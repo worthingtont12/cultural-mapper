@@ -74,3 +74,4 @@ auth.set_access_token(access_token_key, access_token_secret)  # Secret Keys
 twitterStream = Stream(auth, listener(start_time, time_limit=120))
 # set bounding box filter
 twitterStream.filter(locations=[-118.723549, 33.694679, -117.929466, 34.33926])
+#Los Angeles
