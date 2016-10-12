@@ -1,2 +1,4 @@
 # Cultural_Mapper
-Capstone Project
+Data Science Institute Capstone Project
+
+We are mapping out subpopulations using twitter data.
