@@ -27,14 +27,14 @@ class listener(StreamListener):
     def on_data(self, data):
 
         while (time.time() - self.time) < self.limit:
-
+# check this out for more error handlers
+#thttp://stackoverflow.com/questions/23601634/how-to-restart-tweepy-script-in-case-of-error
             try:
                 client = MongoClient('localhost', 27017)
                 db = client['twitter1_db']
                 collection = db['twitter_collection']
                 tweet = json.loads(data)
-                if tweet['coordinates'] is not None:
-                    collection.insert(tweet)
+                collection.insert(tweet)
                 return True
             # various exception handling blocks
             except KeyboardInterrupt:
