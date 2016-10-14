@@ -8,10 +8,10 @@ from pymongo import MongoClient
 import json
 
 # keys
-ckey = ''
-consumer_secret = ''
-access_token_key = ''
-access_token_secret = ''
+ckey = 'YePIl8OYel5dtH2P71B9NbGIe'
+consumer_secret = 'gqsKipuAqLlvFXr3j1C66Wk26hIXZmBdDrOMeZU3Br32a7IoY7'
+access_token_key = '2354152670-IdMr1ZBfcNS5eamHnaY4w9PqksgHjF7UJVJQknJ'
+access_token_secret = 'rWGglrBuxkblkiTKjN7OIXMIBK0Vxk3ZHDyqWfYwtmBgd'
 
 start_time = time.time()  # grabs the system time
 keyword_list = ['twitter']  # track list
@@ -28,7 +28,7 @@ class listener(StreamListener):
 
         while (time.time() - self.time) < self.limit:
 # check this out for more error handlers
-#thttp://stackoverflow.com/questions/23601634/how-to-restart-tweepy-script-in-case-of-error 
+#thttp://stackoverflow.com/questions/23601634/how-to-restart-tweepy-script-in-case-of-error
             try:
                 client = MongoClient('localhost', 27017)
                 db = client['twitter1_db']
