@@ -8,10 +8,10 @@ from pymongo import MongoClient
 import json
 
 # keys
-ckey = 'YePIl8OYel5dtH2P71B9NbGIe'
-consumer_secret = 'gqsKipuAqLlvFXr3j1C66Wk26hIXZmBdDrOMeZU3Br32a7IoY7'
-access_token_key = '2354152670-IdMr1ZBfcNS5eamHnaY4w9PqksgHjF7UJVJQknJ'
-access_token_secret = 'rWGglrBuxkblkiTKjN7OIXMIBK0Vxk3ZHDyqWfYwtmBgd'
+ckey = ''
+consumer_secret = ''
+access_token_key = ''
+access_token_secret = ''
 
 start_time = time.time()  # grabs the system time
 keyword_list = ['twitter']  # track list
