@@ -1,7 +1,7 @@
 import re
 from pymongo import MongoClient
 client = MongoClient('localhost', 27017)
-db = client['twitter1_db']
+db = client['Texas_twitter_db']
 collection = db['twitter_collection']
 tweets_iterator = collection.find()
 for tweet in tweets_iterator:

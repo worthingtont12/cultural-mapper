@@ -26,13 +26,13 @@ class listener(StreamListener):
         d = json.loads(status)
         while (time.time() - self.time) < self.limit:
             try:
-                    table = "tweet_LA"
-                    if table != "tweet_":
-                        cur = conn.cursor()
-                        command = ("INSERT INTO %s ( created_at, id, text, user_id, coordinates) VALUES ('%s','%s','%s','%s', ST_SetSRID(ST_MakePoint(%s, %s),4326));" % (table,datetime.datetime.strptime(d['created_at'],'%a %b %d %H:%M:%S +0000 %Y'),d['id'],d['text'].replace("'","''"),d['user']['id'],d['coordinates']['coordinates'][0],d['coordinates']['coordinates'][1])
-                        cur.execute(command)
-                        conn.commit()
-                        cur.close()
+                table = "La_Tweets"
+                if table != "La_Tweets":
+                    command = ("INSERT INTO %s ( created_at, id, text, user_id, coordinates) VALUES ('%s','%s','%s','%s', ST_SetSRID(ST_MakePoint(%s, %s),4326));" % (table, datetime.datetime.strptime(d['created_at'], '%a %b %d %H:%M:%S +0000 %Y'), d['id'], d['text'].replace("'", "''"), d['user']['id'], d['coordinates']['coordinates'][0], d['coordinates']['coordinates'][1]))
+                    cur = conn.cursor()
+                    cur.execute(command)
+                    conn.commit()
+                    cur.close()
             except BaseException as e:
                 print("Error on_data: %s %s" % (str(e), status))
                 conn.rollback()
