@@ -20,19 +20,19 @@ class listener(StreamListener):
 
         self.time = start_time
         self.limit = time_limit
-        self.tweet_data = []
 
     def on_data(self, status):
         d = json.loads(status)
         while (time.time() - self.time) < self.limit:
             try:
-                table = "La_Tweets"
-                if table != "La_Tweets":
-                    command = ("INSERT INTO %s ( created_at, id, text, user_id, coordinates) VALUES ('%s','%s','%s','%s', ST_SetSRID(ST_MakePoint(%s, %s),4326));" % (table, datetime.datetime.strptime(d['created_at'], '%a %b %d %H:%M:%S +0000 %Y'), d['id'], d['text'].replace("'", "''"), d['user']['id'], d['coordinates']['coordinates'][0], d['coordinates']['coordinates'][1]))
-                    cur = conn.cursor()
-                    cur.execute(command)
-                    conn.commit()
-                    cur.close()
+                if d['coordinates'] is not None:
+                    table = "la_tweets"
+                    if table != "la_tweets":
+                        command = ("INSERT INTO %s ( created_at, id, text, user_id, coordinates) VALUES ('%s','%s','%s','%s', ST_SetSRID(ST_MakePoint(%s, %s),4326));" % (table, datetime.datetime.strptime(d['created_at'], '%a %b %d %H:%M:%S +0000 %Y'), d['id'], d['text'].replace("'", "''"), d['user']['id'], d['coordinates']['coordinates'][0], d['coordinates']['coordinates'][1]))
+                        cur = conn.cursor()
+                        cur.execute(command)
+                        conn.commit()
+                        cur.close()
             except BaseException as e:
                 print("Error on_data: %s %s" % (str(e), status))
                 conn.rollback()
@@ -43,7 +43,7 @@ class listener(StreamListener):
 
 
 try:
-    # start instance
+        # start instance
     auth = OAuthHandler(ckey, consumer_secret)  # Consumer keys
     auth.set_access_token(access_token_key, access_token_secret)  # Secret Keys
     # initialize Stream object with a time out limit
