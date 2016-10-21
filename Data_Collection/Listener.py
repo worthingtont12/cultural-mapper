@@ -12,9 +12,8 @@ import psycopg2
 conn = psycopg2.connect("dbname='cultural_mapper' user='tylerworthington' host='localhost'")
 
 start_time = time.time()  # grabs the system time
-keyword_list = ['twitter']  # track list
-
-
+keyword_list = ['twitter']
+ # track list
 class listener(StreamListener):
     def __init__(self, start_time, time_limit=120):
 
@@ -25,24 +24,25 @@ class listener(StreamListener):
         d = json.loads(status)
         while (time.time() - self.time) < self.limit:
             try:
-                if d['coordinates'] is not None:
-                    table = "la_tweets"
-                    if table != "la_tweets":
-                        command = ("INSERT INTO %s ( created_at, id, text, user_id, coordinates) VALUES ('%s','%s','%s','%s', ST_SetSRID(ST_MakePoint(%s, %s),4326));" % (table, datetime.datetime.strptime(d['created_at'], '%a %b %d %H:%M:%S +0000 %Y'), d['id'], d['text'].replace("'", "''"), d['user']['id'], d['coordinates']['coordinates'][0], d['coordinates']['coordinates'][1]))
-                        cur = conn.cursor()
-                        cur.execute(command)
-                        conn.commit()
-                        cur.close()
+                #if d['coordinates'] is not None:
+                    cur = conn.cursor()
+                    command = ("INSERT INTO la_tweets_2( created_at, id, text, user_id, long , lat, lang_tweet, lang_user,  ) VALUES ('%s','%s','%s','%s', '%s', '%s');" % (datetime.datetime.strptime(d['created_at'], '%a %b %d %H:%M:%S +0000 %Y'), d['id'], d['text'].replace("'","''"), d['user']['id'], d['coordinates']['coordinates'][0], d['coordinates']['coordinates'][1]))
+                    cur.execute(command)
+                    conn.commit()
+                    cur.close()
             except BaseException as e:
                 print("Error on_data: %s %s" % (str(e), status))
                 conn.rollback()
             return True
+
     def on_error(self, status):
-            print(status)
-            return True
-
-
+        print(status)
+        return True
 try:
+    ckey = ''
+    consumer_secret = ''
+    access_token_key = ''
+    access_token_secret = ''
         # start instance
     auth = OAuthHandler(ckey, consumer_secret)  # Consumer keys
     auth.set_access_token(access_token_key, access_token_secret)  # Secret Keys
