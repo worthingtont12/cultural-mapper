@@ -31,7 +31,7 @@ class listener(StreamListener):
                     conn.commit()
                     cur.close()
             except BaseException as e:
-                print("PRIMATRY Error on_data: %s %s" % (str(e), status))
+                print("PRIMARY Error on_data: %s %s" % (str(e), status))
                 conn.rollback()
             try:
                 if d['coordinates'] is not None:
