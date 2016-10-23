@@ -1,12 +1,11 @@
 import datetime
 import time
+import sys
+import json
 import tweepy
 from tweepy import Stream
 from tweepy import OAuthHandler
 from tweepy.streaming import StreamListener
-import sys
-#from pymongo import MongoClient
-import json
 import psycopg2
 
 conn = psycopg2.connect("dbname='cultural_mapper' user='tylerworthington' host='localhost'")
@@ -25,7 +24,7 @@ class listener(StreamListener):
             try:
                 #if d['coordinates'] is not None:
                     cur = conn.cursor()
-                    command = ("INSERT INTO city_primary( id, created_at, source, text, tweet_lang, user_id, long, lat, user_location, user_handle, user_desc, user_lang ) VALUES ('%s','%s','%s','%s', '%s', '%s', '%s','%s','%s','%s', '%s', '%s');" % (d['id'],(datetime.datetime.strptime(d['created_at'],'%a %b %d %H:%M:%S +0000 %Y')),d['source'],d['text'].replace("'","''"),d['lang'],d['user']['id'],d['coordinates']['coordinates'][0],d['coordinates']['coordinates'][1],d['user']['location'],d['user']['screen_name'],d['user']['description'].replace("'","''"),d['user']['lang']))
+                    command = ("INSERT INTO city_primary(id, created_at, source, text, text_lang, user_id, user_location, user_handle, user_lang ) VALUES ('%s','%s','%s','%s', '%s', '%s','%s', '%s', '%s');" % (d['id'], (datetime.datetime.strptime(d['created_at'], '%a %b %d %H:%M:%S +0000 %Y')), d['source'], d['text'].replace("'"," "), d['lang'], d['user']['id'], d['user']['location'], d['user']['screen_name'], d['user']['lang']))
                     cur.execute(command)
                     conn.commit()
                     cur.close()
@@ -35,7 +34,7 @@ class listener(StreamListener):
             try:
                 if d['coordinates'] is not None:
                     cur = conn.cursor()
-                    command = ("INSERT INTO city_secondary( id, long, lat, coordinates) VALUES ('%s', '%s', '%s', ST_SetSRID(ST_MakePoint(%s, %s),4326));" % (d['id'],d['coordinates']['coordinates'][0],d['coordinates']['coordinates'][1],d['coordinates']['coordinates'][0],d['coordinates']['coordinates'][1]))
+                    command = ("INSERT INTO city_secondary( id, long, lat) VALUES ('%s', '%s', '%s');" % (d['id'], d['coordinates']['coordinates'][0], d['coordinates']['coordinates'][1]))
                     cur.execute(command)
                     conn.commit()
                     cur.close()
@@ -43,17 +42,16 @@ class listener(StreamListener):
                 print("SECONDARY: Error on_data: %s %s" % (str(e), status))
                 conn.rollback()
             try:
-                if d['entities'] is not None:
+                if d['user']['description'] is not None:
                     cur = conn.cursor()
-                    command = ("INSERT INTO city_tertiary( id, hashtags, urls, mentions) VALUES ('%s', '%s', '%s', '%s');" % (d['id'],d['entities']['hashtags'],d['entities']['urls'],d['entities']['user_mentions']))
+                    command = ("INSERT INTO user_desc(id, user_id, user_desc) VALUES ('%s','%s','%s');" % (d['id'], d['user']['id'], d['user']['description'].replace("'", " ")))
                     cur.execute(command)
                     conn.commit()
                     cur.close()
             except BaseException as e:
-                print("TERTIARY Error on_data: %s %s" % (str(e), status))
+                print("User Desc: Error on_data: %s %s" % (str(e), status))
                 conn.rollback()
             return True
-
     def on_error(self, status):
         print(status)
         return True

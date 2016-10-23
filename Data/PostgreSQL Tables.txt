@@ -7,21 +7,17 @@ text_lang TEXT,
 user_id BIGINT,
 user_location TEXT,
 user_handle TEXT,
-user_desc TEXT,
 user_lang TEXT
 );
 
 CREATE TABLE city_secondary(
 id BIGINT PRIMARY KEY,
-long NUMERIC,
-lat NUMERIC,
-coordinates TEXT
+long TEXT,
+lat TEXT
 );
 
-CREATE TABLE city_tertiary(
+CREATE TABLE user_desc(
 id BIGINT PRIMARY KEY,
-hashtags TEXT,
-urls TEXT,
-mentions TEXT,
-
+user_id BIGINT,
+user_desc TEXT
 );
