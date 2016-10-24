@@ -12,7 +12,8 @@ from keys import *
 conn = psycopg2.connect("dbname='cultural_mapper' user='tylerworthington' host='localhost'")
 
 start_time = time.time()  # grabs the system time
- # track list
+
+
 class listener(StreamListener):
     def __init__(self, start_time, time_limit=120):
 
@@ -23,11 +24,11 @@ class listener(StreamListener):
         d = json.loads(status)
         while (time.time() - self.time) < self.limit:
             try:
-                    cur = conn.cursor()
-                    command = ("INSERT INTO city_primary(id, created_at, source, text, text_lang, user_id, user_location, user_handle, user_lang ) VALUES ('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s');" % (d['id'], (datetime.datetime.strptime(d['created_at'], '%a %b %d %H:%M:%S +0000 %Y')), d['source'], d['text'].replace("'", " "), d['lang'], d['user']['id'], d['user']['location'], d['user']['screen_name'], d['user']['lang']))
-                    cur.execute(command)
-                    conn.commit()
-                    cur.close()
+                cur = conn.cursor()
+                command = ("INSERT INTO city_primary(id, created_at, source, text, text_lang, user_id, user_location, user_handle, user_lang ) VALUES ('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s');" % (d['id'], (datetime.datetime.strptime(d['created_at'], '%a %b %d %H:%M:%S +0000 %Y')), d['source'], d['text'].replace("'", " "), d['lang'], d['user']['id'], d['user']['location'], d['user']['screen_name'], d['user']['lang']))
+                cur.execute(command)
+                conn.commit()
+                cur.close()
             except BaseException as e:
                 print("PRIMATRY Error on_data: %s %s" % (str(e), status))
                 conn.rollback()
@@ -42,6 +43,16 @@ class listener(StreamListener):
                 print("SECONDARY: Error on_data: %s %s" % (str(e), status))
                 conn.rollback()
             try:
+                if d['is_quote_status'] is True:
+                    cur = conn.cursor()
+                    command = ("INSERT INTO quoted(id, q_id, q_created_at, q_text, q_text_lang, q_user_id, q_user_location, q_user_handle, q_user_lang ) VALUES ('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s');" % (d['id'], d['quoted_status']['id'], (datetime.datetime.strptime(d['quoted_status']['created_at'], '%a %b %d %H:%M:%S +0000 %Y')), d['quoted_status']['text'].replace("'", " "), d['quoted_status']['lang'], d['quoted_status']['user']['id'], d['quoted_status']['user']['location'], d['quoted_status']['user']['screen_name'], d['quoted_status']['user']['lang']))
+                    cur.execute(command)
+                    conn.commit()
+                    cur.close()
+            except BaseException as e:
+                print("User Quoted: Error on_data: %s %s" % (str(e), status))
+                conn.rollback()
+            try:
                 if d['user']['description'] is not None:
                     cur = conn.cursor()
                     command = ("INSERT INTO user_desc(id, user_id, user_desc) VALUES ('%s','%s','%s');" % (d['id'], d['user']['id'], d['user']['description'].replace("'", " ")))
@@ -52,6 +63,7 @@ class listener(StreamListener):
                 print("User Desc: Error on_data: %s %s" % (str(e), status))
                 conn.rollback()
             return True
+
     def on_error(self, status):
         print(status)
         return True
