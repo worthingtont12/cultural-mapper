@@ -7,6 +7,7 @@ from tweepy import Stream
 from tweepy import OAuthHandler
 from tweepy.streaming import StreamListener
 import psycopg2
+from keys import *
 
 conn = psycopg2.connect("dbname='cultural_mapper' user='tylerworthington' host='localhost'")
 
@@ -55,10 +56,10 @@ class listener(StreamListener):
         print(status)
         return True
 try:
-    ckey = ''
-    consumer_secret = ''
-    access_token_key = ''
-    access_token_secret = ''
+    ckey = consumer_key
+    consumer_secret = consumer_secret
+    access_token_key = access_token
+    access_token_secret = access_token_secret
         # start instance
     auth = OAuthHandler(ckey, consumer_secret)  # Consumer keys
     auth.set_access_token(access_token_key, access_token_secret)  # Secret Keys
