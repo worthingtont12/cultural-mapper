@@ -1,3 +1,9 @@
+"""
+
+This is a listener for tweets.
+Thank you Mohammad al Boni for your initial assistance.
+
+"""
 import datetime
 import time
 import sys
@@ -25,7 +31,7 @@ class listener(StreamListener):
         while (time.time() - self.time) < self.limit:
             try:
                 cur = conn.cursor()
-                command = ("INSERT INTO city_primary(id, created_at, source, text, text_lang, user_id, user_location, user_handle, user_lang ) VALUES ('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s');" % (d['id'], (datetime.datetime.strptime(d['created_at'], '%a %b %d %H:%M:%S +0000 %Y')), d['source'], d['text'].replace("'", " "), d['lang'], d['user']['id'], d['user']['location'], d['user']['screen_name'], d['user']['lang']))
+                command = ("INSERT INTO city_primary(id, created_at, source, text, text_lang, user_id, user_location, user_handle, user_lang ) VALUES ('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s');" % (d['id'], (datetime.datetime.strptime(d['created_at'], '%a %b %d %H:%M:%S +0000 %Y')), d['source'], d['text'].replace("'", ""), d['lang'], d['user']['id'], d['user']['location'], d['user']['screen_name'], d['user']['lang']))
                 cur.execute(command)
                 conn.commit()
                 cur.close()
