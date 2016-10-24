@@ -24,12 +24,24 @@ user_desc TEXT
 
 CREATE TABLE quoted(
 id BIGINT PRIMARY KEY,
+<<<<<<< HEAD
 q_id TEXT,
 q_created_at TEXT,
+=======
+q_user_id TEXT
+>>>>>>> 2f99065331930c892f14bde7b925cfd72d828f56
 q_text TEXT,
 q_text_lang TEXT,
 q_user_id BIGINT,
 q_user_location TEXT,
 q_user_handle TEXT,
+<<<<<<< HEAD
 q_user_lang TEXT
 );
+=======
+q_user_lang TEXT,
+q_created_at TEXT,
+q_id TEXT
+q_lang TEXT
+)
+>>>>>>> 2f99065331930c892f14bde7b925cfd72d828f56
