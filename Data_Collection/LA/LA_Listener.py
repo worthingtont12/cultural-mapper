@@ -62,41 +62,40 @@ class listener(StreamListener):
 
 
 if __name__ == '__main__':
-	while 1:
-		try:
+    while 1:
+        try:
             ckey = consumer_key
             consumer_secret = consumer_secret
             access_token_key = access_token
             access_token_secret = access_token_secret
-                # start instance
+            # start instance
             auth = OAuthHandler(ckey, consumer_secret)  # Consumer keys
-            auth.set_access_token(access_token_key, access_token_secret)  # Secret Keys
-
+            auth.set_access_token(access_token_key, access_token_secret)
             api = tweepy.API(auth)
             # initialize Stream object with a time out limit
-            twitterStream = Stream(auth = api.auth, listener = listener(start_time, time_limit=60))
+            twitterStream = Stream(auth = api.auth, listener = listener())
             # set bounding box filter
             twitterStream.filter(locations=[-118.723549, 33.694679, -117.929466, 34.33926])
             # Los Angeles
-		# various exception handling blocks
-		except KeyboardInterrupt:
-			sys.exit()
-		except AttributeError as e:
-			print('AttributeError was returned, stupid bug')
-			pass
-		except tweepy.TweepError as e:
-			print('Below is the printed exception')
-			print(e)
-			if '401' in e:
-				# not sure if this will even work
-				print('Below is the response that came in')
-				print(e)
-				sleep(60)
-				pass
-			else:
-				#raise an exception if another status code was returned, we don't like other kinds
-				sleep(60)
-				pass
-		except Exception as e:
-			sleep(60)
-			pass
+        # various exception handling blocks
+        except KeyboardInterrupt:
+            sys.exit()
+        except AttributeError as e:
+            print('AttributeError was returned, stupid bug')
+            pass
+        except tweepy.TweepError as e:
+            print('Below is the printed exception')
+            print(e)
+            if '401' in e:
+                # not sure if this will even work
+                print('Below is the response that came in')
+                print(e)
+                time.sleep(60)
+                pass
+            else:
+                #raise an exception if another status code was returned, we don't like other kinds
+                time.sleep(60)
+                pass
+        except Exception as e:
+            time.sleep(60)
+        pass
