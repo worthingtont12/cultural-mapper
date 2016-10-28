@@ -26,7 +26,7 @@ class listener(StreamListener):
         while True:
             try:
                 cur = conn.cursor()
-                command = ("INSERT INTO la_city_primary(id, created_at, source, text, text_lang, user_id, user_location, user_handle, user_lang ) VALUES ('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s');" % (d['id'], (datetime.datetime.strptime(d['created_at'], '%a %b %d %H:%M:%S +0000 %Y')), d['source'], d['text'].replace("'", ""), d['lang'], d['user']['id'], d['user']['location'], d['user']['screen_name'], d['user']['lang']))
+                command = ("INSERT INTO chicago_city_primary(id, created_at, source, text, text_lang, user_id, user_location, user_handle, user_lang ) VALUES ('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s');" % (d['id'], (datetime.datetime.strptime(d['created_at'], '%a %b %d %H:%M:%S +0000 %Y')), d['source'], d['text'].replace("'", ""), d['lang'], d['user']['id'], d['user']['location'], d['user']['screen_name'], d['user']['lang']))
                 cur.execute(command)
                 conn.commit()
                 cur.close()
@@ -36,7 +36,7 @@ class listener(StreamListener):
             try:
                 if d['coordinates'] is not None:
                     cur = conn.cursor()
-                    command = ("INSERT INTO la_city_secondary( id, long, lat) VALUES ('%s', '%s', '%s');" % (d['id'], d['coordinates']['coordinates'][0], d['coordinates']['coordinates'][1]))
+                    command = ("INSERT INTO chicago_city_secondary( id, long, lat) VALUES ('%s', '%s', '%s');" % (d['id'], d['coordinates']['coordinates'][0], d['coordinates']['coordinates'][1]))
                     cur.execute(command)
                     conn.commit()
                     cur.close()
@@ -46,7 +46,7 @@ class listener(StreamListener):
             try:
                 if d['is_quote_status'] is True:
                     cur = conn.cursor()
-                    command = ("INSERT INTO la_quoted(id, q_id, q_created_at, q_text, q_text_lang, q_user_id, q_user_location, q_user_handle, q_user_lang ) VALUES ('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s');" % (d['id'], d['quoted_status']['id'], (datetime.datetime.strptime(d['quoted_status']['created_at'], '%a %b %d %H:%M:%S +0000 %Y')), d['quoted_status']['text'].replace("'", " "), d['quoted_status']['lang'], d['quoted_status']['user']['id'], d['quoted_status']['user']['location'], d['quoted_status']['user']['screen_name'], d['quoted_status']['user']['lang']))
+                    command = ("INSERT INTO chicago_quoted(id, q_id, q_created_at, q_text, q_text_lang, q_user_id, q_user_location, q_user_handle, q_user_lang ) VALUES ('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s');" % (d['id'], d['quoted_status']['id'], (datetime.datetime.strptime(d['quoted_status']['created_at'], '%a %b %d %H:%M:%S +0000 %Y')), d['quoted_status']['text'].replace("'", " "), d['quoted_status']['lang'], d['quoted_status']['user']['id'], d['quoted_status']['user']['location'], d['quoted_status']['user']['screen_name'], d['quoted_status']['user']['lang']))
                     cur.execute(command)
                     conn.commit()
                     cur.close()
@@ -56,7 +56,7 @@ class listener(StreamListener):
             try:
                 if d['user']['description'] is not None:
                     cur = conn.cursor()
-                    command = ("INSERT INTO la_user_desc(id, user_id, user_desc) VALUES ('%s','%s','%s');" % (d['id'], d['user']['id'], d['user']['description'].replace("'", " ")))
+                    command = ("INSERT INTO chicago_user_desc(id, user_id, user_desc) VALUES ('%s','%s','%s');" % (d['id'], d['user']['id'], d['user']['description'].replace("'", " ")))
                     cur.execute(command)
                     conn.commit()
                     cur.close()
