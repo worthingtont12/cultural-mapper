@@ -9,7 +9,7 @@ from tweepy.streaming import StreamListener
 import psycopg2
 from keys import *
 
-conn = psycopg2.connect("dbname='culturalmapper_LA' user='culturalmapper' host='culturalmapper-la.cbjpxqmibsmf.us-east-1.rds.amazonaws.com'")
+conn = psycopg2.connect("dbname='culturalmapper_LA' user='culturalmapper' host='culturalmapper-la.cbjpxqmibsmf.us-east-1.rds.amazonaws.com' password='UVAdsi2017'")
 
 class listener(StreamListener):
     def on_data(self, status):
