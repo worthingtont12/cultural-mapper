@@ -1,3 +1,9 @@
+"""
+
+This is a listener for tweets in Chicago.
+Thank you Mohammad al Boni for your initial assistance.
+
+"""
 import datetime
 import time
 import sys
@@ -9,7 +15,7 @@ from tweepy.streaming import StreamListener
 import psycopg2
 from keys import *
 
-conn = psycopg2.connect("dbname='culturalmapper_LA' user='culturalmapper' host='culturalmapper-la.cbjpxqmibsmf.us-east-1.rds.amazonaws.com' password='UVAdsi2017'")
+conn = psycopg2.connect("dbname='culturalmapper_Chicago' user='culturalmapper' host='culturalmapper-la.cbjpxqmibsmf.us-east-1.rds.amazonaws.com' password='UVAdsi2017'")
 
 start_time = time.time()  # grabs the system time
 
@@ -79,8 +85,8 @@ if __name__ == '__main__':
             # initialize Stream object with a time out limit
             twitterStream = Stream(auth = api.auth, listener = listener(start_time, time_limit=60))
             # set bounding box filter
-            twitterStream.filter(locations=[-118.723549, 33.694679, -117.929466, 34.33926])
-            # Los Angeles
+            twitterStream.filter(locations=[-87.968437, 41.624851, -87.397217, 42.07436])
+            # Chicago
 		# various exception handling blocks
 		except KeyboardInterrupt:
 			sys.exit()
