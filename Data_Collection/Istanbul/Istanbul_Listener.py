@@ -79,7 +79,7 @@ if __name__ == '__main__':
             auth = OAuthHandler(ckey, consumer_secret)  # Consumer keys
             auth.set_access_token(access_token_key, access_token_secret)
             api = tweepy.API(auth)
-            # initialize Stream object with a time out limit
+            # initialize Stream object
             twitterStream = Stream(auth = api.auth, listener = listener())
             # set bounding box filter
             twitterStream.filter(locations=[28.448009, 40.802731, 29.45787, 41.23595])
