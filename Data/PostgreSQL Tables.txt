@@ -5,13 +5,6 @@ source TEXT,
 text TEXT,
 text_lang TEXT,
 user_id BIGINT,
-CREATE TABLE city_primary(
-created_at TEXT,
-id BIGINT PRIMARY KEY,
-source TEXT,
-text TEXT,
-text_lang TEXT,
-user_id BIGINT,
 user_location TEXT,
 user_handle TEXT,
 user_lang TEXT
