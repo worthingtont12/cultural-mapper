@@ -82,7 +82,7 @@ if __name__ == '__main__':
             # initialize Stream object with a time out limit
             twitterStream = Stream(auth = api.auth, listener = listener())
             # set bounding box filter
-            twitterStream.filter(locations=[28.448009, 40.802731, 29.45787, 341.23595])
+            twitterStream.filter(locations=[28.448009, 40.802731, 29.45787, 41.23595])
             # Istanbul
         # various exception handling blocks
         except KeyboardInterrupt:
