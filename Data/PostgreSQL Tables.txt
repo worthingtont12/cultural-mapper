@@ -1,11 +1,4 @@
-CREATE TABLE city_primary(
-created_at TEXT,
-id BIGINT PRIMARY KEY,
-source TEXT,
-text TEXT,
-text_lang TEXT,
-user_id BIGINT,
-CREATE TABLE city_primary(
+CREATE TABLE chicago_city_primary(
 created_at TEXT,
 id BIGINT PRIMARY KEY,
 source TEXT,
@@ -17,19 +10,19 @@ user_handle TEXT,
 user_lang TEXT
 );
 
-CREATE TABLE city_secondary(
+CREATE TABLE chicago_city_secondary(
 id BIGINT PRIMARY KEY,
 long TEXT,
 lat TEXT
 );
 
-CREATE TABLE user_desc(
+CREATE TABLE chicago_user_desc(
 id BIGINT PRIMARY KEY,
 user_id BIGINT,
 user_desc TEXT
 );
 
-CREATE TABLE quoted(
+CREATE TABLE chicago_quoted(
 id BIGINT PRIMARY KEY,
 q_id TEXT,
 q_created_at TEXT,
