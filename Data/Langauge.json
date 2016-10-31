@@ -160,6 +160,16 @@
       "status":"production"
    },
    {
+      "code":"en-GB",
+      "name":"British English",
+      "status":"production"
+   },
+   {
+      "code":"en-AU",
+      "name":"Australian English",
+      "status":"production"
+   },
+   {
       "code":"vi",
       "name":"Vietnamese",
       "status":"production"
