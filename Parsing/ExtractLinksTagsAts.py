@@ -16,9 +16,9 @@ hashtags = []
 # Would "apply" be faster?
 
 for tweet in tweets['text']:
-    mentions.append(re.findall('@\S*\b*', tweet))
+    mentions.append(re.findall('@\S*\b', tweet))
     links.append(re.findall('https?://\S*', tweet))
-    hashtags.append(re.findall('#\S*\b*', tweet))
+    hashtags.append(re.findall('#\S*\b', tweet))
 
 # Append features as a new column to the existing dataframe.
 tweets['hashtags'] = hashtags
