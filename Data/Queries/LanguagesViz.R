@@ -51,7 +51,7 @@ colors <- rainbow_hcl(length(levels(la_geo_filter$language)))
 
 pal <- colorFactor(colors, domain = levels(la_geo_filter$language))
 
-leaflet() %>%
+map <- leaflet() %>%
   addProviderTiles("OpenStreetMap.BlackAndWhite") %>%
   addCircleMarkers(lng=la_geo_filter$long,
                    lat=la_geo_filter$lat,
@@ -60,11 +60,19 @@ leaflet() %>%
                    stroke = FALSE, fillOpacity = 0.5,
                    popup = paste0(la_geo_filter$created_at,
                                   "<br>",
-                                  la_geo_filter$language)
+                                  la_geo_filter$language),
+                  group = la_geo_filter$language
                     ) %>%
   addLegend("bottomright", pal = pal, values = la_geo_filter$language,
             title = "Languages",
-            opacity = 1)
+            opacity = 1) %>% 
+  addLayersControl(
+  overlayGroups = levels(languages$language),
+  options = layersControlOptions(collapsed = TRUE),
+  position = 'topleft'
+  )
 
+map
 
-
+library(htmlwidgets)
+saveWidget(widget = map, file ='languagemap.html')
