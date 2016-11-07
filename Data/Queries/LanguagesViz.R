@@ -40,16 +40,16 @@ Lang_sum <- la_geo_filter %>%
   summarise(count=n())
 
 
-languages <- Lang_sum[Lang_sum$count > 100 & Lang_sum$language != "English" & Lang_sum$language != "Unknown","language"]
+languages <- Lang_sum[Lang_sum$count > 100 & Lang_sum$language != "English" & Lang_sum$language != "Unknown",]
 
 library(RColorBrewer)
 library(colorspace)
 
-#colors <- brewer.pal(nrow(la_geo_filter),"Set3")
-colors <- rainbow_hcl(length(levels(la_geo_filter$language)))
+#colors <- brewer.pal(nrow(languages),"Set3")
+colors <- rainbow_hcl(length(levels(languages$language)))
 
 
-pal <- colorFactor(colors, domain = levels(la_geo_filter$language))
+pal <- colorFactor(colors, domain = levels(languages$language))
 
 map <- leaflet() %>%
   addProviderTiles("OpenStreetMap.BlackAndWhite") %>%
@@ -63,7 +63,7 @@ map <- leaflet() %>%
                                   la_geo_filter$language),
                   group = la_geo_filter$language
                     ) %>%
-  addLegend("bottomright", pal = pal, values = la_geo_filter$language,
+  addLegend("bottomright", pal = pal, values = languages$language,
             title = "Languages",
             opacity = 1) %>% 
   addLayersControl(
