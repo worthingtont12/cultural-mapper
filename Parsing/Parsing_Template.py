@@ -35,15 +35,19 @@ primary['user_language'] = languages1
 print(primary['user_language'].value_counts())
 
 # handling @,#, and URL's
+# Create empty lists for each category.
 mentions = []
 links = []
 hashtags = []
 
-for tweet in primary['text']:
-    mentions.append(re.findall('@\S*\b*', tweet))
-    links.append(re.findall('https?://\S*', tweet))
-    hashtags.append(re.findall('#\S*\b*', tweet))
+# Iterate over the text, extracting and adding
 
+for tweet in primary['text']:
+    mentions.append(re.findall('@\S*\b', tweet))
+    links.append(re.findall('https?://\S*', tweet))
+    hashtags.append(re.findall('#\S*\b', tweet))
+
+# Append features as a new column to the existing dataframe.
 primary['hashtags'] = hashtags
 primary['mentions'] = mentions
 primary['links'] = links
@@ -52,30 +56,36 @@ primary['links'] = links
 clean1 = []
 for i in primary['text']:
     tmp = ' '.join(re.sub("(@[A-Za-z0-9]+)|([^0-9A-Za-z \t])|(\w+:\/\/\S+)", " ", i).split())
-    clean1.append(tmp)
+    tmp1 = re.sub('[\s]+', ' ', tmp)
+    clean1.append(tmp1)
 
 primary['cleaned.text'] = clean1
 
 #dealing with quoted df
 # handling @,#, and URL's
+# Create empty lists for each category.
 mentions1 = []
 links1 = []
 hashtags1 = []
 
-for tweet in quoted['text']:#tweek variable names
-    mentions.append(re.findall('@\S*\b*', tweet))
-    links.append(re.findall('https?://\S*', tweet))
-    hashtags.append(re.findall('#\S*\b*', tweet))
+# Iterate over the text, extracting and adding
 
-quoted['hashtags'] = hashtags1
-quoted['mentions'] = mentions1
-quoted['links'] = links1
+for tweet in quoted['text']:
+    mentions1.append(re.findall('@\S*\b', tweet))
+    links1.append(re.findall('https?://\S*', tweet))
+    hashtags1.append(re.findall('#\S*\b', tweet))
+
+# Append features as a new column to the existing dataframe.
+quoted['hashtags'] = hashtags
+quoted['mentions'] = mentions
+quoted['links'] = links
 
 #stripping non text characters ie @, # ,https://, ect
 clean2 = []
 for i in quoted['q_text']:
     tmp = ' '.join(re.sub("(@[A-Za-z0-9]+)|([^0-9A-Za-z \t])|(\w+:\/\/\S+)", " ", i).split())
-    clean2.append(tmp)
+    tmp1 = re.sub('[\s]+', ' ', tmp)
+    clean2.append(tmp1)
 
 quoted['q_cleaned.text'] = clean2
 
@@ -89,9 +99,6 @@ primary['author.text'] = primary[['user.id', 'cleaned.text', 'quoted_text', 'has
 #throwout duplicates
 
 #merge with user desc
-
-#Remove additional white spaces
-primary['text'] = re.sub('[\s]+', ' ', primary['text'])
 
 # #remove punctuation
 for p in list(punctuation):
