@@ -90,6 +90,11 @@
       "status":"production"
    },
    {
+      "code":"zh",
+      "name":"Chinese",
+      "status":"production"
+   },
+   {
       "code":"hi",
       "name":"Hindi",
       "status":"production"
