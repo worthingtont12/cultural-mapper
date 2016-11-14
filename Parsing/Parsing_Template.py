@@ -34,43 +34,77 @@ for i in primary['user_lang']:
 primary['user_language'] = languages1
 print(primary['user_language'].value_counts())
 
-#handling @
+# handling @,#, and URL's
+# Create empty lists for each category.
+mentions = []
+links = []
+hashtags = []
 
-#handling links
+# Iterate over the text, extracting and adding
 
-#
-# #stripping non text characters ie @, # ,https://, ect
-# clean1 = []
-# for i in primary['text']:
-#     tmp = ' '.join(re.sub("(@[A-Za-z0-9]+)|([^0-9A-Za-z \t])|(\w+:\/\/\S+)", " ", i).split())
-#     clean1.append(tmp)
-#
-# primary['cleaned.text'] = clean1
-#
-# #merge text from quoted with primary
-#
-# ##creating new df
-# #collapsing tweets by user.id
-# primary['author.text'] = primary[['user.id', 'cleaned.text']].groupby(['user.id'])['cleaned.text'].transform(lambda x: ','.join(x))
-#
-# #throwout duplicates
-#
-# #merge with user desc
-#
-# #Remove additional white spaces
-# primary['text'] = re.sub('[\s]+', ' ', primary['text'])
-#
-# #Convert www.* or https?://* to URL
-# primary['text'] = re.sub('((www\.[^\s]+)|(https?://[^\s]+))','URL', primary['text'])
-#
-# #Replace #word with word
-# primary['text'] = re.sub(r'#([^\s]+)', r'\1', primary['text'])
-# #
-# # #remove punctuation
-# for p in list(punctuation):
-#     tweet_processed=tweet_processed.replace(p,'')
-# #or
-# df.replace({'\n': '<br>'}, regex=True)
+for tweet in primary['text']:
+    mentions.append(re.findall('@\S*\b', tweet))
+    links.append(re.findall('https?://\S*', tweet))
+    hashtags.append(re.findall('#\S*\b', tweet))
+
+# Append features as a new column to the existing dataframe.
+primary['hashtags'] = hashtags
+primary['mentions'] = mentions
+primary['links'] = links
+
+#stripping non text characters ie @, # ,https://, ect
+clean1 = []
+for i in primary['text']:
+    tmp = ' '.join(re.sub("(@[A-Za-z0-9]+)|([^0-9A-Za-z \t])|(\w+:\/\/\S+)", " ", i).split())
+    tmp1 = re.sub('[\s]+', ' ', tmp)
+    clean1.append(tmp1)
+
+primary['cleaned.text'] = clean1
+
+#dealing with quoted df
+# handling @,#, and URL's
+# Create empty lists for each category.
+mentions1 = []
+links1 = []
+hashtags1 = []
+
+# Iterate over the text, extracting and adding
+
+for tweet in quoted['text']:
+    mentions1.append(re.findall('@\S*\b', tweet))
+    links1.append(re.findall('https?://\S*', tweet))
+    hashtags1.append(re.findall('#\S*\b', tweet))
+
+# Append features as a new column to the existing dataframe.
+quoted['hashtags'] = hashtags
+quoted['mentions'] = mentions
+quoted['links'] = links
+
+#stripping non text characters ie @, # ,https://, ect
+clean2 = []
+for i in quoted['q_text']:
+    tmp = ' '.join(re.sub("(@[A-Za-z0-9]+)|([^0-9A-Za-z \t])|(\w+:\/\/\S+)", " ", i).split())
+    tmp1 = re.sub('[\s]+', ' ', tmp)
+    clean2.append(tmp1)
+
+quoted['q_cleaned.text'] = clean2
+
+#merge text from quoted with primary
+pd.merge(primary , quoted, on='id')
+
+#creating new df
+#collapsing tweets by user.id
+primary['author.text'] = primary[['user.id', 'cleaned.text', 'quoted_text', 'hashtags', 'mentions', 'links']].groupby(['user.id'])['cleaned.text','quoted_text','hashtags','mentions','links'].transform(lambda x: ','.join(x))
+
+#throwout duplicates
+
+#merge with user desc
+
+# #remove punctuation
+for p in list(punctuation):
+    tweet_processed=tweet_processed.replace(p,'')
+#or
+df.replace({'\n': '<br>'}, regex=True)
 
 #ignore case
 str.lower()
