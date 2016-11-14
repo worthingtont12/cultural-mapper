@@ -7,3 +7,7 @@ Data_Collection/Instanbul/keys.py
 .Rproj.user
 
 Data/Queries/.Rhistory
+
+Data/Queries/.RData
+
+Data/Queries/LA_Geotagged.csv
