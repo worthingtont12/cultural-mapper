@@ -99,9 +99,6 @@ primary['c_q_text_lang'] = primary[['user_id', 'q_text_lang']].groupby(['user_id
 primary['c_q_user_location'] = primary[['user_id', 'q_user_location']].groupby(['user_id'])['q_user_location'].transform(lambda x: ','.join(x))
 primary['c_q_user_lang'] = primary[['user_id', 'q_user_lang']].groupby(['user_id'])['q_user_lang'].transform(lambda x: ','.join(x))
 
-#throwout duplicates
-primary = pd.DataFrame(primary)
-
 #merge with user desc
 primary2 = pd.merge(primary, user_desc, on='user_id')
 
