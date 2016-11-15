@@ -1,7 +1,6 @@
 """Parse Tweets and export them into a working format for Topic Modeling."""
 import json
 import os
-from string import punctuation
 import re
 import pandas as pd
 os.chdir("/Users/tylerworthington/Git_Repos")
@@ -25,6 +24,21 @@ for i in primary['user_lang']:
 
 primary['user_language'] = languages1
 
+#merge text from quoted with primary
+primary = pd.merge(primary, quoted, on='id')
+
+#creating new df
+#collapsing tweets by user_id
+primary['author.text'] = primary[['user_id', 'text']].groupby(['user_id'])['text'].transform(lambda x: ','.join(x))
+primary['q_author.text'] = primary[['user_id', 'q_text']].groupby(['user_id'])['q_text'].transform(lambda x: ','.join(x))
+primary['c_text_lang'] = primary[['user_id', 'text_lang']].groupby(['user_id'])['text_lang'].transform(lambda x: ','.join(x))
+primary['c_user_location'] = primary[['user_id', 'user_location']].groupby(['user_id'])['user_location'].transform(lambda x: ','.join(x))
+primary['c_user_lang'] = primary[['user_id', 'user_lang']].groupby(['user_id'])['user_lang'].transform(lambda x: ','.join(x))
+primary['c_source'] = primary[['user_id', 'source']].groupby(['user_id'])['source'].transform(lambda x: ','.join(x))
+primary['c_q_text_lang'] = primary[['user_id', 'q_text_lang']].groupby(['user_id'])['q_text_lang'].transform(lambda x: ','.join(x))
+primary['c_q_user_location'] = primary[['user_id', 'q_user_location']].groupby(['user_id'])['q_user_location'].transform(lambda x: ','.join(x))
+primary['c_q_user_lang'] = primary[['user_id', 'q_user_lang']].groupby(['user_id'])['q_user_lang'].transform(lambda x: ','.join(x))
+
 # handling @,#, and URL's
 # Create empty lists for each category.
 mentions = []
@@ -33,7 +47,7 @@ hashtags = []
 
 # Iterate over the text, extracting and adding
 
-for tweet in primary['text']:
+for tweet in primary['author.text']:
     mentions.append(re.findall('@\S*\b', tweet))
     links.append(re.findall('https?://\S*', tweet))
     hashtags.append(re.findall('#\S*\b', tweet))
@@ -42,16 +56,6 @@ for tweet in primary['text']:
 primary['hashtags'] = hashtags
 primary['mentions'] = mentions
 primary['links'] = links
-
-#stripping non text characters ie @, # ,https://, ect
-clean1 = []
-for i in primary['text']:
-    tmp = ' '.join(re.sub("(@\S*\b)|(https?://\S*)|(#\S*\b)", " ", i).split())
-    tmp1 = re.sub('[\s]+', ' ', tmp)
-    tmp1 = re.sub('[^\w]', ' ', tmp1)
-    clean1.append(tmp1)
-
-primary['cleaned.text'] = clean1
 
 #dealing with quoted df
 # handling @,#, and URL's
@@ -62,42 +66,36 @@ hashtags1 = []
 
 # Iterate over the text, extracting and adding
 
-for tweet in quoted['q_text']:
+for tweet in primary['q_author.text']:
     mentions1.append(re.findall('@\S*\b', tweet))
     links1.append(re.findall('https?://\S*', tweet))
     hashtags1.append(re.findall('#\S*\b', tweet))
 
 # Append features as a new column to the existing dataframe.
-quoted['hashtags'] = hashtags1
-quoted['mentions'] = mentions1
-quoted['links'] = links1
+primary['q_hashtags'] = hashtags1
+primary['q_mentions'] = mentions1
+primary['q_links'] = links1
+
+#stripping non text characters ie @, # ,https://, ect
+clean1 = []
+for i in primary['author.text']:
+    tmp = ' '.join(re.sub("(@\S*\b)|(https?://\S*)|(#\S*\b)", " ", i).split())
+    tmp1 = re.sub('[\s]+', ' ', tmp)
+    tmp1 = re.sub('[^\w]', ' ', tmp1)
+    clean1.append(tmp1)
+
+primary['cleaned.author.text'] = clean1
 
 #stripping non text characters ie @, # ,https://, ect
 clean2 = []
 
-for i in quoted['q_text']:
+for i in primary['q_author.text']:
     tmp = ' '.join(re.sub("(@\S*\b)|(https?://\S*)|(#\S*\b)", " ", i).split())
     tmp1 = re.sub('[\s]+', ' ', tmp)
     tmp1 = re.sub('[^\w]', ' ', tmp1)
     clean2.append(tmp1)
 
-quoted['q_cleaned.text'] = clean2
-
-#merge text from quoted with primary
-primary = pd.merge(primary, quoted, on='id')
-
-
-#creating new df
-#collapsing tweets by user_id
-primary['author.text'] = primary[['user_id', 'cleaned.text']].groupby(['user_id'])['cleaned.text'].transform(lambda x: ','.join(x))
-primary['q_author.text'] = primary[['user_id', 'q_cleaned.text']].groupby(['user_id'])['q_cleaned.text'].transform(lambda x: ','.join(x))
-primary['c_text_lang'] = primary[['user_id', 'text_lang']].groupby(['user_id'])['text_lang'].transform(lambda x: ','.join(x))
-primary['c_user_location'] = primary[['user_id', 'user_location']].groupby(['user_id'])['user_location'].transform(lambda x: ','.join(x))
-primary['c_user_lang'] = primary[['user_id', 'user_lang']].groupby(['user_id'])['user_lang'].transform(lambda x: ','.join(x))
-primary['c_source'] = primary[['user_id', 'source']].groupby(['user_id'])['source'].transform(lambda x: ','.join(x))
-primary['c_q_text_lang'] = primary[['user_id', 'q_text_lang']].groupby(['user_id'])['q_text_lang'].transform(lambda x: ','.join(x))
-primary['c_q_user_location'] = primary[['user_id', 'q_user_location']].groupby(['user_id'])['q_user_location'].transform(lambda x: ','.join(x))
-primary['c_q_user_lang'] = primary[['user_id', 'q_user_lang']].groupby(['user_id'])['q_user_lang'].transform(lambda x: ','.join(x))
+primary['cleaned.q.author.text'] = clean2
 
 #merge with user desc
 primary2 = pd.merge(primary, user_desc, on='user_id')
