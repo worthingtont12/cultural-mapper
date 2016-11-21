@@ -11,7 +11,7 @@ from io import StringIO
 
 os.chdir("/Users/tylerworthington/Git_Repos")
 
-df = pd.read_csv("primary.csv", error_bad_lines=False)
+df = pd.read_csv("author_tweets.csv", error_bad_lines=False)
 
 ###################Function to deal with special characters, tokenizing, and stemming#####################
 def clean(text):
@@ -58,34 +58,35 @@ df.apply(clean)
 # Korean            1
 # Swedish           1
 
-####Stop Words
-#English
-english = stopwords.words('english')
-words = [w for w in df if not w in stopwords.words("english")]
-
-#Spanish
-spanish = stopwords.words('spanish')
-
-#Portuguese
-portuguese = stopwords.words('portuguese')
-
-#French
-french = stopwords.words('french')
-
-#German
-german = stopwords.words('german')
-
-#Russian
-russian = stopwords.words('russian')
-
-#Dutch
-dutch  = stopwords.words('dutch')
-
-#Turkish
-turkish = stopwords.words('turkish')
-
-#Finnish
-finnish = stopwords.words('finnish')
-
-#Swedish
-swedish = stopwords.words('swedish')
+# ####Stop Words
+# #English
+# english = stopwords.words('english')
+# words = [w for w in df if not w in stopwords.words("english")]
+#
+# #Spanish
+# spanish = stopwords.words('spanish')
+#
+# #Portuguese
+# portuguese = stopwords.words('portuguese')
+#
+# #French
+# french = stopwords.words('french')
+#
+# #German
+# german = stopwords.words('german')
+#
+# #Russian
+# russian = stopwords.words('russian')
+#
+# #Dutch
+# dutch  = stopwords.words('dutch')
+#
+# #Turkish
+# turkish = stopwords.words('turkish')
+#
+# #Finnish
+# finnish = stopwords.words('finnish')
+#
+# #Swedish
+# swedish = stopwords.words('swedish')
+pd.to_csv('cleaned_tweets.csv')
