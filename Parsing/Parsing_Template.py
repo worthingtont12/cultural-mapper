@@ -5,7 +5,7 @@ import re
 import pandas as pd
 os.chdir("/Users/tylerworthington/Git_Repos")
 #importing json language file
-with open("Cultural_Mapper/Data/Langauge.json") as json_file:
+with open("Cultural_Mapper/Assets/Langauge.json") as json_file:
     json_data = json.load(json_file)
 #Import CSVs
 primary = pd.read_csv("Data/la-primary_102616.csv", error_bad_lines=False)
@@ -67,9 +67,9 @@ hashtags1 = []
 # Iterate over the text, extracting and adding
 
 for tweet in primary['q_author.text']:
-    mentions1.append(re.findall('@\S*', tweet))
+    mentions1.append(re.findall(r'@\S*', tweet))
     links1.append(re.findall('https?://\S*', tweet))
-    hashtags1.append(re.findall('#\S*', tweet))
+    hashtags1.append(re.findall(r'#\S*', tweet))
 
 # Append features as a new column to the existing dataframe.
 primary['q_hashtags'] = hashtags1
