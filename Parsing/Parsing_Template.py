@@ -14,7 +14,6 @@ quoted = pd.read_csv("Data/la-quoted102616.csv", error_bad_lines=False)
 user_desc = pd.read_csv("Data/la_user_desc_102616.csv", error_bad_lines=False)
 
 #transforming language variable
-print(primary['user_lang'].value_counts())
 
 languages1 = []
 for i in primary['user_lang']:
@@ -23,6 +22,7 @@ for i in primary['user_lang']:
             languages1.append(j['name'])
 
 primary['user_language'] = languages1
+print(primary['user_language'].value_counts())
 
 #merge text from quoted with primary
 primary = pd.merge(primary, quoted, on='id')
@@ -48,9 +48,9 @@ hashtags = []
 # Iterate over the text, extracting and adding
 
 for tweet in primary['author.text']:
-    mentions.append(re.findall('@\S*\b', tweet))
+    mentions.append(re.findall('@\S*', tweet))
     links.append(re.findall('https?://\S*', tweet))
-    hashtags.append(re.findall('#\S*\b', tweet))
+    hashtags.append(re.findall('#\S*', tweet))
 
 # Append features as a new column to the existing dataframe.
 primary['hashtags'] = hashtags
@@ -67,9 +67,9 @@ hashtags1 = []
 # Iterate over the text, extracting and adding
 
 for tweet in primary['q_author.text']:
-    mentions1.append(re.findall('@\S*\b', tweet))
+    mentions1.append(re.findall('@\S*', tweet))
     links1.append(re.findall('https?://\S*', tweet))
-    hashtags1.append(re.findall('#\S*\b', tweet))
+    hashtags1.append(re.findall('#\S*', tweet))
 
 # Append features as a new column to the existing dataframe.
 primary['q_hashtags'] = hashtags1
@@ -79,7 +79,7 @@ primary['q_links'] = links1
 #stripping non text characters ie @, # ,https://, ect
 clean1 = []
 for i in primary['author.text']:
-    tmp = ' '.join(re.sub("(@\S*\b)|(https?://\S*)|(#\S*\b)", " ", i).split())
+    tmp = re.sub("(@\S*)|(https?://\S*)|(#\S*)", " ", i)
     tmp1 = re.sub('[\s]+', ' ', tmp)
     tmp1 = re.sub('[^\w]', ' ', tmp1)
     clean1.append(tmp1)
@@ -90,7 +90,7 @@ primary['cleaned.author.text'] = clean1
 clean2 = []
 
 for i in primary['q_author.text']:
-    tmp = ' '.join(re.sub("(@\S*\b)|(https?://\S*)|(#\S*\b)", " ", i).split())
+    tmp =  re.sub("(@\S*)|(https?://\S*)|(#\S*)", " ", i)
     tmp1 = re.sub('[\s]+', ' ', tmp)
     tmp1 = re.sub('[^\w]', ' ', tmp1)
     clean2.append(tmp1)

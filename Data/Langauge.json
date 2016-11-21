@@ -81,12 +81,12 @@
    },
    {
       "code":"zh-tw",
-      "name":"Traditional Chinese",
+      "name":"Chinese",
       "status":"production"
    },
    {
       "code":"zh-cn",
-      "name":"Simplified Chinese",
+      "name":"Chinese",
       "status":"production"
    },
    {
@@ -161,17 +161,17 @@
    },
    {
       "code":"en-gb",
-      "name":"British English",
+      "name":"English",
       "status":"production"
    },
    {
       "code":"en-GB",
-      "name":"British English",
+      "name":"English",
       "status":"production"
    },
    {
       "code":"en-AU",
-      "name":"Australian English",
+      "name":"English",
       "status":"production"
    },
    {
