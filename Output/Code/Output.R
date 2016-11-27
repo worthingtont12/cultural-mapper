@@ -1,14 +1,24 @@
 source('Registry.R')
-ist_geo <- location('../../../../../Desktop/Capstone/Istanbul.csv', 28.448009, 40.802731, 29.45787, 41.23595)
+ist_geo <- location('../../Data/Queries/Istanbul.csv',
+                    "Asia/Istanbul",
+                    28.448009, 40.802731, 29.45787, 41.23595)
 ist_map <- location_map(ist_geo)
 ist_map
+ist_dygraph <- location_dygraph(ist_geo)
+ist_dygraph
 
 
-la_geo <- location('../../../DATAArchive/LA_Geotagged.csv', -118.723549, 33.694679, -117.929466, 34.33926)
-la_map <- location_map(la_geo)
+la_geo <- location('../../Data/Queries/LA_Geotagged.csv', 
+                   "America/Los_Angeles",
+                   -118.723549, 33.694679, -117.929466, 34.33926)
+la_map <- location_map(la_geo, 2000)
 la_map
+la_dygraph <- location_dygraph(la_geo)
+la_dygraph
 
-chi_geo <- location('../../../../../Desktop/Capstone/Chicago_sample.csv', -87.968437, 41.624851, -87.397217, 42.07436)
+chi_geo <- location('../../Data/Queries/Chicago_sample.csv',
+                    "America/Chicago",
+                    -87.968437, 41.624851, -87.397217, 42.07436)
 chi_map <- location_map(chi_geo)
 chi_map
 

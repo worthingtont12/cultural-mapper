@@ -1,24 +1,8 @@
-install.packages("dygraphs")
-install.packages("xts")
 library(dygraphs)
 library(xts)
-lungDeaths <- cbind(mdeaths, fdeaths)
-
-
-dygraph(lungDeaths) %>% dyRangeSelector()
-
-
-temp <- paste0(substr(la_geo$created_at, 12, 15), "0")
-temp <- paste0(as.Date(la_geo$created_at, format='%a %b %d'), " ", temp, ":00")
-the_data <- data.frame(table(tweets$threeMins))
-the_data$Var1<-as.POSIXct(as.character(the_data$Var1))
-the_xts<-xts(the_data[,2], order.by=the_data[,1])
-colnames(the_xts)[1] <- "Tweets"
-dygraph(the_xts)
-
-
 library(tidyr)
 
+attr(la_geo$created_at, "tzone") <- "America/Los_Angeles"
 la_geo$rounded <- round(la_geo$created_at, units = 'hours')
 head(la_geo)
 
@@ -29,8 +13,12 @@ Lang_sum <- geo_filter %>%
   summarise(count=n()) %>%
   spread(language,count, fill = 0) %>%
   arrange(rounded)
-Lang_sum$rounded <- as.POSIXct(Lang_sum$rounded)
+Lang_sum$rounded <- as.POSIXct(Lang_sum$rounded, tz = "America/Los_Angeles")
 names(Lang_sum[-1])
+volume <- colSums(Lang_sum[,-1])
+languages <- names(volume[volume > 100])
+the_xts<-xts(Lang_sum[,-1], order.by=Lang_sum$rounded, tz = "America/Los_Angeles")
+#indexTZ(the_xts) <- "America/Los_Angeles"
 
 
 
@@ -89,8 +77,39 @@ location_map <- function(geo_filter, threshold = 100){
 temp <- list(x = lungDeaths , y = languages)
 
 
-dygraph(the_xts) %>%
-  dyOptions(colors = RColorBrewer::brewer.pal(32,"Paired")) %>%
+dygraph(the_xts,
+        main = "Tweets per Hour",
+        ylab = "Tweets (log scale)") %>%
+  dyLegend(showZeroValues = FALSE) %>%
+  dyOptions(colors = color_pal$colors,
+            logscale = F,
+            useDataTimezone = TRUE,
+            connectSeparatedPoints = TRUE) %>%
   dyHighlight(highlightSeriesBackgroundAlpha = .2, highlightSeriesOpts = list(strokeWidth = 3)) %>%
   dyRoller(rollPeriod = 6) %>%
   dyRangeSelector()
+
+
+max(Lang_sum$rounded) - as.difftime(1, units = "days")
+
+
+library(RColorBrewer)
+colors <- c(brewer.pal(35, "Set3"),
+            brewer.pal(35, "Set1"),
+            brewer.pal(35, "Dark2"),
+            "#000000", "#F7F7F7","FFE1FF")
+
+library(jsonlite)
+registry <- fromJSON('../../Assets/Langauge.json')
+registry <- registry[,1:2]
+names(registry) <- c('text_lang', 'language')
+
+language <- unique(registry$language)
+
+color_pal <- as.data.frame(cbind(language, colors))
+registry <- merge(registry,color_pal)
+
+
+temp <- list()
+temp$raw <- la_geo
+temp$reg <- registry
