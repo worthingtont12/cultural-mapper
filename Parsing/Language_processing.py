@@ -13,13 +13,15 @@ os.chdir("/Users/tylerworthington/Git_Repos")
 
 df = pd.read_csv("author_tweets.csv", error_bad_lines=False)
 
-###################Function to deal with special characters, tokenizing, and stemming#####################
+################### Function to deal with special characters, tokenizing,
+
+
 def clean(text):
-    #functions used
+    # functions used
     tokenizer = RegexpTokenizer(r'\w+')
     stemmer = PorterStemmer()
 
-    #dealing with special cases
+    # dealing with special cases
     text = text.replace('\'', '')
     text = text.replace('"', ' ')
     text = text.replace('_', ' ')
@@ -27,7 +29,7 @@ def clean(text):
     text = re.sub(' +', ' ', text)
     text = re.sub('[1|2|3|4|5|6|7|8|9|0]', '', text)
 
-    #remove case
+    # remove case
     text = text.lower()
 
     # tokenizing
@@ -39,7 +41,7 @@ def clean(text):
     return stemmed_tokenized_words
 
 
-#applying function to dataframe
+# applying function to dataframe
 df.apply(clean)
 
 
