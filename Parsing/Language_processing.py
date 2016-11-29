@@ -1,13 +1,13 @@
 """Processing Language for Topic Modeling."""
 import os
-import pandas as pd
 from nltk.tokenize import RegexpTokenizer
 from nltk.corpus import stopwords
 from nltk.stem import PorterStemmer
+from Joining_and_Cleaning import primary2
 
 os.chdir("/Users/tylerworthington/Git_Repos")
 
-df = pd.read_csv("author_tweets.csv", error_bad_lines=False)
+df = primary2
 
 # Function to deal with tokenizing,stemming, and stop word filtering
 
@@ -65,6 +65,9 @@ swedish = stopwords.words('swedish')
 # applying function to dataframe
 df_en = df[df.user_language == 'English']
 df_en['final_combined_text'] = df_en['final_combined_text'].apply(lambda row: process(row, english))
+
+df_es = df[df.user_language == 'Spanish']
+df_es['final_combined_text'] = df_es['final_combined_text'].apply(lambda row: process(row, spanish))
 
 # exporting
 df_en.to_csv('cleaned_tweets.csv')

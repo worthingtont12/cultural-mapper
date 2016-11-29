@@ -1,15 +1,21 @@
 """Topic Modeling on Authored Tweets"""
+# guidance found from
+# https://de.dariah.eu/tatom/topic_model_python.html
+
 import os
 import pandas as pd
 import numpy as np
 import sklearn.feature_extraction.text as text
 from sklearn import decomposition
-# https://de.dariah.eu/tatom/topic_model_python.html
+from Language_processing import df_en
 
+# set wd
 os.chdir("/Users/tylerworthington/Git_Repos")
 
-df = pd.read_csv("cleaned_tweets.csv")
+#import data
+df = df_en
 
+# create document term matrix
 vectorizer = text.CountVectorizer()
 dtm = vectorizer.fit_transform(df.final_combined_text).toarray()
 vocab = np.array(vectorizer.get_feature_names())

@@ -1,5 +1,4 @@
 """Parse Tweets and export them into a working format for Topic Modeling."""
-import json
 import os
 import re
 import pandas as pd
@@ -20,8 +19,12 @@ user_desc.columns = ['id', 'user_id', 'user_desc']
 # recasting
 primary['id'] = primary['id'].apply(str)
 primary['user_id'] = primary['user_id'].apply(str)
-primary['q_id'] = primary['q_id'].apply(str)
-primary['q_user_id'] = primary['q_user_id'].apply(str)
+primary['text_lang'] = primary['text_lang'].apply(str)
+primary['user_location'] = primary['user_location'].apply(str)
+primary['user_handle'] = primary['user_handle'].apply(str)
+primary['user_lang'] = primary['user_lang'].apply(str)
+primary['source'] = primary['source'].apply(str)
+
 
 # transforming language variable
 map_lang = {'en': "English", 'fr': "French", 'und': "Unknown", 'ar': "Arabic", 'ja': "Japanese", 'es': "Spanish",
@@ -37,6 +40,15 @@ print(primary['user_language'].value_counts())
 
 # merge text from quoted with primary
 primary = pd.merge(primary, quoted, on='id')
+
+# recasting new variables
+# primary['q_id'] = primary['q_id'].apply(str)
+# primary['q_user_id'] = primary['q_user_id'].apply(str)
+primary['q_text_lang'] = primary['q_text_lang'].apply(str)
+primary['q_user_location'] = primary['q_user_location'].apply(str)
+primary['q_user_handle'] = primary['q_user_handle'].apply(str)
+primary['q_user_lang'] = primary['q_user_lang'].apply(str)
+primary['q_source'] = primary['q_source'].apply(str)
 
 # creating new df
 # collapsing tweets by user_id
@@ -58,6 +70,12 @@ primary['c_q_user_location'] = primary[['user_id', 'q_user_location']].groupby(
     ['user_id'])['q_user_location'].transform(lambda x: ','.join(x))
 primary['c_q_user_lang'] = primary[['user_id', 'q_user_lang']].groupby(
     ['user_id'])['q_user_lang'].transform(lambda x: ','.join(x))
+
+# drop non unique observations
+#primary = primary.loc[~primary['user_id'].duplicated()]
+primary.drop(~['user_id', 'user_language', 'c_q_text_lang', 'c_text_lang', 'c_user_location',
+               'c_q_user_location', 'c_source', 'author.text', 'q_author.text'], inplace=True, axis=1)
+primary.drop_duplicates(inplace=True)
 
 # handling @,#, and URL's
 # Create empty lists for each category.
@@ -143,6 +161,3 @@ for i in primary2['user_desc']:
 primary2['cleaned_user_desc'] = clean3
 
 primary2['cleaned_user_desc'] = primary2['cleaned_user_desc'].astype(str)
-
-# Export Tweets
-primary2.to_csv('primary.csv')
