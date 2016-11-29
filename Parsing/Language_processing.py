@@ -12,8 +12,6 @@ from io import StringIO
 os.chdir("/Users/tylerworthington/Git_Repos")
 
 df = pd.read_csv("author_tweets.csv", error_bad_lines=False)
-
-<<<<<<< HEAD
 # recasting
 df['cleaned_user_desc'] = df['cleaned_user_desc'].apply(str)
 df['cleaned.q.author.text'] = df['cleaned.q.author.text'].apply(str)
@@ -23,10 +21,7 @@ df['cleaned.author.text'] = df['cleaned.author.text'].apply(str)
 df['final_combined_text'] = df[['cleaned_user_desc', 'cleaned.q.author.text',
                                 'cleaned.author.text']].apply(lambda x: ' '.join(x), axis=1)
 
-# Function to deal with special characters, tokenizing, a
-=======
-################### Function to deal with special characters, tokenizing,
->>>>>>> e105d5bcd1024ab3a3138fd336340814acc64571
+# Function to deal with special characters, tokenizing,
 
 
 def clean(text):
@@ -34,17 +29,6 @@ def clean(text):
     tokenizer = RegexpTokenizer(r'\w+')
     stemmer = PorterStemmer()
 
-<<<<<<< HEAD
-=======
-    # dealing with special cases
-    text = text.replace('\'', '')
-    text = text.replace('"', ' ')
-    text = text.replace('_', ' ')
-    text = text.replace('-', ' ')
-    text = re.sub(' +', ' ', text)
-    text = re.sub('[1|2|3|4|5|6|7|8|9|0]', '', text)
-
->>>>>>> e105d5bcd1024ab3a3138fd336340814acc64571
     # remove case
     text = text.lower()
 
@@ -58,7 +42,6 @@ def clean(text):
 
 
 # applying function to dataframe
-<<<<<<< HEAD
 df['final_combined_text'] = df['final_combined_text'].apply(clean)
 
 #
@@ -109,8 +92,6 @@ df['final_combined_text'] = df['final_combined_text'].apply(clean)
 # # Swedish
 # swedish = stopwords.words('swedish')
 
-df.to_csv('cleaned.csv')
-=======
 df.apply(clean)
 
 
@@ -161,4 +142,3 @@ df.apply(clean)
 # #Swedish
 # swedish = stopwords.words('swedish')
 pd.to_csv('cleaned_tweets.csv')
->>>>>>> e105d5bcd1024ab3a3138fd336340814acc64571

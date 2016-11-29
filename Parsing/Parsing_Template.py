@@ -115,7 +115,6 @@ primary['cleaned.q.author.text'] = clean2
 # merge with user desc
 primary2 = pd.merge(primary, user_desc, on='user_id')
 
-<<<<<<< HEAD
 # Cleaning user description
 clean3 = []
 for i in primary2['user_desc']:
@@ -130,10 +129,6 @@ for i in primary2['user_desc']:
 primary2['cleaned_user_desc'] = clean3
 
 primary2['cleaned_user_desc'] = primary2['cleaned_user_desc'].astype(str)
-=======
-#
-primary2.merged_text = primary2[['cleaned.author.text', 'cleaned.q.author.text']].apply(lambda x: ' '.join(x), axis=1)
 
->>>>>>> e105d5bcd1024ab3a3138fd336340814acc64571
 # Export Tweets
 primary2.to_csv('primary.csv')
