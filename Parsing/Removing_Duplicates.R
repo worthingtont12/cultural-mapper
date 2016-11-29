@@ -1,0 +1,10 @@
+#Cleaning up data to drop duplicate variables
+library(readr)
+setwd('/Users/tylerworthington/Git_Repos')
+df<- read_csv('primary.csv')
+df <- subset(df, select = -c( X1 : text_lang ))
+df <- subset(df, select = -c( user_location : user_lang ))
+df <- subset(df, select = -c( q_id : q_user_lang ))
+df <- subset(df, select = -c(id_y))
+df<- unique(df)
+write_csv(df,'author_tweets.csv')
