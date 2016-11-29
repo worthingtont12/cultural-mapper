@@ -4,24 +4,35 @@ import os
 import re
 import pandas as pd
 os.chdir("/Users/tylerworthington/Git_Repos")
-# importing json language file
-with open("Cultural_Mapper/Assets/Langauge.json") as json_file:
-    json_data = json.load(json_file)
+
 # Import CSVs
-primary = pd.read_csv("Data/la-primary_102616.csv", error_bad_lines=False)
-secondary = pd.read_csv("Data/la-secondary_102616.csv", error_bad_lines=False)
-quoted = pd.read_csv("Data/la-quoted102616.csv", error_bad_lines=False)
-user_desc = pd.read_csv("Data/la_user_desc_102616.csv", error_bad_lines=False)
+primary = pd.read_csv("Data/1125/1125LA_primary.csv", error_bad_lines=False)
+quoted = pd.read_csv("Data/1125/1125LA_quoted.csv", error_bad_lines=False)
+user_desc = pd.read_csv("Data/1125/1125LA_userdesc.csv", error_bad_lines=False)
+
+# naming Columns
+primary.columns = ['created_at', 'id', 'source', 'text', 'text_lang',
+                   'user_id', 'user_location', 'user_handle', 'user_lang']
+quoted.columns = ['id', 'q_id' 'q_created_at', 'q_source', 'q_text', 'q_text_lang',
+                  'q_user_id', 'q_user_location', 'q_user_handle', 'q_user_lang']
+user_desc.columns = ['id', 'user_id', 'user_desc']
+
+# recasting
+primary['id'] = primary['id'].apply(str)
+primary['user_id'] = primary['user_id'].apply(str)
+primary['q_id'] = primary['q_id'].apply(str)
+primary['q_user_id'] = primary['q_user_id'].apply(str)
 
 # transforming language variable
+map_lang = {'en': "English", 'fr': "French", 'und': "Unknown", 'ar': "Arabic", 'ja': "Japanese", 'es': "Spanish",
+            'de': "German", 'it': 'Italian', 'id': "Indonesian", "pt": "Portuguese", 'ko': "Korean", 'tr': "Turkish",
+            'ru': "Russian", 'nl': "Dutch", 'fil': "Filipino", 'msa': "Malay", 'zh-tw': "Chinese", 'zh-cn': "Chinese",
+            'zh': "Chinese", 'hi': "Hindi", 'no': "Norwegian", 'sv': "Swedish", 'fi': "Finnish", 'da': "Danish",
+            'pl': "Polish", 'hu': "Hungarian", 'fa': "Persian", 'he': "Hebrew", 'th': "Thai", 'uk': "Ukrainian",
+            'cs': "Czech", 'ro': "Romanian", 'en-gb': "English", 'en-GB': "English", 'en-AU': "English",
+            'vi': "Vietnamese", 'bn': "Bengali"}
 
-languages1 = []
-for i in primary['user_lang']:
-    for j in json_data:
-        if i == j['code']:
-            languages1.append(j['name'])
-
-primary['user_language'] = languages1
+primary['user_language'] = primary["user_lang"].map(map_lang)
 print(primary['user_language'].value_counts())
 
 # merge text from quoted with primary
