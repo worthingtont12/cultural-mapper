@@ -88,13 +88,14 @@ primary['q_links'] = links1
 # stripping non text characters ie @, # ,https://, ect
 clean1 = []
 for i in primary['author.text']:
-    tmp = re.sub("(@\S*)|(https?://\S*)", " ", i)
-    tmp1 = ' '.join(re.sub("(\w+:\/\/\S+)", " ", tmp).split())
-    tmp1 = re.sub('[\s]+', ' ', tmp)
-    tmp1 = re.sub('[^\w]', ' ', tmp1)
-    tmp1 = re.sub(' +', ' ', tmp1)
-    tmp1 = re.sub('[1|2|3|4|5|6|7|8|9|0]', '', tmp1)
-    clean1.append(tmp1)
+    tmp = re.sub("'", '', i)
+    tmp = re.sub("(@\S*)|(https?://\S*)", " ", tmp)
+    tmp = ' '.join(re.sub("(\w+:\/\/\S+)", " ", tmp).split())
+    tmp = re.sub('[\s]+', ' ', tmp)
+    tmp = re.sub('[^\w]', ' ', tmp)
+    tmp = re.sub(' +', ' ', tmp)
+    tmp = re.sub('[1|2|3|4|5|6|7|8|9|0]', '', tmp)
+    clean1.append(tmp)
 
 primary['cleaned.author.text'] = clean1
 
@@ -102,13 +103,14 @@ primary['cleaned.author.text'] = clean1
 clean2 = []
 
 for i in primary['q_author.text']:
-    tmp = re.sub("(@\S*)|(https?://\S*)", " ", i)
-    tmp1 = ' '.join(re.sub("(\w+:\/\/\S+)", " ", tmp).split())
-    tmp1 = re.sub('[\s]+', ' ', tmp)
-    tmp1 = re.sub('[^\w]', ' ', tmp1)
-    tmp1 = re.sub(' +', ' ', tmp1)
-    tmp1 = re.sub('[1|2|3|4|5|6|7|8|9|0]', '', tmp1)
-    clean2.append(tmp1)
+    tmp = re.sub("'", '', i)
+    tmp = re.sub("(@\S*)|(https?://\S*)", " ", tmp)
+    tmp = ' '.join(re.sub("(\w+:\/\/\S+)", " ", tmp).split())
+    tmp = re.sub('[\s]+', ' ', tmp)
+    tmp = re.sub('[^\w]', ' ', tmp)
+    tmp = re.sub(' +', ' ', tmp)
+    tmp = re.sub('[1|2|3|4|5|6|7|8|9|0]', '', tmp)
+    clean2.append(tmp)
 
 primary['cleaned.q.author.text'] = clean2
 
@@ -118,13 +120,14 @@ primary2 = pd.merge(primary, user_desc, on='user_id')
 # Cleaning user description
 clean3 = []
 for i in primary2['user_desc']:
-    tmp = re.sub("(@\S*)|(https?://\S*)", " ", i)
-    tmp1 = ' '.join(re.sub("(\w+:\/\/\S+)", " ", tmp).split())
-    tmp1 = re.sub('[\s]+', ' ', tmp1)
-    tmp1 = re.sub('[^\w]', ' ', tmp1)
-    tmp1 = re.sub(' +', ' ', tmp1)
-    tmp1 = re.sub('[1|2|3|4|5|6|7|8|9|0]', '', tmp1)
-    clean3.append(tmp1)
+    tmp = re.sub("'", '', i)
+    tmp = re.sub("(@\S*)|(https?://\S*)", " ", tmp)
+    tmp = ' '.join(re.sub("(\w+:\/\/\S+)", " ", tmp).split())
+    tmp = re.sub('[\s]+', ' ', tmp)
+    tmp = re.sub('[^\w]', ' ', tmp)
+    tmp = re.sub(' +', ' ', tmp)
+    tmp = re.sub('[1|2|3|4|5|6|7|8|9|0]', '', tmp)
+    clean3.append(tmp)
 
 primary2['cleaned_user_desc'] = clean3
 
