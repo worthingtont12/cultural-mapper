@@ -24,7 +24,7 @@ df['final_combined_text'] = df[['cleaned_user_desc', 'cleaned.q.author.text',
 # Function to deal with special characters, tokenizing,
 
 
-def clean(text):
+def process(text, lang):
     # functions used
     tokenizer = RegexpTokenizer(r'\w+')
     stemmer = PorterStemmer()
@@ -38,107 +38,27 @@ def clean(text):
     # stemming
     stemmed_tokenized_words = [stemmer.stem(i) for i in words]
 
-    return stemmed_tokenized_words
+    # stop words
+    stop_words = [i for i in stemmed_tokenized_words if i not in lang]
+
+    return stop_words
 
 
 # applying function to dataframe
-df['final_combined_text'] = df['final_combined_text'].apply(clean)
+english = stopwords.words('english')
+df_en = df[df.user_language == 'English']
+df_en['final_combined_text'] = df_en['final_combined_text'].apply(lambda row: process(row, english))
 
-#
-# # English       19633
-# # Spanish         127
-# # Portuguese       59
-# # Arabic           48
-# # Japanese         42
-# # French           19
-# # German           18
-# # Russian          11
-# # Polish           11
-# # Dutch             5
-# # Turkish           5
-# # Finnish           2
-# # Korean            1
-# # Swedish           1
-#
 # # Stop Words
 # English
-#english = stopwords.words('english')
-#words = [w for w in df if not w in stopwords.words("english")]
-#
-# # Spanish
-# spanish = stopwords.words('spanish')
-#
-# # Portuguese
-# portuguese = stopwords.words('portuguese')
-#
-# # French
-# french = stopwords.words('french')
-#
-# # German
-# german = stopwords.words('german')
-#
-# # Russian
-# russian = stopwords.words('russian')
-#
-# # Dutch
-# dutch = stopwords.words('dutch')
-#
-# # Turkish
-# turkish = stopwords.words('turkish')
-#
-# # Finnish
-# finnish = stopwords.words('finnish')
-#
-# # Swedish
-# swedish = stopwords.words('swedish')
 
-df.apply(clean)
+#
+# def stop(doc, lang):
+#     stop_words = " ".join([i for i in doc if i not in lang])
+#     return stop_words
+#
+#
+# df['final_combined_text1'] = df['final_combined_text'].apply(lambda doc: stop(doc, english))
 
-
-# English       19633
-# Spanish         127
-# Portuguese       59
-# Arabic           48
-# Japanese         42
-# French           19
-# German           18
-# Russian          11
-# Polish           11
-# Dutch             5
-# Turkish           5
-# Finnish           2
-# Korean            1
-# Swedish           1
-
-# ####Stop Words
-# #English
-# english = stopwords.words('english')
-# words = [w for w in df if not w in stopwords.words("english")]
-#
-# #Spanish
-# spanish = stopwords.words('spanish')
-#
-# #Portuguese
-# portuguese = stopwords.words('portuguese')
-#
-# #French
-# french = stopwords.words('french')
-#
-# #German
-# german = stopwords.words('german')
-#
-# #Russian
-# russian = stopwords.words('russian')
-#
-# #Dutch
-# dutch  = stopwords.words('dutch')
-#
-# #Turkish
-# turkish = stopwords.words('turkish')
-#
-# #Finnish
-# finnish = stopwords.words('finnish')
-#
-# #Swedish
-# swedish = stopwords.words('swedish')
-pd.to_csv('cleaned_tweets.csv')
+# exporting
+df_en.to_csv('cleaned_tweets.csv')
