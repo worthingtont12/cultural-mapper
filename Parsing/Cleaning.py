@@ -3,6 +3,10 @@ import os
 import re
 from Parsing.Joining import primary2
 
+# TODO
+# filter out job bots
+# remove user_desc that has this text "Follow this account for geo-targeted"
+
 df = primary2
 os.chdir("/Users/tylerworthington/Git_Repos/Data")
 
@@ -132,7 +136,3 @@ df['user_desc'] = df['user_desc'].apply(str)
 df['cleaned_author_text'] = df['author.text'].apply(text_clean)
 df['cleaned_q_author_text'] = df['q_author.text'].apply(text_clean)
 df['cleaned_user_desc'] = df['user_desc'].apply(text_clean)
-
-# TODO
-# filter out job bots
-# remove user_desc that has this text "Follow this account for geo-targeted"
