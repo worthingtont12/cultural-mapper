@@ -1,4 +1,4 @@
-"""Parse Tweets and export them into a working format for Topic Modeling."""
+"""Parse and clean tweets and export them into a working format for Topic Modeling."""
 import os
 import re
 from Joining import primary2
@@ -6,8 +6,25 @@ from Joining import primary2
 df = primary2
 os.chdir("/Users/tylerworthington/Git_Repos/Data")
 
+
+def text_clean(dirtytext):
+    """Cleans text by stripping out unnecessary characters.
+    arguments:
+    dirtytext: The text to be cleaned.
+    """
+    tmp = re.sub("'", '', dirtytext)
+    tmp = re.sub("(@\S*)|(https?://\S*)", " ", tmp)
+    tmp = ' '.join(re.sub("(\w+:\/\/\S+)", " ", tmp).split())
+    tmp = re.sub('[\s]+', ' ', tmp)
+    tmp = re.sub('[^\w]', ' ', tmp)
+    tmp = re.sub(' +', ' ', tmp)
+    tmp = re.sub('[1|2|3|4|5|6|7|8|9|0]', '', tmp)
+    tmp = re.sub('nan', ' ', tmp)
+    return tmp
+
 # recasting
 df['id'] = df['id'].apply(str)
+df['text'] = df['text'].apply(str)
 df['user_id'] = df['user_id'].apply(str)
 df['text_lang'] = df['text_lang'].apply(str)
 df['user_location'] = df['user_location'].apply(str)
@@ -18,6 +35,7 @@ df['q_text_lang'] = df['q_text_lang'].apply(str)
 df['q_user_location'] = df['q_user_location'].apply(str)
 df['q_user_handle'] = df['q_user_handle'].apply(str)
 df['q_user_lang'] = df['q_user_lang'].apply(str)
+df['q_text'] = df['q_text'].apply(str)
 
 # transforming language variable for clearer interpretation
 map_lang = {'en': "English", 'fr': "French", 'und': "Unknown", 'ar': "Arabic", 'ja': "Japanese", 'es': "Spanish",
@@ -57,9 +75,9 @@ df['c_q_user_lang'] = df[['user_id', 'q_user_lang']].groupby(
 # drop non unique observations
 # df = df.loc[~df['user_id'].duplicated()]
 df.drop(['created_at', 'id', 'source', 'text',
-         'text_lang', 'user_location', 'user_handle',  'user_lang', 'q_id',
-         'q_created_at', 'q_text', 'q_text_lang',    'q_user_id',
-         'q_user_location', 'q_user_handle',  'q_user_lang'], inplace=True,
+         'text_lang', 'user_location', 'user_handle', 'user_lang', 'q_id',
+         'q_created_at', 'q_text', 'q_text_lang', 'q_user_id',
+         'q_user_location', 'q_user_handle', 'q_user_lang'], inplace=True,
         axis=1)
 df.drop_duplicates(subset='user_id', inplace=True)
 
@@ -100,50 +118,12 @@ df['q_hashtags'] = hashtags1
 df['q_mentions'] = mentions1
 df['q_links'] = links1
 
-# author text
+# recasting variables
+df['author.text'] = df['author.text'].apply(str)
+df['q_author.text'] = df['q_author.text'].apply(str)
+df['user_desc'] = df['user_desc'].apply(str)
+
 # stripping non text characters ie @, # ,https://, ect
-clean1 = []
-for i in df['author.text']:
-    tmp = re.sub("'", '', i)
-    tmp = re.sub("(@\S*)|(https?://\S*)", " ", tmp)
-    tmp = ' '.join(re.sub("(\w+:\/\/\S+)", " ", tmp).split())
-    tmp = re.sub('[\s]+', ' ', tmp)
-    tmp = re.sub('[^\w]', ' ', tmp)
-    tmp = re.sub(' +', ' ', tmp)
-    tmp = re.sub('[1|2|3|4|5|6|7|8|9|0]', '', tmp)
-    clean1.append(tmp)
-
-df['cleaned.author.text'] = clean1
-
-# Quoted author text
-# stripping non text characters ie @, # ,https://, ect
-clean2 = []
-
-for i in df['q_author.text']:
-    tmp = re.sub("'", '', i)
-    tmp = re.sub("(@\S*)|(https?://\S*)", " ", tmp)
-    tmp = ' '.join(re.sub("(\w+:\/\/\S+)", " ", tmp).split())
-    tmp = re.sub('[\s]+', ' ', tmp)
-    tmp = re.sub('[^\w]', ' ', tmp)
-    tmp = re.sub(' +', ' ', tmp)
-    tmp = re.sub('[1|2|3|4|5|6|7|8|9|0]', '', tmp)
-    clean2.append(tmp)
-
-df['cleaned.q.author.text'] = clean2
-
-# User Description
-# stripping non text characters ie @, # ,https://, ect
-clean3 = []
-for i in df['user_desc']:
-    tmp = re.sub("'", '', i)
-    tmp = re.sub("(@\S*)|(https?://\S*)", " ", tmp)
-    tmp = ' '.join(re.sub("(\w+:\/\/\S+)", " ", tmp).split())
-    tmp = re.sub('[\s]+', ' ', tmp)
-    tmp = re.sub('[^\w]', ' ', tmp)
-    tmp = re.sub(' +', ' ', tmp)
-    tmp = re.sub('[1|2|3|4|5|6|7|8|9|0]', '', tmp)
-    clean3.append(tmp)
-
-df['cleaned_user_desc'] = clean3
-
-df['cleaned_user_desc'] = df['cleaned_user_desc'].astype(str)
+df['cleaned_author_text'] = df['author.text'].apply(text_clean)
+df['cleaned_q_author_text'] = df['q_author.text'].apply(text_clean)
+df['cleaned_user_desc'] = df['user_desc'].apply(text_clean)

@@ -7,10 +7,15 @@ from Cleaning import df
 
 os.chdir("/Users/tylerworthington/Git_Repos/Data")
 
-# Function to deal with tokenizing,stemming, and stop word filtering
-
 
 def process(text, lang):
+    """Function to deal with tokenizing, stemming, and stop word filtering.
+
+    arguments:
+    text: text of interest in string format.
+    lang: language for stop word filtering.
+
+    """
     # functions used
     tokenizer = RegexpTokenizer(r'\w+')
     stemmer = PorterStemmer()
@@ -29,14 +34,15 @@ def process(text, lang):
 
     return stop_words
 
+
 # recasting
 df['cleaned_user_desc'] = df['cleaned_user_desc'].apply(str)
-df['cleaned.q.author.text'] = df['cleaned.q.author.text'].apply(str)
-df['cleaned.author.text'] = df['cleaned.author.text'].apply(str)
+df['cleaned_q_author_text'] = df['cleaned_q_author_text'].apply(str)
+df['cleaned_author_text'] = df['cleaned_author_text'].apply(str)
 
 # merging all text into one column
-df['final_combined_text'] = df[['cleaned_user_desc', 'cleaned.q.author.text',
-                                'cleaned.author.text']].apply(lambda x: ' '.join(x), axis=1)
+df['final_combined_text'] = df[['cleaned_user_desc', 'cleaned_q_author_text',
+                                'cleaned_author_text']].apply(lambda x: ' '.join(x), axis=1)
 
 # Stop Words
 # english
