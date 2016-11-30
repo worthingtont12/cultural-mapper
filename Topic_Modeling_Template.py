@@ -11,12 +11,11 @@ from Parsing.Language_processing import df_en
 # set wd
 os.chdir("/Users/tylerworthington/Git_Repos")
 
-#import data
+# import data
 df = df_en
 df_en['final_combined_text'] = df_en['final_combined_text'].apply(str)
 
 # create document term matrix
-#vectorizer = text.CountVectorizer(tokenizer=lambda doc: doc, lowercase=False)
 vectorizer = text.CountVectorizer(lowercase=False)
 dtm = vectorizer.fit_transform(df.final_combined_text).toarray()
 vocab = np.array(vectorizer.get_feature_names())

@@ -5,7 +5,7 @@ import pandas as pd
 os.chdir("/Users/tylerworthington/Git_Repos/Data")
 
 # Import CSVs
-primary = pd.read_csv("1125/1125LA_primary.csv", error_bad_lines=False, nrows=10000)
+primary = pd.read_csv("1125/1125LA_primary.csv", error_bad_lines=False, nrows=1000)
 quoted = pd.read_csv("1125/1125LA_quoted.csv", error_bad_lines=False, nrows=1000)
 user_desc = pd.read_csv("1125/1125LA_userdesc.csv", error_bad_lines=False, nrows=1000)
 

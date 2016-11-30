@@ -4,6 +4,8 @@ from nltk.tokenize import RegexpTokenizer
 from nltk.corpus import stopwords
 from nltk.stem import PorterStemmer
 from Parsing.Cleaning import df, text_clean
+# TODO
+# Consider lemmantizing
 
 os.chdir("/Users/tylerworthington/Git_Repos/Data")
 
@@ -72,3 +74,4 @@ swedish = stopwords.words('swedish')
 # applying function to dataframe
 df_en = df[df.user_language == 'English']
 df_en['final_combined_text'] = df_en['final_combined_text'].apply(lambda row: process(row, english))
+df_en.to_csv('x.csv')
