@@ -1,6 +1,6 @@
 # Order
-1.Joining and Cleaning
-2.Removing Duplicates
+1.Joining
+2.Cleaning
 3.Language Processing
 
 # Description

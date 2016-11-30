@@ -3,11 +3,9 @@ import os
 from nltk.tokenize import RegexpTokenizer
 from nltk.corpus import stopwords
 from nltk.stem import PorterStemmer
-from Joining_and_Cleaning import primary2
+from Cleaning import df
 
-os.chdir("/Users/tylerworthington/Git_Repos")
-
-df = primary2
+os.chdir("/Users/tylerworthington/Git_Repos/Data")
 
 # Function to deal with tokenizing,stemming, and stop word filtering
 
