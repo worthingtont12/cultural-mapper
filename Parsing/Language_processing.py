@@ -3,7 +3,9 @@ import os
 from nltk.tokenize import RegexpTokenizer
 from nltk.corpus import stopwords
 from nltk.stem import PorterStemmer
-from Cleaning import df
+from Parsing.Cleaning import df, text_clean
+# TODO
+# Consider lemmantizing
 
 os.chdir("/Users/tylerworthington/Git_Repos/Data")
 
@@ -42,8 +44,11 @@ df['cleaned_author_text'] = df['cleaned_author_text'].apply(str)
 
 # merging all text into one column
 df['final_combined_text'] = df[['cleaned_user_desc', 'cleaned_q_author_text',
-                                'cleaned_author_text']].apply(lambda x: ' '.join(x), axis=1)
+                                'cleaned_author_text']].apply(lambda x: ''.join(x), axis=1)
 
+# clean the text
+df['final_combined_text'] = df['final_combined_text'].apply(text_clean)
+df['final_combined_text'] = df['final_combined_text'].apply(str)
 # Stop Words
 # english
 english = stopwords.words('english')
@@ -69,9 +74,4 @@ swedish = stopwords.words('swedish')
 # applying function to dataframe
 df_en = df[df.user_language == 'English']
 df_en['final_combined_text'] = df_en['final_combined_text'].apply(lambda row: process(row, english))
-
-df_es = df[df.user_language == 'Spanish']
-df_es['final_combined_text'] = df_es['final_combined_text'].apply(lambda row: process(row, spanish))
-
-# exporting
-df_en.to_csv('cleaned_tweets.csv')
+df_en.to_csv('x.csv')

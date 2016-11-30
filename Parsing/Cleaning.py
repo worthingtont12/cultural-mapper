@@ -1,10 +1,12 @@
 """Parse and clean tweets and export them into a working format for Topic Modeling."""
 import os
 import re
-from Joining import primary2
+from Parsing.Joining import primary2
 
 df = primary2
 os.chdir("/Users/tylerworthington/Git_Repos/Data")
+
+# functions
 
 
 def text_clean(dirtytext):
@@ -13,6 +15,7 @@ def text_clean(dirtytext):
     dirtytext: The text to be cleaned.
     """
     tmp = re.sub("'", '', dirtytext)
+    tmp = re.sub(",", '', tmp)
     tmp = re.sub("(@\S*)|(https?://\S*)", " ", tmp)
     tmp = ' '.join(re.sub("(\w+:\/\/\S+)", " ", tmp).split())
     tmp = re.sub('[\s]+', ' ', tmp)
@@ -20,7 +23,9 @@ def text_clean(dirtytext):
     tmp = re.sub(' +', ' ', tmp)
     tmp = re.sub('[1|2|3|4|5|6|7|8|9|0]', '', tmp)
     tmp = re.sub('nan', ' ', tmp)
+    tmp = tmp.lower()
     return tmp
+
 
 # recasting
 df['id'] = df['id'].apply(str)
@@ -127,3 +132,7 @@ df['user_desc'] = df['user_desc'].apply(str)
 df['cleaned_author_text'] = df['author.text'].apply(text_clean)
 df['cleaned_q_author_text'] = df['q_author.text'].apply(text_clean)
 df['cleaned_user_desc'] = df['user_desc'].apply(text_clean)
+
+# TODO
+# filter out job bots
+# remove user_desc that has this text "Follow this account for geo-targeted"
