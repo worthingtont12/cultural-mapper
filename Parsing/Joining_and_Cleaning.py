@@ -12,7 +12,7 @@ user_desc = pd.read_csv("Data/1125/1125LA_userdesc.csv", error_bad_lines=False)
 # naming Columns
 primary.columns = ['created_at', 'id', 'source', 'text', 'text_lang',
                    'user_id', 'user_location', 'user_handle', 'user_lang']
-quoted.columns = ['id', 'q_id' 'q_created_at', 'q_source', 'q_text', 'q_text_lang',
+quoted.columns = ['id', 'q_id', 'q_created_at', 'q_text', 'q_text_lang',
                   'q_user_id', 'q_user_location', 'q_user_handle', 'q_user_lang']
 user_desc.columns = ['id', 'user_id', 'user_desc']
 
@@ -48,7 +48,7 @@ primary['q_text_lang'] = primary['q_text_lang'].apply(str)
 primary['q_user_location'] = primary['q_user_location'].apply(str)
 primary['q_user_handle'] = primary['q_user_handle'].apply(str)
 primary['q_user_lang'] = primary['q_user_lang'].apply(str)
-primary['q_source'] = primary['q_source'].apply(str)
+
 
 # creating new df
 # collapsing tweets by user_id
@@ -72,10 +72,13 @@ primary['c_q_user_lang'] = primary[['user_id', 'q_user_lang']].groupby(
     ['user_id'])['q_user_lang'].transform(lambda x: ','.join(x))
 
 # drop non unique observations
-#primary = primary.loc[~primary['user_id'].duplicated()]
-primary.drop(~['user_id', 'user_language', 'c_q_text_lang', 'c_text_lang', 'c_user_location',
-               'c_q_user_location', 'c_source', 'author.text', 'q_author.text'], inplace=True, axis=1)
-primary.drop_duplicates(inplace=True)
+# primary = primary.loc[~primary['user_id'].duplicated()]
+primary.drop(['created_at', 'id', 'source', 'text',
+              'text_lang', 'user_location', 'user_handle',  'user_lang', 'q_id',
+              'q_created_at', 'q_text', 'q_text_lang',    'q_user_id',
+              'q_user_location', 'q_user_handle',  'q_user_lang'], inplace=True,
+             axis=1)
+primary.drop_duplicates(subset='user_id', inplace=True)
 
 # handling @,#, and URL's
 # Create empty lists for each category.
@@ -161,3 +164,5 @@ for i in primary2['user_desc']:
 primary2['cleaned_user_desc'] = clean3
 
 primary2['cleaned_user_desc'] = primary2['cleaned_user_desc'].astype(str)
+
+primary2.to_csv('cleaned_tweets.csv')
