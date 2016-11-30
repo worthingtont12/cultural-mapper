@@ -1,7 +1,7 @@
 # Order
-1.Joining and Cleaning
-2.Removing Duplicates
+1.Joining
+2.Cleaning
 3.Language Processing
 
 # Description
-The cleaning is broken up into 3 parts so as to utilize functions across languages R and Python. The first script , Joining and Cleaning, takes in the data and groups by user id it also does the bulk of the text cleaning. The second script , Removing Duplicates, deletes duplicates and throws out unnecessary variables. The final script, Language Processing, creates the main variable of interest from the merging of all text columns. It also does the necessary text processing for topic modeling, ie stemming, removing case, tokenizing,ect.
+The cleaning is broken up into 3 parts for simplicity. The first script , Joining, takes in all the datasets and joins them into one dataframe. The second script , Cleaning, joins observations by user_id and does some preliminary text cleaning. It also deletes duplicates and throws out unnecessary variables. The final script, Language Processing, creates the main variable of interest from the merging of all text columns. It also does the necessary text processing for topic modeling, ie stemming, removing case, tokenizing, ect.

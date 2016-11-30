@@ -1,18 +1,21 @@
 """Processing Language for Topic Modeling."""
 import os
-import pandas as pd
 from nltk.tokenize import RegexpTokenizer
 from nltk.corpus import stopwords
 from nltk.stem import PorterStemmer
+from Cleaning import df
 
-os.chdir("/Users/tylerworthington/Git_Repos")
-
-df = pd.read_csv("author_tweets.csv", error_bad_lines=False)
-
-# Function to deal with tokenizing,stemming, and stop word filtering
+os.chdir("/Users/tylerworthington/Git_Repos/Data")
 
 
 def process(text, lang):
+    """Function to deal with tokenizing, stemming, and stop word filtering.
+
+    arguments:
+    text: text of interest in string format.
+    lang: language for stop word filtering.
+
+    """
     # functions used
     tokenizer = RegexpTokenizer(r'\w+')
     stemmer = PorterStemmer()
@@ -31,14 +34,15 @@ def process(text, lang):
 
     return stop_words
 
+
 # recasting
 df['cleaned_user_desc'] = df['cleaned_user_desc'].apply(str)
-df['cleaned.q.author.text'] = df['cleaned.q.author.text'].apply(str)
-df['cleaned.author.text'] = df['cleaned.author.text'].apply(str)
+df['cleaned_q_author_text'] = df['cleaned_q_author_text'].apply(str)
+df['cleaned_author_text'] = df['cleaned_author_text'].apply(str)
 
 # merging all text into one column
-df['final_combined_text'] = df[['cleaned_user_desc', 'cleaned.q.author.text',
-                                'cleaned.author.text']].apply(lambda x: ' '.join(x), axis=1)
+df['final_combined_text'] = df[['cleaned_user_desc', 'cleaned_q_author_text',
+                                'cleaned_author_text']].apply(lambda x: ' '.join(x), axis=1)
 
 # Stop Words
 # english
@@ -65,6 +69,9 @@ swedish = stopwords.words('swedish')
 # applying function to dataframe
 df_en = df[df.user_language == 'English']
 df_en['final_combined_text'] = df_en['final_combined_text'].apply(lambda row: process(row, english))
+
+df_es = df[df.user_language == 'Spanish']
+df_es['final_combined_text'] = df_es['final_combined_text'].apply(lambda row: process(row, spanish))
 
 # exporting
 df_en.to_csv('cleaned_tweets.csv')
