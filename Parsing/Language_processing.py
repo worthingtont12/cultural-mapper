@@ -9,7 +9,7 @@ df = df
 
 
 def process(text, lang):
-    """Function to deal with tokenizing, stemming, and stop word filtering.
+    """Function to deal with tokenizing, stemming or lemmantizing, and stop word filtering.
 
     arguments:
     text: text of interest in string format.
@@ -68,6 +68,13 @@ turkish = stopwords.words('turkish')
 finnish = stopwords.words('finnish')
 # Swedish
 swedish = stopwords.words('swedish')
+
+# dimesion reduction
+df.drop(['cleaned_user_desc', 'cleaned_q_author_text',
+         'cleaned_author_text', 'author.text', 'q_author.text', 'c_text_lang', 'c_user_location', 'c_user_lang', 'c_source',
+         'c_q_text_lang', 'c_q_user_location', 'c_q_user_lang', 'hashtags', 'mentions', 'links', 'q_hashtags', 'q_mentions',
+         'q_links', 'user_desc'], inplace=True,
+        axis=1)
 
 # applying function to dataframe
 df_en = df[df.user_language == 'English']

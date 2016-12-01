@@ -2,14 +2,13 @@
 # guidance found from
 # https://de.dariah.eu/tatom/topic_model_python.html
 
-import os
+#import os
 import numpy as np
 import sklearn.feature_extraction.text as text
 from sklearn import decomposition
 from Parsing.Language_processing import df_en
-
 # set wd
-os.chdir("/Users/tylerworthington/Git_Repos/Cultural_Mapper/Topic_Modeling")
+# os.chdir("/Users/tylerworthington/Git_Repos/Cultural_Mapper/Topic_Modeling")
 
 # import data
 df = df_en
@@ -41,3 +40,4 @@ for t in range(len(topic_words)):
     print("Topic {}: {}".format(t, ' '.join(topic_words[t][:15])))
 
 # export topics
+# $ Topic_Modeling.py > Topic_Modeling/output.txt
