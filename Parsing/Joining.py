@@ -6,9 +6,9 @@ import psycopg2
 conn = psycopg2.connect(
     "dbname='culturalmapper_LA' user=culturalmapper host=culturalmapper-la.cbjpxqmibsmf.us-east-1.rds.amazonaws.com password=UVAdsi2017")
 
-primary = psql.read_sql("SELECT * FROM la_city_primary LIMIT 1000", conn)
-quoted = psql.read_sql("SELECT * FROM la_quoted LIMIT 1000", conn)
-user_desc = psql.read_sql("SELECT * FROM la_user_desc LIMIT 1000", conn)
+primary = psql.read_sql("SELECT * FROM la_city_primary", conn)
+quoted = psql.read_sql("SELECT * FROM la_quoted", conn)
+user_desc = psql.read_sql("SELECT * FROM la_user_desc", conn)
 
 # naming Columns
 primary.columns = ['created_at', 'id', 'source', 'text', 'text_lang',
