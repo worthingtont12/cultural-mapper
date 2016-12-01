@@ -1,13 +1,14 @@
 """Joining datasets for parsing."""
-import os
 import pandas as pd
+import pandas.io.sql as psql
+import psycopg2
 
-os.chdir("/Users/tylerworthington/Git_Repos/Data")
+conn = psycopg2.connect(
+    "dbname='culturalmapper_LA' user=culturalmapper host=culturalmapper-la.cbjpxqmibsmf.us-east-1.rds.amazonaws.com password=UVAdsi2017")
 
-# Import CSVs
-primary = pd.read_csv("1125/1125LA_primary.csv", error_bad_lines=False, nrows=1000)
-quoted = pd.read_csv("1125/1125LA_quoted.csv", error_bad_lines=False, nrows=1000)
-user_desc = pd.read_csv("1125/1125LA_userdesc.csv", error_bad_lines=False, nrows=1000)
+primary = psql.read_sql("SELECT * FROM la_city_primary LIMIT 1000", conn)
+quoted = psql.read_sql("SELECT * FROM la_quoted LIMIT 1000", conn)
+user_desc = psql.read_sql("SELECT * FROM la_user_desc LIMIT 1000", conn)
 
 # naming Columns
 primary.columns = ['created_at', 'id', 'source', 'text', 'text_lang',

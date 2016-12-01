@@ -1,14 +1,9 @@
 """Parse and clean tweets and export them into a working format for Topic Modeling."""
-import os
 import re
 from Parsing.Joining import primary2
-
-# TODO
-# filter out job bots
-# remove user_desc that has this text "Follow this account for geo-targeted"
-
+# Pulls in data frame created in previous sheet.
+# See README for describtion of process
 df = primary2
-os.chdir("/Users/tylerworthington/Git_Repos/Data")
 
 # functions
 
@@ -45,6 +40,11 @@ df['q_user_location'] = df['q_user_location'].apply(str)
 df['q_user_handle'] = df['q_user_handle'].apply(str)
 df['q_user_lang'] = df['q_user_lang'].apply(str)
 df['q_text'] = df['q_text'].apply(str)
+df['user_desc'] = df['user_desc'].apply(str)
+
+# filter out job bots
+# remove rows where user_desc has this text "Follow this account for geo-targeted"
+df = df[~df['user_desc'].str.contains("Follow this account for geo-targeted")]
 
 # transforming language variable for clearer interpretation
 map_lang = {'en': "English", 'fr': "French", 'und': "Unknown", 'ar': "Arabic", 'ja': "Japanese", 'es': "Spanish",

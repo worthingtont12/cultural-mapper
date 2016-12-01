@@ -9,7 +9,7 @@ from sklearn import decomposition
 from Parsing.Language_processing import df_en
 
 # set wd
-os.chdir("/Users/tylerworthington/Git_Repos")
+os.chdir("/Users/tylerworthington/Git_Repos/Cultural_Mapper/Topic_Modeling")
 
 # import data
 df = df_en
@@ -39,3 +39,5 @@ for topic in clf.components_:
 
 for t in range(len(topic_words)):
     print("Topic {}: {}".format(t, ' '.join(topic_words[t][:15])))
+
+# export topics

@@ -1,13 +1,11 @@
 """Processing Language for Topic Modeling."""
-import os
 from nltk.tokenize import RegexpTokenizer
 from nltk.corpus import stopwords
-from nltk.stem import PorterStemmer
+from nltk.stem import WordNetLemmatizer
 from Parsing.Cleaning import df, text_clean
-# TODO
-# Consider lemmantizing
-
-os.chdir("/Users/tylerworthington/Git_Repos/Data")
+# Pulls in data frame created in previous sheet.
+# See README for describtion of process
+df = df
 
 
 def process(text, lang):
@@ -20,7 +18,7 @@ def process(text, lang):
     """
     # functions used
     tokenizer = RegexpTokenizer(r'\w+')
-    stemmer = PorterStemmer()
+    lemmatizer = WordNetLemmatizer()
 
     # remove case
     text = text.lower()
@@ -28,11 +26,11 @@ def process(text, lang):
     # tokenizing
     words = tokenizer.tokenize(text)
 
-    # stemming
-    stemmed_tokenized_words = [stemmer.stem(i) for i in words]
+    # lemmantizing
+    lemmed_tokenized_words = [lemmatizer.lemmatize(i) for i in words]
 
     # stop words
-    stop_words = [i for i in stemmed_tokenized_words if i not in lang]
+    stop_words = [i for i in lemmed_tokenized_words if i not in lang]
 
     return stop_words
 
@@ -74,4 +72,3 @@ swedish = stopwords.words('swedish')
 # applying function to dataframe
 df_en = df[df.user_language == 'English']
 df_en['final_combined_text'] = df_en['final_combined_text'].apply(lambda row: process(row, english))
-df_en.to_csv('x.csv')
