@@ -1,27 +1,31 @@
-English       974
-Spanish        12
-Japanese        8
-Portuguese      4
-Turkish         1
-Arabic          1
+English     987
+Spanish       8
+Japanese      2
+Korean        1
+Turkish       1
 Name: user_language, dtype: int64
-Topic 0: nov gmt movistar claro guatemala oct usd may nicaragua costarica honduras mexico bonus elsalvador additional
-Topic 1: jesus name amengod thank holy amenjesus ijn tonight come god please life word keep coming
-Topic 2: player control know much guy better far touch younger ref need watch well maybe ball
-Topic 3: get one thing omg even make tho family give really anymore think everything day ill
-Topic 4: amp people vote lost final quot ready quarter gt many need lied end lt shame
-Topic 5: like feel really tonight bitch high nice thing hair look great omg sun certainty springing
-Topic 6: en ahora increíbles mirábamos sus actuaciones lo los usa con link así malacostubradas malacostumbramos nuestra
-Topic 7: championship cifss def christian santa san city monica brother academy valley crossroad vbscores culver katella
-Topic 8: love hate color yeah tho fucking shit girl fall creation marcus wolf yonkers uuuuuuuuim yellowi
-Topic 9: cd ff ef fd de ed da fbatest_geo_hierarchy ebffbtest_geo_hierarchy cefecdtest_geo_hierarchy ceftest_geo_hierarchy cf fe dabeftest_geo_hierarchy df
-Topic 10: dont lol say care dude little girl keep thats sometimes literally cant bad voice control
-Topic 11: trump wa think dog ur best cant know wouldnt keep surprised trying sorry account fake
-Topic 12: back long beach today yorba linda another cuttin happy never time went already feel come
-Topic 13: college electoral make hillary via th president elector clinton december sign set volleyball pierce victorvalley
-Topic 14: shit white person help man yall black nigga find woman daughter men supposed marrying disgustingsmack
-Topic 15: always arent cute hickies lol time left handed scissors except night game rt youre feel
-Topic 16: wa said fuck good got night last today big still check baby man home shower
-Topic 17: im except handed scissors left mad miss final life thinking way quarter ready either sc
-Topic 18: go year let going popcorn game hope got tonight see new mix really watch want
-Topic 19: la wa yes dude mortified whoa smokin que love de está haciendo two din pilot
+[nltk_data] Downloading package stopwords to
+[nltk_data]     /home/ec2-user/nltk_data...
+[nltk_data]   Package stopwords is already up-to-date!
+[nltk_data] Downloading package wordnet to /home/ec2-user/nltk_data...
+[nltk_data]   Package wordnet is already up-to-date!
+Topic 0: de el en por llorar toptrce voto mi marquez malditos los madre golaso su la
+Topic 1: new world held cocktail pirelli hispanic reception motor exclusive zero press album woot time friend
+Topic 2: like mom wa look guy turn tweet see guess many whats hear coyote left howling
+Topic 3: rafa marquez goal fucking rquez shit still te gol half pinche goat scored hair commentator
+Topic 4: im shit go voted glad ive tryna really gonna done happily college getting trump since
+Topic 5: rd traffic back min american eb vallejo cyn red delay stopped top closed rest area
+Topic 6: disney eliukfamilyadventures eliuksdodisney disneyland sydneyanabelle henryjames friend another line orleans cruise square jingle favourite work
+Topic 7: mexico fuck marquez yeah right win take usa go viva usmnt guey usavmexvamons raza goallaassoooo
+Topic 8: say take table dinner rude selfies lol mean start call daily thing world time nothing
+Topic 9: one day usa getting want thank keep boat since happy half dick craving amazing thinking
+Topic 10: time cant every thanks movie help watching actress female podcast nail notice im woot call
+Topic 11: amp baby go always let working gonna better taste time away would lady straight didnt
+Topic 12: que creo yo ganaremos la el est donde gol malditos los awebo mierda dios golazo
+Topic 13: trump say kid team looking working forward run business intimately especially transition ivanka elected voted
+Topic 14: af aa df fb bf eb bda bb test_geo_hierarchy bca edf afbatest_geo_hierarchy bddfctest_geo_hierarchy ddca batest_geo_hierarchy
+Topic 15: wa fight want stop yes lit wing school cant marquez got still go trying though
+Topic 16: dont trust way always know feel friend much live small respect anything might enough wrong
+Topic 17: shot also boyfriend dad sad hrc dick craving keep thinking life know little snapchat live
+Topic 18: get fucking thats love fuck damn back oh go life tomorrow make see youre good
+Topic 19: usavmex week te nunca retires elfutbolesnuestro usmnt usa lost rquez continuing theme would angeles usavmexin
