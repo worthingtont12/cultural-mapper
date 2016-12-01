@@ -1,7 +1,7 @@
 Parsing/login_info.py
 Data_Collection/Chicago/login_info.py
 Data_Collection/LA/login_info.py
-Data_Collection/Instanbul/login_info.py
+Data_Collection/Istanbul/login_info.py
 Data_Collection/keys.py
 Data_Collection/__pycache__
 Data_Collection/LA/keys.py
