@@ -42,9 +42,16 @@ df['q_user_lang'] = df['q_user_lang'].apply(str)
 df['q_text'] = df['q_text'].apply(str)
 df['user_desc'] = df['user_desc'].apply(str)
 
-# filter out job bots
-# remove rows where user_desc has this text "Follow this account for geo-targeted"
+# filter out job bots. Their spam distorts the results.
+df = df[~df['source'].str.contains("TweetMYJOBS")]
+df = df[~df['source'].str.contains("tweetmyjobs")]
 df = df[~df['user_desc'].str.contains("Follow this account for geo-targeted")]
+df = df[~df['text'].str.contains("Want to work in")]
+df = df[~df['text'].str.contains("Can you recommend anyone for this")]
+df = df[~df['text'].str.contains("CareerArc")]
+
+# filter out other anomolies
+df = df[~df['text'].str.contains("geo_hierarchy")]
 
 # transforming language variable for clearer interpretation
 map_lang = {'en': "English", 'fr': "French", 'und': "Unknown", 'ar': "Arabic", 'ja': "Japanese", 'es': "Spanish",
