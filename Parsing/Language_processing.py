@@ -1,8 +1,11 @@
 """Processing Language for Topic Modeling."""
+import nltk
 from nltk.tokenize import RegexpTokenizer
 from nltk.corpus import stopwords
 from nltk.stem import WordNetLemmatizer
 from Parsing.Cleaning import df, text_clean
+nltk.download("stopwords")
+nltk.download("wordnet")
 # Pulls in data frame created in previous sheet.
 # See README for describtion of process
 df = df

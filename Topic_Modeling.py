@@ -7,8 +7,6 @@ import numpy as np
 import sklearn.feature_extraction.text as text
 from sklearn import decomposition
 from Parsing.Language_processing import df_en
-# set wd
-# os.chdir("/Users/tylerworthington/Git_Repos/Cultural_Mapper/Topic_Modeling")
 
 # import data
 df = df_en
