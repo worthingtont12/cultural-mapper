@@ -1,0 +1,27 @@
+English       974
+Spanish        12
+Japanese        8
+Portuguese      4
+Turkish         1
+Arabic          1
+Name: user_language, dtype: int64
+Topic 0: nov gmt movistar claro guatemala oct usd may nicaragua costarica honduras mexico bonus elsalvador additional
+Topic 1: jesus name amengod thank holy amenjesus ijn tonight come god please life word keep coming
+Topic 2: player control know much guy better far touch younger ref need watch well maybe ball
+Topic 3: get one thing omg even make tho family give really anymore think everything day ill
+Topic 4: amp people vote lost final quot ready quarter gt many need lied end lt shame
+Topic 5: like feel really tonight bitch high nice thing hair look great omg sun certainty springing
+Topic 6: en ahora increíbles mirábamos sus actuaciones lo los usa con link así malacostubradas malacostumbramos nuestra
+Topic 7: championship cifss def christian santa san city monica brother academy valley crossroad vbscores culver katella
+Topic 8: love hate color yeah tho fucking shit girl fall creation marcus wolf yonkers uuuuuuuuim yellowi
+Topic 9: cd ff ef fd de ed da fbatest_geo_hierarchy ebffbtest_geo_hierarchy cefecdtest_geo_hierarchy ceftest_geo_hierarchy cf fe dabeftest_geo_hierarchy df
+Topic 10: dont lol say care dude little girl keep thats sometimes literally cant bad voice control
+Topic 11: trump wa think dog ur best cant know wouldnt keep surprised trying sorry account fake
+Topic 12: back long beach today yorba linda another cuttin happy never time went already feel come
+Topic 13: college electoral make hillary via th president elector clinton december sign set volleyball pierce victorvalley
+Topic 14: shit white person help man yall black nigga find woman daughter men supposed marrying disgustingsmack
+Topic 15: always arent cute hickies lol time left handed scissors except night game rt youre feel
+Topic 16: wa said fuck good got night last today big still check baby man home shower
+Topic 17: im except handed scissors left mad miss final life thinking way quarter ready either sc
+Topic 18: go year let going popcorn game hope got tonight see new mix really watch want
+Topic 19: la wa yes dude mortified whoa smokin que love de está haciendo two din pilot
