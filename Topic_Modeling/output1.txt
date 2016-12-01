@@ -1,44 +1,43 @@
-English       98184
-Spanish         602
-Portuguese      287
-Japanese        271
-Russian         193
-French          111
-German           81
-Polish           67
+English       95460
+Spanish         611
+Portuguese      358
+Japanese        310
+French          148
+Russian         103
+Turkish          78
+German           56
+Arabic           56
 Italian          36
-Turkish          31
-Dutch            27
-Arabic           26
-Korean           16
-Chinese          15
-Indonesian       13
-Finnish          11
-Swedish           5
-Thai              4
-Czech             4
-Romanian          3
+Polish           36
+Indonesian       18
+Dutch            18
+Chinese          17
+Thai             13
+Korean           12
+Finnish          12
+Ukrainian        11
+Swedish           7
+Romanian          5
 Danish            1
-Vietnamese        1
-Filipino          1
+Hungarian         1
 Name: user_language, dtype: int64
-Topic 0: job ca hiring losangeles latest click work opening apply recommend anyone great fit careerarcwere careerarccan
-Topic 1: de en por voto el toptrce volvamos noséllorar montana joey mi lasmassonadas lo que un
-Topic 2: im like wa dont get lol one know go love got people think good shit
-Topic 3: earthquake utc report quakeusgs km california geyser wnw ca nw cobb wsw laytonville northern lake
-Topic 4: job ca hiring restaurant hospitality latest anyone recommend click opening work great fit careerarccan apply
-Topic 5: job healthcare ca hiring latest losangeles opening click longbeach work apply technician pharmacy recommend anyone
-Topic 6: usa amp trump hillary wikileaks radicalislam election saving destroy deficit vote world maga thanks directprimarycare
-Topic 7: gt lt im mph humidity wind like time irc weather pressure get temperature got haze
-Topic 8: vnch communist vietnamroyalvictorialuudinh vietnam letstalk nation return stateofvietnam regime gulfoftonkin province environment destroying lossincome civilian
-Topic 9: job retail hiring ca sale anyone recommend seasonal latest work click holiday time macys opening
-Topic 10: would help share trump ha obama nice hillary pls timing smexy think million wa know
-Topic 11: florida ohio arizona undecided northcarolina undecidedvoter newhampshire michigan utah iowa good must evil triumph election
-Topic 12: amp trump obama cnn clinton hillary contd corruption ha dnc america win potus medium cheater
-Topic 13: year campaign create mental remove illness society estate real granada ha low hoe next last
-Topic 14: day light sea morning form creeping good god one darkness youll water dominion creepeth thing
-Topic 15: voting internet vote line waiting lacounty election new security doable sez dumpdean book dean logan
-Topic 16: vote ok please get go know old yr using comedy retweet mom music let service
-Topic 17: tracking ca graffiti avenue park santa monica buena street th west road hollywood ball boulevardgraffiti
-Topic 18: la los lp jeremy madison parrish central que trending angeles en pero el se lo
-Topic 19: nursing job ca hiring rn latest click work losangeles opening great fit apply nurse glendale
+Topic 0: take help join important read moment step plea thank amp please youplease thanks following facebook
+Topic 1: baby feliz fback sdv seja happy как на то youre меня еще не fighter уже
+Topic 2: earthquake report utc km quakeusgs ca california geyser nw sse idyllwild wnw ne se westmorland
+Topic 3: vnch vietnam vietnamroyalvictorialuudinh letstalk nation communist stateofvietnam regime return north china river soldier misery lossincome
+Topic 4: black people hillary like wa fuck nigga dont rapper white one youre stop fucking want
+Topic 5: gt lt humidity mph wind like wa hmm would temperature dont im window ninja mog
+Topic 6: de mi el en por voto montana joey toptrce volvamos que lo se una beba
+Topic 7: vote go voting today teamtrump line trump dont please imwithher voted cast right dumptrump prop
+Topic 8: light day created unto second spirit sea creepeth kind forth one morning seed together cant
+Topic 9: movie time back strike fave starwars movietwit empire city cloud sad run millennium hunter duel
+Topic 10: get imwithher new video shoutout madison mallory kidpreneurs sharktank amp sassy grove ivoted favorite anaheim
+Topic 11: trump clinton win donald hillary contd america people teamtrump maga ha american make great get
+Topic 12: election electionday day today voted voting voter poll going imwithher angeles ballot ha hillary name
+Topic 13: tracking ca graffiti santa monica avenuegraffiti streetgraffiti avenue costa mesa th usagraffiti beach street west
+Topic 14: dont like wa get know go lol one need time love people thats want think
+Topic 15: im like shit want fuck yall lmao gonna lol got bitch wanna really going day
+Topic 16: amp yall contd pay going million clinton donald oxygen ppl done destroy hunt liar gra
+Topic 17: real estate granada street check note music hop hip news market agent new hillsreal sale
+Topic 18: la trending que los angeles de california con en se pero lo posted te yo
+Topic 19: follow video dm week dare dolantwinsnewvideo thanks ilysm usa gray health directprimarycare good funny guy
