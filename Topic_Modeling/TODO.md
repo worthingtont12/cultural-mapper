@@ -17,6 +17,9 @@
 # Dimension Reduction
 * decreasing number of unique words
 
+#Langauge Processing
+* strip_accents
+
 # Consider other implementations
 * Streaming lda
 * Mahout
