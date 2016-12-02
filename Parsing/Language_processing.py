@@ -14,9 +14,10 @@ df = df
 def process(text, lang):
     """Function to deal with tokenizing, stemming or lemmantizing, and stop word filtering.
 
-    arguments:
-    text: text of interest in string format.
-    lang: language for stop word filtering.
+    Parameters
+    ----------
+    text : text of interest in string format.
+    lang : language for stop word filtering.
 
     """
     # functions used

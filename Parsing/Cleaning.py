@@ -10,8 +10,9 @@ df = primary2
 
 def text_clean(dirtytext):
     """Cleans text by stripping out unnecessary characters.
-    arguments:
-    dirtytext: The text to be cleaned.
+    Parameters
+    ----------
+    dirtytext : The text to be cleaned.
     """
     tmp = re.sub("'", '', dirtytext)
     tmp = re.sub(",", '', tmp)
