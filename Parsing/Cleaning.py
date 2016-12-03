@@ -1,6 +1,7 @@
 """Parse and clean tweets and export them into a working format for Topic Modeling."""
 import re
 from Parsing.Joining import primary2
+import pandas as pd
 # Pulls in data frame created in previous sheet.
 # See README for describtion of process
 df = primary2
@@ -43,7 +44,7 @@ df['q_user_lang'] = df['q_user_lang'].apply(str)
 df['q_text'] = df['q_text'].apply(str)
 df['user_desc'] = df['user_desc'].apply(str)
 
-# filter out job bots. Their spam distorts the results.
+# filter out job bots, weather bots, geo bots, ect
 df = df[~df['source'].str.contains("TweetMYJOBS")]
 df = df[~df['source'].str.contains("tweetmyjobs")]
 df = df[~df['user_desc'].str.contains("Follow this account for geo-targeted")]
@@ -51,8 +52,20 @@ df = df[~df['text'].str.contains("Want to work in")]
 df = df[~df['text'].str.contains("Can you recommend anyone for this")]
 df = df[~df['text'].str.contains("CareerArc")]
 
-# filter out other anomolies
-df = df[~df['text'].str.contains("geo_hierarchy")]
+df1 = df[df['source'].str.contains("Twitter for")]
+df2 = df[df['source'].str.contains("for Android")]
+df3 = df[df['source'].str.contains("for iOS")]
+df4 = df[df['source'].str.contains("for iPhone")]
+df5 = df[df['source'].str.contains("for Windows Phone")]
+df6 = df[df['source'].str.contains("for iPad")]
+df7 = df[df['source'].str.contains("for Mac")]
+df8 = df[df['source'].str.contains("Twitter Web Client")]
+df9 = df[df['source'].str.contains("Instagram")]
+df10 = df[df['source'].str.contains("Foursquare")]
+df11 = df[df['source'].str.contains("tron")]
+
+dfs = [df1, df2, df3, df4, df5, df6, df7, df8, df9, df10, df11]
+dffiltered = pd.concat(dfs)
 
 # transforming language variable for clearer interpretation
 map_lang = {'en': "English", 'fr': "French", 'und': "Unknown", 'ar': "Arabic", 'ja': "Japanese", 'es': "Spanish",
@@ -63,40 +76,40 @@ map_lang = {'en': "English", 'fr': "French", 'und': "Unknown", 'ar': "Arabic", '
             'cs': "Czech", 'ro': "Romanian", 'en-gb': "English", 'en-GB': "English", 'en-AU': "English",
             'vi': "Vietnamese", 'bn': "Bengali"}
 
-df['user_language'] = df["user_lang"].map(map_lang)
+dffiltered['user_language'] = dffiltered["user_lang"].map(map_lang)
 
 # langauge counts
-print(df['user_language'].value_counts())
+print(dffiltered['user_language'].value_counts())
 
 # collapsing tweets by user_id
-df['author.text'] = df[['user_id', 'text']].groupby(
+dffiltered['author.text'] = dffiltered[['user_id', 'text']].groupby(
     ['user_id'])['text'].transform(lambda x: ','.join(x))
-df['q_author.text'] = df[['user_id', 'q_text']].groupby(
+dffiltered['q_author.text'] = dffiltered[['user_id', 'q_text']].groupby(
     ['user_id'])['q_text'].transform(lambda x: ','.join(x))
-df['c_text_lang'] = df[['user_id', 'text_lang']].groupby(
+dffiltered['c_text_lang'] = dffiltered[['user_id', 'text_lang']].groupby(
     ['user_id'])['text_lang'].transform(lambda x: ','.join(x))
-df['c_user_location'] = df[['user_id', 'user_location']].groupby(
+dffiltered['c_user_location'] = dffiltered[['user_id', 'user_location']].groupby(
     ['user_id'])['user_location'].transform(lambda x: ','.join(x))
-df['c_user_lang'] = df[['user_id', 'user_lang']].groupby(
+dffiltered['c_user_lang'] = dffiltered[['user_id', 'user_lang']].groupby(
     ['user_id'])['user_lang'].transform(lambda x: ','.join(x))
-df['c_source'] = df[['user_id', 'source']].groupby(
+dffiltered['c_source'] = dffiltered[['user_id', 'source']].groupby(
     ['user_id'])['source'].transform(lambda x: ','.join(x))
-df['c_q_text_lang'] = df[['user_id', 'q_text_lang']].groupby(
+dffiltered['c_q_text_lang'] = dffiltered[['user_id', 'q_text_lang']].groupby(
     ['user_id'])['q_text_lang'].transform(lambda x: ','.join(x))
-df['c_q_user_location'] = df[['user_id', 'q_user_location']].groupby(
+dffiltered['c_q_user_location'] = dffiltered[['user_id', 'q_user_location']].groupby(
     ['user_id'])['q_user_location'].transform(lambda x: ','.join(x))
-df['c_q_user_lang'] = df[['user_id', 'q_user_lang']].groupby(
+dffiltered['c_q_user_lang'] = dffiltered[['user_id', 'q_user_lang']].groupby(
     ['user_id'])['q_user_lang'].transform(lambda x: ','.join(x))
 
 
 # drop non unique observations
-# df = df.loc[~df['user_id'].duplicated()]
-df.drop(['created_at', 'id', 'source', 'text',
-         'text_lang', 'user_location', 'user_handle', 'user_lang', 'q_id',
-         'q_created_at', 'q_text', 'q_text_lang', 'q_user_id',
-         'q_user_location', 'q_user_handle', 'q_user_lang'], inplace=True,
-        axis=1)
-df.drop_duplicates(subset='user_id', inplace=True)
+# dffiltered = dffiltered.loc[~dffiltered['user_id'].duplicated()]
+dffiltered.drop(['created_at', 'id', 'source', 'text',
+                 'text_lang', 'user_location', 'user_handle', 'user_lang', 'q_id',
+                 'q_created_at', 'q_text', 'q_text_lang', 'q_user_id',
+                 'q_user_location', 'q_user_handle', 'q_user_lang'], inplace=True,
+                axis=1)
+dffiltered.drop_duplicates(subset='user_id', inplace=True)
 
 # handling @,#, and URL's
 # Create empty lists for each category.
@@ -106,17 +119,17 @@ hashtags = []
 
 # Iterate over the text, extracting and adding
 
-for tweet in df['author.text']:
+for tweet in dffiltered['author.text']:
     mentions.append(re.findall('@\S*', tweet))
     links.append(re.findall('https?://\S*', tweet))
     hashtags.append(re.findall('#\S*', tweet))
 
 # Append features as a new column to the existing dataframe.
-df['hashtags'] = hashtags
-df['mentions'] = mentions
-df['links'] = links
+dffiltered['hashtags'] = hashtags
+dffiltered['mentions'] = mentions
+dffiltered['links'] = links
 
-# dealing with quoted df
+# dealing with quoted dffiltered
 # handling @,#, and URL's
 # Create empty lists for each category.
 mentions1 = []
@@ -125,22 +138,22 @@ hashtags1 = []
 
 # Iterate over the text, extracting and adding
 
-for tweet in df['q_author.text']:
+for tweet in dffiltered['q_author.text']:
     mentions1.append(re.findall(r'@\S*', tweet))
     links1.append(re.findall('https?://\S*', tweet))
     hashtags1.append(re.findall(r'#\S*', tweet))
 
 # Append features as a new column to the existing dataframe.
-df['q_hashtags'] = hashtags1
-df['q_mentions'] = mentions1
-df['q_links'] = links1
+dffiltered['q_hashtags'] = hashtags1
+dffiltered['q_mentions'] = mentions1
+dffiltered['q_links'] = links1
 
 # recasting variables
-df['author.text'] = df['author.text'].apply(str)
-df['q_author.text'] = df['q_author.text'].apply(str)
-df['user_desc'] = df['user_desc'].apply(str)
+dffiltered['author.text'] = dffiltered['author.text'].apply(str)
+dffiltered['q_author.text'] = dffiltered['q_author.text'].apply(str)
+dffiltered['user_desc'] = dffiltered['user_desc'].apply(str)
 
 # stripping non text characters ie @, # ,https://, ect
-df['cleaned_author_text'] = df['author.text'].apply(text_clean)
-df['cleaned_q_author_text'] = df['q_author.text'].apply(text_clean)
-df['cleaned_user_desc'] = df['user_desc'].apply(text_clean)
+dffiltered['cleaned_author_text'] = dffiltered['author.text'].apply(text_clean)
+dffiltered['cleaned_q_author_text'] = dffiltered['q_author.text'].apply(text_clean)
+dffiltered['cleaned_user_desc'] = dffiltered['user_desc'].apply(text_clean)

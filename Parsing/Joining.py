@@ -29,3 +29,5 @@ primary1 = pd.merge(primary, quoted, on='id', how='left')
 
 # merge with user desc
 primary2 = pd.merge(primary1, user_desc, on=['user_id', 'id'], how='left')
+
+print(primary2.source.value_counts())
