@@ -8,9 +8,6 @@
     divide by 1024 B to get that value to Kilobytes (KB)
     divide again by 1024 (KB) to get to MB
 
-# Filtering Users
-* get a count of sources
-
 # Language problems
 * filter out multiple stop word languages?
 
