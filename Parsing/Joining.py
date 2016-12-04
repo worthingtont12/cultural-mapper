@@ -2,9 +2,10 @@
 import pandas as pd
 import pandas.io.sql as psql
 import psycopg2
+from login_info import user, host, password
 
 conn = psycopg2.connect(
-    "dbname='culturalmapper_LA' user=culturalmapper host=culturalmapper-la.cbjpxqmibsmf.us-east-1.rds.amazonaws.com password=UVAdsi2017")
+    "dbname='culturalmapper_LA' user=%s host=%s password=%s" % (user, host, password))
 
 primary = psql.read_sql("SELECT * FROM la_city_primary LIMIT 100000", conn)
 quoted = psql.read_sql("SELECT * FROM la_quoted LIMIT 10000", conn)
@@ -29,3 +30,8 @@ primary1 = pd.merge(primary, quoted, on='id', how='left')
 
 # merge with user desc
 primary2 = pd.merge(primary1, user_desc, on=['user_id', 'id'], how='left')
+
+df = primary2
+df11 = df[df['source'].str.contains("tron")]
+print(df.source.value_counts())
+print(df11.head(30))

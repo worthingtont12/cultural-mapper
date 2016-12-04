@@ -8,10 +8,10 @@ from tweepy import OAuthHandler
 from tweepy.streaming import StreamListener
 import psycopg2
 from keys import *
-from login_info import *
+from login_info import user, host, password
 
 conn = psycopg2.connect(
-    "dbname='culturalmapper_LA' user='culturalmapper' user=user host=host password=password")
+    "dbname='culturalmapper_LA' user=%s host=%s password=%s" % (user, host, password))
 
 
 class listener(StreamListener):
