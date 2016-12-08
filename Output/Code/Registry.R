@@ -88,7 +88,7 @@ location_map <- function(data, pal = brewer.pal(9, "Set1")){
 }
 
 # Create Dygraph Time series.
-location_dygraph <-function(data, pal = brewer.pal(9, "Set1")){
+location_dygraph <-function(data){
   require(dygraphs)
   require(xts)
   require(dplyr)
@@ -122,7 +122,7 @@ createDygraph <- function(the_xts, pal = brewer.pal(9, "Set1")){
                 highlightSeriesOpts = list(strokeWidth = 3)) %>%
     dyRoller(rollPeriod = 6) %>%
     dyRangeSelector(dateWindow = c(max(index(the_xts)) - as.difftime(7, units = "days"),
-                                   max(index(the_xts))))
+                                   max(index(the_xts)) - as.difftime(6, units = "days")))
 }
 
 # Aggregate count by language per rounded hour
@@ -205,3 +205,11 @@ colors <- function(path = '../../Assets/Langauge.json'){
   registry <- rbind(registry,c("Other",NA,"gray39"))
   return(registry)
 }
+
+ # From   https://github.com/rstudio/dygraphs/issues/63
+dyVisibility <- function (dygraph, visibility = TRUE){
+  dygraph$x$attrs$visibility <- visibility
+  dygraph
+}
+
+#  dyVisibility(visibility=c(TRUE,FALSE, TRUE))
