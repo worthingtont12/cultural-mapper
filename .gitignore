@@ -1,3 +1,7 @@
+Parsing/Cleaning.pyc
+Parsing/Joining.pyc
+Parsing/Language_processing.pyc
+Parsing/__init__.pyc
 Parsing/login_info.py
 Data_Collection/Chicago/login_info.py
 Data_Collection/LA/login_info.py
