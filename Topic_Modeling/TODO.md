@@ -25,3 +25,6 @@
 * Mallet
     http://www.oracle.com/technetwork/articles/java/micro-1925135.html
 * Gensim
+
+#Amazon EMR
+https://aws.amazon.com/emr/
