@@ -1,0 +1,58 @@
+English       1689590
+Spanish         12420
+Portuguese       4501
+Japanese         3771
+French           1715
+Arabic           1304
+Russian          1139
+Turkish           630
+Italian           571
+German            547
+Chinese           402
+Korean            272
+Thai              269
+Polish            225
+Dutch             212
+Indonesian        183
+Swedish           155
+Finnish            61
+Vietnamese         27
+Norwegian          23
+Ukrainian          18
+Filipino           17
+Danish             14
+Hebrew             12
+Hungarian           9
+Romanian            8
+Czech               4
+Persian             2
+Hindi               1
+Name: user_language, dtype: int64
+[nltk_data] Downloading package stopwords to
+[nltk_data]     /Users/tylerworthington/nltk_data...
+[nltk_data]   Unzipping corpora/stopwords.zip.
+[nltk_data] Downloading package wordnet to
+[nltk_data]     /Users/tylerworthington/nltk_data...
+[nltk_data]   Package wordnet is already up-to-date!
+(104513, 2731)
+2177.619956970215
+Topic 0: para de el mi del en por ft que si la yo con se los
+Topic 1: like dont get go people know want feel need make think really someone one time
+Topic 2: lt gt im like wa know dont one get cant ha would man make shit
+Topic 3: amp world president time ppl food get garden real yall needed late shop see global
+Topic 4: day light sea one star wont together morning set first may face created image said
+Topic 5: trump vote wa people ha right white president job recount say woman obama would america
+Topic 6: lol like im wa gt lmao yall thats gotta man ppl tho got dont love
+Topic 7: follow lmao dont im lol get woman know like oh want wanna love wa yes
+Topic 8: never life truth one fear say every must faith thing day ever win million week
+Topic 9: la de que en el los se con un lo por pero le si una
+Topic 10: nigga shit bitch got fuck dont like get yall im aint yo girl really wa
+Topic 11: please trump mr count every minute born republican thanksgiving see family house bad called cause
+Topic 12: dec visit present greatest singer french musical amp happy th pm album angeles los anniversary
+Topic 13: im wa fucking gonna baby going want cry still omg got fuck cant look ill
+Topic 14: love happy birthday much day best thanks miss friend hope beautiful great new good thank
+Topic 15: actor acting checked photo look website hr session page always posted facebook much thank definitely
+Topic 16: thank retweet dream thanks much life spirit struggle beautiful self music god video jesus trying
+Topic 17: state criminal enemy attack medium nation political people american fucking united justice upon official see
+Topic 18: beat get one free friday tryna run buy black deal need got facebook go time
+Topic 19: wa game good ha one get would time think year know back see got right
