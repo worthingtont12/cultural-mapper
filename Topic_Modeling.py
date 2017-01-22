@@ -1,5 +1,5 @@
 """Topic Modeling on Authored Tweets Using Latent Dirichlet Allocation"""
-# guidance found from https://de.dariah.eu/tatom/topic_model_python.html
+
 import numpy as np
 import sklearn.feature_extraction.text as text
 from sklearn import decomposition
@@ -37,6 +37,3 @@ for topic in lda.components_:
 
 for t in range(len(topic_words)):
     print("Topic {}: {}".format(t, ' '.join(topic_words[t][:15])))
-
-# export topics
-# $ python Topic_Modeling.py > Topic_Modeling/output.txt
