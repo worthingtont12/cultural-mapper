@@ -14,4 +14,4 @@ https://github.com/amyxzhang/boundingbox-cities
 
 # Language JSON file
 
-Used the Twitter API to make a request of supported langauges. File was manipulated to collapse similar langauges into one category, ie english,british english, and australian english.
+Used the Twitter API to make a request of supported languages. File was manipulated to collapse similar languages into one category, ie english, British english, and Australian english.
