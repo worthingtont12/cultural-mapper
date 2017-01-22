@@ -3,7 +3,7 @@ The topic modeling script in the root directory pulls in the cleaned data create
 
 To run script navigate to root directory and run this line:
 ```bash
-python Topic_Modeling.py > Topic_Modeling/output.txt
+$ python Topic_Modeling.py > Topic_Modeling/output.txt
 ```
 
 # References
