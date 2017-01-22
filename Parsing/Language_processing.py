@@ -3,12 +3,12 @@ import nltk
 from nltk.tokenize import RegexpTokenizer
 from nltk.corpus import stopwords
 from nltk.stem import WordNetLemmatizer
-from Parsing.Cleaning import df, text_clean
+from Parsing.Cleaning import dffiltered, text_clean
 nltk.download("stopwords")
 nltk.download("wordnet")
 # Pulls in data frame created in previous sheet.
 # See README for describtion of process
-df = df
+df = dffiltered
 
 
 def process(text, lang):
@@ -55,29 +55,29 @@ df['final_combined_text'] = df['final_combined_text'].apply(str)
 # english
 english = stopwords.words('english')
 # Spanish
-spanish = stopwords.words('spanish')
-# Portuguese
-portuguese = stopwords.words('portuguese')
-# French
-french = stopwords.words('french')
-# German
-german = stopwords.words('german')
-# Russian
-russian = stopwords.words('russian')
-# Dutch
-dutch = stopwords.words('dutch')
-# Turkish
-turkish = stopwords.words('turkish')
-# Finnish
-finnish = stopwords.words('finnish')
-# Swedish
-swedish = stopwords.words('swedish')
-# Japanese
-japanese = stopwords.words('japanese')
-# Chinese
-chinese = stopwords.words('chinese')
-# Arabic
-arabic = stopwords.words('arabic')
+# spanish = stopwords.words('spanish')
+# # Portuguese
+# portuguese = stopwords.words('portuguese')
+# # French
+# french = stopwords.words('french')
+# # German
+# german = stopwords.words('german')
+# # Russian
+# russian = stopwords.words('russian')
+# # Dutch
+# dutch = stopwords.words('dutch')
+# # Turkish
+# turkish = stopwords.words('turkish')
+# # Finnish
+# finnish = stopwords.words('finnish')
+# # Swedish
+# swedish = stopwords.words('swedish')
+# # Japanese
+# japanese = stopwords.words('japanese')
+# # Chinese
+# chinese = stopwords.words('chinese')
+# # Arabic
+# arabic = stopwords.words('arabic')
 
 
 # dimesion reduction

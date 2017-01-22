@@ -1,31 +1,58 @@
-English     987
-Spanish       8
-Japanese      2
-Korean        1
-Turkish       1
+English       1689590
+Spanish         12420
+Portuguese       4501
+Japanese         3771
+French           1715
+Arabic           1304
+Russian          1139
+Turkish           630
+Italian           571
+German            547
+Chinese           402
+Korean            272
+Thai              269
+Polish            225
+Dutch             212
+Indonesian        183
+Swedish           155
+Finnish            61
+Vietnamese         27
+Norwegian          23
+Ukrainian          18
+Filipino           17
+Danish             14
+Hebrew             12
+Hungarian           9
+Romanian            8
+Czech               4
+Persian             2
+Hindi               1
 Name: user_language, dtype: int64
 [nltk_data] Downloading package stopwords to
-[nltk_data]     /home/ec2-user/nltk_data...
-[nltk_data]   Package stopwords is already up-to-date!
-[nltk_data] Downloading package wordnet to /home/ec2-user/nltk_data...
+[nltk_data]     /Users/tylerworthington/nltk_data...
+[nltk_data]   Unzipping corpora/stopwords.zip.
+[nltk_data] Downloading package wordnet to
+[nltk_data]     /Users/tylerworthington/nltk_data...
 [nltk_data]   Package wordnet is already up-to-date!
-Topic 0: de el en por llorar toptrce voto mi marquez malditos los madre golaso su la
-Topic 1: new world held cocktail pirelli hispanic reception motor exclusive zero press album woot time friend
-Topic 2: like mom wa look guy turn tweet see guess many whats hear coyote left howling
-Topic 3: rafa marquez goal fucking rquez shit still te gol half pinche goat scored hair commentator
-Topic 4: im shit go voted glad ive tryna really gonna done happily college getting trump since
-Topic 5: rd traffic back min american eb vallejo cyn red delay stopped top closed rest area
-Topic 6: disney eliukfamilyadventures eliuksdodisney disneyland sydneyanabelle henryjames friend another line orleans cruise square jingle favourite work
-Topic 7: mexico fuck marquez yeah right win take usa go viva usmnt guey usavmexvamons raza goallaassoooo
-Topic 8: say take table dinner rude selfies lol mean start call daily thing world time nothing
-Topic 9: one day usa getting want thank keep boat since happy half dick craving amazing thinking
-Topic 10: time cant every thanks movie help watching actress female podcast nail notice im woot call
-Topic 11: amp baby go always let working gonna better taste time away would lady straight didnt
-Topic 12: que creo yo ganaremos la el est donde gol malditos los awebo mierda dios golazo
-Topic 13: trump say kid team looking working forward run business intimately especially transition ivanka elected voted
-Topic 14: af aa df fb bf eb bda bb test_geo_hierarchy bca edf afbatest_geo_hierarchy bddfctest_geo_hierarchy ddca batest_geo_hierarchy
-Topic 15: wa fight want stop yes lit wing school cant marquez got still go trying though
-Topic 16: dont trust way always know feel friend much live small respect anything might enough wrong
-Topic 17: shot also boyfriend dad sad hrc dick craving keep thinking life know little snapchat live
-Topic 18: get fucking thats love fuck damn back oh go life tomorrow make see youre good
-Topic 19: usavmex week te nunca retires elfutbolesnuestro usmnt usa lost rquez continuing theme would angeles usavmexin
+(104513, 2731)
+2177.619956970215
+Topic 0: para de el mi del en por ft que si la yo con se los
+Topic 1: like dont get go people know want feel need make think really someone one time
+Topic 2: lt gt im like wa know dont one get cant ha would man make shit
+Topic 3: amp world president time ppl food get garden real yall needed late shop see global
+Topic 4: day light sea one star wont together morning set first may face created image said
+Topic 5: trump vote wa people ha right white president job recount say woman obama would america
+Topic 6: lol like im wa gt lmao yall thats gotta man ppl tho got dont love
+Topic 7: follow lmao dont im lol get woman know like oh want wanna love wa yes
+Topic 8: never life truth one fear say every must faith thing day ever win million week
+Topic 9: la de que en el los se con un lo por pero le si una
+Topic 10: nigga shit bitch got fuck dont like get yall im aint yo girl really wa
+Topic 11: please trump mr count every minute born republican thanksgiving see family house bad called cause
+Topic 12: dec visit present greatest singer french musical amp happy th pm album angeles los anniversary
+Topic 13: im wa fucking gonna baby going want cry still omg got fuck cant look ill
+Topic 14: love happy birthday much day best thanks miss friend hope beautiful great new good thank
+Topic 15: actor acting checked photo look website hr session page always posted facebook much thank definitely
+Topic 16: thank retweet dream thanks much life spirit struggle beautiful self music god video jesus trying
+Topic 17: state criminal enemy attack medium nation political people american fucking united justice upon official see
+Topic 18: beat get one free friday tryna run buy black deal need got facebook go time
+Topic 19: wa game good ha one get would time think year know back see got right
