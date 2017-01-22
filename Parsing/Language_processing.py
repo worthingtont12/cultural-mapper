@@ -4,8 +4,7 @@ from nltk.tokenize import RegexpTokenizer
 from nltk.corpus import stopwords
 from nltk.stem import WordNetLemmatizer
 from Parsing.Cleaning import dffiltered, text_clean
-nltk.download("stopwords")
-nltk.download("wordnet")
+
 # Pulls in data frame created in previous sheet.
 # See README for describtion of process
 df = dffiltered
@@ -51,6 +50,7 @@ df['final_combined_text'] = df[['cleaned_user_desc', 'cleaned_q_author_text',
 # clean the text
 df['final_combined_text'] = df['final_combined_text'].apply(text_clean)
 df['final_combined_text'] = df['final_combined_text'].apply(str)
+
 # Stop Words
 # english
 english = stopwords.words('english')
@@ -78,14 +78,6 @@ english = stopwords.words('english')
 # chinese = stopwords.words('chinese')
 # # Arabic
 # arabic = stopwords.words('arabic')
-
-
-# dimesion reduction
-# df.drop(['cleaned_user_desc', 'cleaned_q_author_text',
-#          'cleaned_author_text', 'author.text', 'q_author.text', 'c_text_lang', 'c_user_location', 'c_user_lang', 'c_source',
-#          'c_q_text_lang', 'c_q_user_location', 'c_q_user_lang', 'hashtags', 'mentions', 'links', 'q_hashtags', 'q_mentions',
-#          'q_links', 'user_desc'], inplace=True,
-#         axis=1)
 
 # applying function to dataframe
 df_en = df[df.user_language == 'English']
