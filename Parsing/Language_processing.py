@@ -82,3 +82,6 @@ english = stopwords.words('english')
 # applying function to dataframe
 df_en = df[df.user_language == 'English']
 df_en['final_combined_text'] = df_en['final_combined_text'].apply(lambda row: process(row, english))
+
+# free up memory
+del df

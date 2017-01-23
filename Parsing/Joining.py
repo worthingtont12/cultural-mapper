@@ -31,4 +31,6 @@ primary1 = pd.merge(primary, quoted, on='id', how='left')
 # merge with user desc
 primary2 = pd.merge(primary1, user_desc, on=['user_id', 'id'], how='left')
 
-df = primary2
+
+# free up memory
+del primary1, primary, quoted, user_desc

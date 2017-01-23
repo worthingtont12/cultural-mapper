@@ -157,3 +157,6 @@ dffiltered['user_desc'] = dffiltered['user_desc'].apply(str)
 dffiltered['cleaned_author_text'] = dffiltered['author.text'].apply(text_clean)
 dffiltered['cleaned_q_author_text'] = dffiltered['q_author.text'].apply(text_clean)
 dffiltered['cleaned_user_desc'] = dffiltered['user_desc'].apply(text_clean)
+
+# free up memory
+del df1, df2, df3, df4, df5, df6, df7, df8, df9, df10, df11
