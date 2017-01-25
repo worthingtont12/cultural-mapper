@@ -1,9 +1,12 @@
 """Topic Modeling on Authored Tweets Using Latent Dirichlet Allocation"""
 
+import smtplib
 import numpy as np
 import sklearn.feature_extraction.text as text
 from sklearn import decomposition
 from Parsing.Language_processing import df_en
+from Parsing.login_info import username, password2, recipient1
+
 
 # import data
 df_en['final_combined_text'] = df_en['final_combined_text'].apply(str)
@@ -37,3 +40,12 @@ for topic in lda.components_:
 
 for t in range(len(topic_words)):
     print("Topic {}: {}".format(t, ' '.join(topic_words[t][:15])))
+
+
+# email when done
+server = smtplib.SMTP("smtp.gmail.com", 587)
+server.starttls()
+
+server.login(username, password2)
+
+server.sendmail(username, recipient1, 'Topic Models Built')

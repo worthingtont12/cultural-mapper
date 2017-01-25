@@ -1,41 +1,51 @@
-"""Topic Modeling on Authored Tweets"""
-# guidance found from
-# https://de.dariah.eu/tatom/topic_model_python.html
+"""Topic Modeling on Authored Tweets Using Latent Dirichlet Allocation"""
 
-import os
+import smtplib
 import numpy as np
 import sklearn.feature_extraction.text as text
 from sklearn import decomposition
 from Parsing.Language_processing import df_en
+from Parsing.login_info import username, password2, recipient1
 
-# set wd
-os.chdir("/Users/tylerworthington/Git_Repos")
 
 # import data
-df = df_en
 df_en['final_combined_text'] = df_en['final_combined_text'].apply(str)
 
 # create document term matrix
-vectorizer = text.CountVectorizer(lowercase=False)
-dtm = vectorizer.fit_transform(df.final_combined_text).toarray()
+vectorizer = text.CountVectorizer(max_df=0.95, min_df=200, strip_accents='unicode', lowercase=False)
+dtm = vectorizer.fit_transform(df_en.final_combined_text).toarray()
 vocab = np.array(vectorizer.get_feature_names())
+
+# document term matrix size
+print(dtm.shape)
+print(((dtm.data.nbytes / 1024) / 1024))  # number of bytes dtm takes up
 
 # Parameters for topic model
 num_topics = 20
 
 num_top_words = 20
 
-clf = decomposition.NMF(n_components=num_topics, random_state=1)
+lda = decomposition.LatentDirichletAllocation(
+    n_topics=num_topics, learning_method='online', learning_offset=50., random_state=0)
 
 # train model
-doctopic = clf.fit_transform(dtm)
+doctopic = lda.fit_transform(dtm)
 
 # display results
 topic_words = []
 
-for topic in clf.components_:
+for topic in lda.components_:
     word_idx = np.argsort(topic)[::-1][0:num_top_words]
     topic_words.append([vocab[i] for i in word_idx])
 
 for t in range(len(topic_words)):
     print("Topic {}: {}".format(t, ' '.join(topic_words[t][:15])))
+
+
+# email when done
+server = smtplib.SMTP("smtp.gmail.com", 587)
+server.starttls()
+
+server.login(username, password2)
+
+server.sendmail(username, recipient1, 'Topic Models Built')
