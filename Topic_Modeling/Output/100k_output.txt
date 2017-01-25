@@ -1,0 +1,43 @@
+English       169186
+Spanish         1059
+Portuguese       566
+Japanese         467
+French           181
+Arabic           127
+Chinese           88
+Russian           66
+Italian           55
+German            54
+Dutch             31
+Turkish           28
+Thai              26
+Indonesian        19
+Korean            11
+Hebrew            11
+Swedish           10
+Polish             5
+Finnish            3
+Romanian           1
+Name: user_language, dtype: int64
+(28845, 414)
+91.10893249511719
+Topic 0: love day good week show friend yes next miss last fun one great light nice
+Topic 1: happy birthday youre amazing win old love yeah another shes open full saturday cry seeing
+Topic 2: today year work ha every two day one favorite time season wish family car also
+Topic 3: la los angeles california video de hollywood beach team dad west almost whats le tbt
+Topic 4: new cole album music song help big listen dog soon post drop beat listening end
+Topic 5: thanks still hard job put thats since tweet whole talking though making high working support
+Topic 6: back one gt home hope coming live guy school hill boy tree heart better already
+Topic 7: lol right holiday baby free oh bro ok pic text stay drink away af second
+Topic 8: im gonna done long someone class omg house face dude hit everything told dream art
+Topic 9: really night tomorrow im made getting ready ive come morning literally bc everyone mom actually
+Topic 10: make people give say stop tell dont cant please youre beautiful thing money food word
+Topic 11: like im dont know feel look get think something black person try white people trying
+Topic 12: go get need always tonight game let raider play bad sleep ball gift time keep
+Topic 13: life thank christmas final ca pm set santa real break friday im start weekend date
+Topic 14: want much going way think hour fan ill playing buy hair left lit hear sick
+Topic 15: see time cant watch wait movie photo great trailer cool kid spidermanhomecoming little studio official
+Topic 16: amp trump party lot true god city woman doe anyone president chief state st ha
+Topic 17: got shit girl fuck wanna lmao nigga fucking bitch yall hate aint ur phone tho
+Topic 18: wa thing first thought would th sure never said one check looking saw pretty didnt
+Topic 19: best man ever well john doesnt call many via year havent ha may glenn taking
