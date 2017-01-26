@@ -1,3 +1,7 @@
+corpus.mm
+corpus.mm.index
+Topic_Modeling/corpus.mm
+Topic_Modeling/corpus.mm.index
 Parsing/Cleaning.pyc
 Parsing/Joining.pyc
 Parsing/Language_processing.pyc

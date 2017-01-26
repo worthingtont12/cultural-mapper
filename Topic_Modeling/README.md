@@ -11,3 +11,5 @@ Links below were used for syntax:
 * https://de.dariah.eu/tatom/topic_model_python.html
 * https://medium.com/@aneesha/topic-modeling-with-scikit-learn-e80d33668730#.nc7n0epiw
 * http://scikit-learn.org/stable/modules/generated/sklearn.decomposition.LatentDirichletAllocation.html
+* http://graus.co/tag/gensim/
+* https://radimrehurek.com/gensim/models/ldamulticore.html
