@@ -39,6 +39,7 @@ print(lda)
 # topic distribution for documents
 docTopicProbMat = lda[corpus]
 print(docTopicProbMat[0])
+print(type(docTopicProbMat[0]))
 
 #
 K = lda.num_topics
