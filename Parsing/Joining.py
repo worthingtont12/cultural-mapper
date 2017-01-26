@@ -7,9 +7,9 @@ from Parsing.login_info import user, host, password
 conn = psycopg2.connect(
     "dbname='culturalmapper_LA' user=%s host=%s password=%s" % (user, host, password))
 
-primary = psql.read_sql("SELECT * FROM la_city_primary LIMIT 100000", conn)
-quoted = psql.read_sql("SELECT * FROM la_quoted LIMIT 100000", conn)
-user_desc = psql.read_sql("SELECT * FROM la_user_desc LIMIT 100000", conn)
+primary = psql.read_sql("SELECT * FROM la_city_primary LIMIT 1000000", conn)
+quoted = psql.read_sql("SELECT * FROM la_quoted LIMIT 1000000", conn)
+user_desc = psql.read_sql("SELECT * FROM la_user_desc LIMIT 1000000", conn)
 
 # naming Columns
 primary.columns = ['created_at', 'id', 'source', 'text', 'text_lang',

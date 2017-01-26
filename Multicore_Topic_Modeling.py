@@ -1,6 +1,7 @@
 """Topic Modeling on Authored Tweets Using Parralelized Latent Dirichlet Allocation"""
 import smtplib
 import logging
+from multiprocessing import cpu_count
 from gensim import corpora, models
 from gensim.models.ldamulticore import LdaMulticore
 from Parsing.Language_processing import df_en
@@ -33,7 +34,7 @@ tfidf = models.TfidfModel(corpus)
 corpus_tfidf = tfidf[corpus]
 
 # train model
-lda = LdaMulticore(corpus_tfidf, id2word=dictionary, num_topics=20)
+lda = LdaMulticore(corpus_tfidf, workers=cpu_count() - 1, id2word=dictionary, num_topics=20)
 print(lda)
 
 # topic distribution for documents
