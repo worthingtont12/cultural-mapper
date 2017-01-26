@@ -13,13 +13,12 @@ df_en['final_combined_text'] = df_en['final_combined_text'].apply(str)
 print(df_en['final_combined_text'].head)
 
 # create document term matrix
-vectorizer = text.CountVectorizer(max_df=0.95, min_df=200, strip_accents='unicode', lowercase=False)
+vectorizer = text.CountVectorizer(max_df=0.75, min_df=200, strip_accents='unicode', lowercase=False)
 dtm = vectorizer.fit_transform(df_en.final_combined_text).toarray()
 vocab = np.array(vectorizer.get_feature_names())
 
 # document term matrix size
 print(dtm.shape)
-print(((dtm.data.nbytes / 1024) / 1024))  # number of bytes dtm takes up
 
 # Parameters for topic model
 num_topics = 20
@@ -47,7 +46,7 @@ for t in range(len(topic_words)):
 topic_assignment = []
 for n in range(len(df_en['final_combined_text'])):
     topic_assignment.append(doctopic[n].argmax())
-df_en['topic'] = topic_assignment
+df_en['top_topic'] = topic_assignment
 
 
 # email when done
