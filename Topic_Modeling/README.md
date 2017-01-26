@@ -13,5 +13,4 @@ Links below were used for syntax:
 * http://scikit-learn.org/stable/modules/generated/sklearn.decomposition.LatentDirichletAllocation.html
 * http://graus.co/tag/gensim/
 * https://radimrehurek.com/gensim/models/ldamulticore.html
-Algorithm:
 * https://www.cs.princeton.edu/~blei/papers/BleiNgJordan2003.pdf
