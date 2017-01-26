@@ -1,6 +1,4 @@
 # TODO
-#Dimension Reduction
-* Multicore Implementation
 
 # Language problems
 * filter out multiple stop word languages?
