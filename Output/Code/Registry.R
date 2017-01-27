@@ -58,16 +58,33 @@ colors <- function(path = '../../Assets/Langauge.json'){
   names(registry) <- c('text_lang', 'language')
   
   language <- unique(registry$language)
+  language <- sort(language)
   
-  require(RColorBrewer)
-  color <- c(brewer.pal(12, "Set3"),
-              brewer.pal(9, "Set1"),
-              brewer.pal(8, "Dark2"),
-              "#000000", "#F7F7F7","#FFE1FF")
+  # require(RColorBrewer)
+  # color <- c(brewer.pal(12, "Set3"),
+  #             brewer.pal(9, "Set1"),
+  #             brewer.pal(8, "Dark2"),
+  #             "#000000", "#F7F7F7","#FFE1FF")
+  
+  # Need 33 colors (32 + 1 for OTHER)
+  blues <- c("blue","darkblue","cyan","darkcyan","cornflowerblue",
+             "darkslateblue","darkslategray",
+             "deepskyblue3","deepskyblue4")
+  reds <- c("thistle1","coral3","darkorange1", "darkorange3",
+            "darkorchid1","darkorchid4","red","darkred",
+            "deeppink3","deeppink4")
+  greens <- c("aquamarine3","aquamarine4","green","darkgreen",
+              "darkolivegreen1", "darkolivegreen4")
+  yellows <- c("chocolate1","chocolate4", "darkgoldenrod1","darkgoldenrod4",
+               "yellow")
+  neutrals <- c("black","mistyrose")
+  
+  color <- c(blues, reds, greens, yellows, neutrals)
   
   color_pal <- as.data.frame(cbind(language, color))
   registry <- merge(registry,color_pal)
   registry$color <- as.character(registry$color)
+  registry <- rbind(registry,c("Other",NA,"gray39"))
   return(registry)
 }
 
