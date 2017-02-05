@@ -67,6 +67,8 @@ df11 = df[df['source'].str.contains("tron")]
 dfs = [df1, df2, df3, df4, df5, df6, df7, df8, df9, df10, df11]
 dffiltered = pd.concat(dfs)
 
+# number of documents
+print(dffiltered.shape)
 # transforming language variable for clearer interpretation
 map_lang = {'en': "English", 'fr': "French", 'und': "Unknown", 'ar': "Arabic", 'ja': "Japanese", 'es': "Spanish",
             'de': "German", 'it': 'Italian', 'id': "Indonesian", "pt": "Portuguese", 'ko': "Korean", 'tr': "Turkish",
@@ -101,6 +103,8 @@ dffiltered['c_q_user_location'] = dffiltered[['user_id', 'q_user_location']].gro
 dffiltered['c_q_user_lang'] = dffiltered[['user_id', 'q_user_lang']].groupby(
     ['user_id'])['q_user_lang'].transform(lambda x: ','.join(x))
 
+# number of users
+print(dffiltered.shape)
 
 # drop non unique observations
 # dffiltered = dffiltered.loc[~dffiltered['user_id'].duplicated()]

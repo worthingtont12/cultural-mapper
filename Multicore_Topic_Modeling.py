@@ -1,6 +1,7 @@
 """Topic Modeling on Authored Tweets Using Parralelized Latent Dirichlet Allocation"""
 import smtplib
 import logging
+import pandas as pd
 from multiprocessing import cpu_count
 from operator import itemgetter
 from gensim import corpora, models
@@ -40,8 +41,8 @@ class MyCorpus(object):
 
 
 corpus = MyCorpus()
-corpora.MmCorpus.serialize('corpus.mm', corpus)  # Save corpus to disk
-corpus = corpora.MmCorpus('corpus.mm')  # Load corpus
+corpora.MmCorpus.serialize('Topic_Modeling/Data/en_corpus.mm', corpus)  # Save corpus to disk
+corpus = corpora.MmCorpus('Topic_Modeling/Data/en_corpus.mm')  # Load corpus
 
 # creating tfidf matrix
 tfidf = models.TfidfModel(corpus)
@@ -70,9 +71,10 @@ for n in range(len(df_en['final_combined_text'])):
 df_en['top_topic'] = topic_assignment
 df_en['topic_prob'] = topic_probabilities
 
-#df_en['top_topic_1'] = docTopicProbMat.apply(lambda row: max_val(row, -1)[0])
-# print(df_en['top_topic_1'].head)
-print(df_en['top_topic'].head)
+# saving results
+lda.save('Topic_Modeling/Data/en_lda.model')
+df_en.to_csv('Topic_Modeling/Data/English_LA.csv',
+             columns=['user_id', 'user_language', 'top_topic', 'topic_prob'])
 
 
 # email when done
