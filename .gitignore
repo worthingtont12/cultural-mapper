@@ -2,6 +2,11 @@ corpus.mm
 corpus.mm.index
 Topic_Modeling/corpus.mm
 Topic_Modeling/corpus.mm.index
+Topic_Modeling/Data/corpus.mm
+Topic_Modeling/Data/corpus.mm.index
+Topic_Modeling/Data/lda.model
+Topic_Modeling/Data/lda.model.state
+Topic_Modeling/Data/English_LA.csv
 Parsing/Cleaning.pyc
 Parsing/Joining.pyc
 Parsing/Language_processing.pyc
