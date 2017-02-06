@@ -8,11 +8,11 @@ conn = psycopg2.connect(
     "dbname='culturalmapper_LA' user=%s host=%s password=%s" % (user, host, password))
 
 primary = psql.read_sql(
-    "SELECT * FROM la_city_primary WHERE created_at > '2016-10-28' AND created_at < '2017-01-27'", conn)
+    "SELECT * FROM la_city_primary WHERE created_at > '2016-10-28' AND created_at < '2017-01-28'", conn)
 quoted = psql.read_sql(
-    "SELECT * FROM la_quoted WHERE created_at > '2016-10-28' AND created_at < '2017-01-27'", conn)
+    "SELECT * FROM la_quoted WHERE created_at > '2016-10-28' AND created_at < '2017-01-28'", conn)
 user_desc = psql.read_sql(
-    "SELECT * FROM la_user_desc WHERE created_at > '2016-10-28' AND created_at < '2017-01-27'", conn)
+    "SELECT * FROM la_user_desc WHERE created_at > '2016-10-28' AND created_at < '2017-01-28'", conn)
 
 # naming Columns
 primary.columns = ['created_at', 'id', 'source', 'text', 'text_lang',
