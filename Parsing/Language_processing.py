@@ -55,29 +55,8 @@ df['final_combined_text'] = df['final_combined_text'].apply(str)
 # english
 english = stopwords.words('english')
 # Spanish
-# spanish = stopwords.words('spanish')
-# # Portuguese
-# portuguese = stopwords.words('portuguese')
-# # French
-# french = stopwords.words('french')
-# # German
-# german = stopwords.words('german')
-# # Russian
-# russian = stopwords.words('russian')
-# # Dutch
-# dutch = stopwords.words('dutch')
-# # Turkish
-# turkish = stopwords.words('turkish')
-# # Finnish
-# finnish = stopwords.words('finnish')
-# # Swedish
-# swedish = stopwords.words('swedish')
-# # Japanese
-# japanese = stopwords.words('japanese')
-# # Chinese
-# chinese = stopwords.words('chinese')
-# # Arabic
-# arabic = stopwords.words('arabic')
+spanish = stopwords.words('spanish')
+
 
 # applying function to dataframe
 df_en = df[df.user_language == 'English']
