@@ -1,7 +1,6 @@
-"""Topic Modeling on Authored Tweets Using Parralelized Latent Dirichlet Allocation"""
+"""Topic Modeling on Authored Tweets Using Parralelized Latent Dirichlet Allocation."""
 import smtplib
 import logging
-import pandas as pd
 from multiprocessing import cpu_count
 from operator import itemgetter
 from gensim import corpora, models
@@ -34,7 +33,7 @@ df_en['final_combined_text'] = df_en['final_combined_text'].apply(str)
 dictionary = corpora.Dictionary(line.lower().split() for line in df_en['final_combined_text'])
 
 # dimension reduction
-dictionary.filter_extremes(no_below=200, no_above=0.75)
+dictionary.filter_extremes(no_below=.04, no_above=0.75)
 
 # formatting corpus for use
 
@@ -81,12 +80,3 @@ df_en['topic_prob'] = topic_probabilities
 lda.save('Topic_Modeling/Data/en_lda.model')
 df_en.to_csv('Topic_Modeling/Data/English_LA.csv',
              columns=['user_id', 'user_language', 'top_topic', 'topic_prob'])
-
-
-# email when done
-server = smtplib.SMTP("smtp.gmail.com", 587)
-server.starttls()
-
-server.login(username, password2)
-
-server.sendmail(username, recipient1, 'Topic Models Built')
