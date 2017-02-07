@@ -1,5 +1,4 @@
 """Topic Modeling on Authored Tweets Using Parralelized Latent Dirichlet Allocation."""
-import smtplib
 import logging
 from multiprocessing import cpu_count
 from operator import itemgetter
@@ -7,7 +6,6 @@ from gensim import corpora, models
 from gensim.models.ldamulticore import LdaMulticore
 # local modules
 from Parsing.Language_processing import df_en
-from Parsing.login_info import username, password2, recipient1
 # logging
 logging.basicConfig(format='%(asctime)s : %(levelname)s : %(message)s', level=logging.INFO)
 
@@ -33,7 +31,7 @@ df_en['final_combined_text'] = df_en['final_combined_text'].apply(str)
 dictionary = corpora.Dictionary(line.lower().split() for line in df_en['final_combined_text'])
 
 # dimension reduction
-dictionary.filter_extremes(no_below=.04, no_above=0.75)
+dictionary.filter_extremes(no_below=.04, no_above=0.65)
 
 # formatting corpus for use
 

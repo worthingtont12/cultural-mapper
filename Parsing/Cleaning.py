@@ -67,6 +67,12 @@ df11 = df[df['source'].str.contains("tron")]
 dfs = [df1, df2, df3, df4, df5, df6, df7, df8, df9, df10, df11]
 dffiltered = pd.concat(dfs)
 
+# filter out serial tweeters
+df = df[~df['user_id'].str.contains("22454941")]
+df = df[~df['user_id'].str.contains("21298660")]
+df = df[~df['user_id'].str.contains("37966969")]
+
+
 # number of documents
 print(dffiltered.shape)
 # transforming language variable for clearer interpretation
