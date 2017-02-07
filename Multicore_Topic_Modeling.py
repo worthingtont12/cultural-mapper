@@ -1,4 +1,4 @@
-"""Topic Modeling on Authored Tweets Using Parralelized Latent Dirichlet Allocation"""
+"""Topic Modeling on Authored Tweets Using Parralelized Latent Dirichlet Allocation."""
 import smtplib
 import logging
 from multiprocessing import cpu_count
@@ -15,7 +15,13 @@ logging.basicConfig(format='%(asctime)s : %(levelname)s : %(message)s', level=lo
 
 
 def max_val(l, i):
-    """
+    """Function takes the highest value in a list within a list.
+
+    Parameters
+    ----------
+    l : .
+    i : .
+
     """
     return max(enumerate(map(itemgetter(i), l)), key=itemgetter(1))
 
@@ -27,7 +33,7 @@ df_en['final_combined_text'] = df_en['final_combined_text'].apply(str)
 dictionary = corpora.Dictionary(line.lower().split() for line in df_en['final_combined_text'])
 
 # dimension reduction
-dictionary.filter_extremes(no_below=200, no_above=0.75)
+dictionary.filter_extremes(no_below=.04, no_above=0.75)
 
 # formatting corpus for use
 
@@ -40,8 +46,8 @@ class MyCorpus(object):
 
 
 corpus = MyCorpus()
-corpora.MmCorpus.serialize('corpus.mm', corpus)  # Save corpus to disk
-corpus = corpora.MmCorpus('corpus.mm')  # Load corpus
+corpora.MmCorpus.serialize('Topic_Modeling/Data/en_corpus.mm', corpus)  # Save corpus to disk
+corpus = corpora.MmCorpus('Topic_Modeling/Data/en_corpus.mm')  # Load corpus
 
 # creating tfidf matrix
 tfidf = models.TfidfModel(corpus)
@@ -70,15 +76,7 @@ for n in range(len(df_en['final_combined_text'])):
 df_en['top_topic'] = topic_assignment
 df_en['topic_prob'] = topic_probabilities
 
-#df_en['top_topic_1'] = docTopicProbMat.apply(lambda row: max_val(row, -1)[0])
-# print(df_en['top_topic_1'].head)
-print(df_en['top_topic'].head)
-
-
-# email when done
-server = smtplib.SMTP("smtp.gmail.com", 587)
-server.starttls()
-
-server.login(username, password2)
-
-server.sendmail(username, recipient1, 'Topic Models Built')
+# saving results
+lda.save('Topic_Modeling/Data/en_lda.model')
+df_en.to_csv('Topic_Modeling/Data/English_LA.csv',
+             columns=['user_id', 'user_language', 'top_topic', 'topic_prob'])
