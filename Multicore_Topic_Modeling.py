@@ -31,7 +31,7 @@ df_en['final_combined_text'] = df_en['final_combined_text'].apply(str)
 dictionary = corpora.Dictionary(line.lower().split() for line in df_en['final_combined_text'])
 
 # dimension reduction
-dictionary.filter_extremes(no_below=1000, no_above=0.5)
+dictionary.filter_extremes(no_below=1000, no_above=0.3)
 
 # formatting corpus for use
 
