@@ -9,7 +9,7 @@ from Parsing.Language_processing import df_en
 # logging
 logging.basicConfig(format='%(asctime)s : %(levelname)s : %(message)s', level=logging.INFO)
 
-# Returns highest list of list
+# functions
 
 
 def max_val(l, i):
@@ -31,7 +31,7 @@ df_en['final_combined_text'] = df_en['final_combined_text'].apply(str)
 dictionary = corpora.Dictionary(line.lower().split() for line in df_en['final_combined_text'])
 
 # dimension reduction
-dictionary.filter_extremes(no_below=.04, no_above=0.65)
+dictionary.filter_extremes(no_below=1000, no_above=0.5)
 
 # formatting corpus for use
 
