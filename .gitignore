@@ -1,9 +1,26 @@
-
+corpus.mm
+corpus.mm.index
+Topic_Modeling/corpus.mm
+Topic_Modeling/corpus.mm.index
+Topic_Modeling/Data/en_corpus.mm
+Topic_Modeling/Data/en_corpus.mm.index
+Topic_Modeling/Data/en_lda.model
+Topic_Modeling/Data/en_lda.model.state
+Topic_Modeling/Data/English_LA.csv
+Parsing/Cleaning.pyc
+Parsing/Joining.pyc
+Parsing/Language_processing.pyc
+Parsing/__init__.pyc
+Parsing/login_info.py
+Data_Collection/Chicago/login_info.py
+Data_Collection/LA/login_info.py
+Data_Collection/Istanbul/login_info.py
 Data_Collection/keys.py
 Data_Collection/__pycache__
 Data_Collection/LA/keys.py
 Data_Collection/Chicago/keys.py
 Data_Collection/Instanbul/keys.py
+Parsing/__pycache__
 .Rproj.user
 
 Data/Queries/.Rhistory

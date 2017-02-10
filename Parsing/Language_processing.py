@@ -1,91 +1,65 @@
 """Processing Language for Topic Modeling."""
-import re
-import os
-import pandas as pd
-import nltk
 from nltk.tokenize import RegexpTokenizer
 from nltk.corpus import stopwords
-from nltk.stem import PorterStemmer
-from sklearn.feature_extraction.text import TfidfVectorizer
-from io import StringIO
+from nltk.stem import WordNetLemmatizer
+from Parsing.Cleaning import dffiltered, text_clean
 
-os.chdir("/Users/tylerworthington/Git_Repos")
+# Pulls in data frame created in previous sheet.
+# See README for describtion of process
+df = dffiltered
 
-df = pd.read_csv("primary.csv", error_bad_lines=False)
 
-###################Function to deal with special characters, tokenizing, and stemming#####################
-def clean(text):
-    #functions used
+def process(text, lang):
+    """Function to deal with tokenizing, stemming or lemmantizing, and stop word filtering.
+
+    Parameters
+    ----------
+    text : text of interest in string format.
+    lang : language for stop word filtering.
+
+    """
+    # functions used
     tokenizer = RegexpTokenizer(r'\w+')
-    stemmer = PorterStemmer()
+    lemmatizer = WordNetLemmatizer()
 
-    #dealing with special cases
-    text = text.replace('\'', '')
-    text = text.replace('"', ' ')
-    text = text.replace('_', ' ')
-    text = text.replace('-', ' ')
-    text = re.sub(' +', ' ', text)
-    text = re.sub('[1|2|3|4|5|6|7|8|9|0]', '', text)
-
-    #remove case
+    # remove case
     text = text.lower()
 
     # tokenizing
     words = tokenizer.tokenize(text)
 
-    # stemming
-    stemmed_tokenized_words = [stemmer.stem(i) for i in words]
+    # lemmantizing
+    lemmed_tokenized_words = [lemmatizer.lemmatize(i) for i in words]
 
-    return stemmed_tokenized_words
+    # stop words
+    stop_words = [i for i in lemmed_tokenized_words if i not in lang]
+
+    return stop_words
 
 
-#applying function to dataframe
-df.apply(clean)
+# recasting
+df['cleaned_user_desc'] = df['cleaned_user_desc'].apply(str)
+df['cleaned_q_author_text'] = df['cleaned_q_author_text'].apply(str)
+df['cleaned_author_text'] = df['cleaned_author_text'].apply(str)
 
+# merging all text into one column
+df['final_combined_text'] = df[['cleaned_user_desc', 'cleaned_q_author_text',
+                                'cleaned_author_text']].apply(lambda x: ''.join(x), axis=1)
 
-# English       19633
-# Spanish         127
-# Portuguese       59
-# Arabic           48
-# Japanese         42
-# French           19
-# German           18
-# Russian          11
-# Polish           11
-# Dutch             5
-# Turkish           5
-# Finnish           2
-# Korean            1
-# Swedish           1
+# clean the text
+df['final_combined_text'] = df['final_combined_text'].apply(text_clean)
+df['final_combined_text'] = df['final_combined_text'].apply(str)
 
-####Stop Words
-#English
+# Stop Words
+# english
 english = stopwords.words('english')
-words = [w for w in df if not w in stopwords.words("english")]
-
-#Spanish
+# Spanish
 spanish = stopwords.words('spanish')
 
-#Portuguese
-portuguese = stopwords.words('portuguese')
 
-#French
-french = stopwords.words('french')
+# applying function to dataframe
+df_en = df[df.user_language == 'English']
+df_en['final_combined_text'] = df_en['final_combined_text'].apply(lambda row: process(row, english))
 
-#German
-german = stopwords.words('german')
-
-#Russian
-russian = stopwords.words('russian')
-
-#Dutch
-dutch  = stopwords.words('dutch')
-
-#Turkish
-turkish = stopwords.words('turkish')
-
-#Finnish
-finnish = stopwords.words('finnish')
-
-#Swedish
-swedish = stopwords.words('swedish')
+# free up memory
+del df
