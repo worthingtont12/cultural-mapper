@@ -24,9 +24,21 @@ library(rgdal)
 # the_xts<-xts(Lang_sum[,-1], order.by=Lang_sum$rounded, tz = "America/Los_Angeles")
 
 
+# https://plot.ly/r/shinyapp-UN-advanced/ for selectizeInput
+
 # Create UI for Shiny
 ui <- fluidPage(
-  leafletOutput("map1"),
+  sidebarPanel(
+    h3("Languages in Los Angeles"),
+    # Select Languages here
+    selectizeInput("lang", label = "Languages of Interest",
+                   choices = unique(language), multiple = T,
+                   options = list(maxItems = 12, placeholder = 'Select a language'),
+                   selected = "Spanish")
+  ),
+  mainPanel(
+    leafletOutput("map1")
+  ),
   dygraphOutput("dygraph1",height = 300)
 )
 
@@ -35,6 +47,14 @@ geo <- la_geo
 # Create Shiny Server
 server <- function(input, output, session) {
   v <- reactiveValues(msg = "")
+  
+  get_Data <- reactive(
+    
+  )
+  
+  observe({
+    langs <- input$lang
+  })
   
   output$map1 <- renderLeaflet({
     location_map(geo)

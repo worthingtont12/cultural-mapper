@@ -33,3 +33,13 @@ Data/Queries/LA_Geotagged.csv
 Data/Queries/Chicago_sample.csv
 
 Data/Queries/Istanbul.csv
+
+Output/Code/.RData
+
+Output/Code/.RData
+
+ConvexHulls/keys.R
+
+ConvexHulls/.RData
+
+ConvexHulls/.Rhistory
