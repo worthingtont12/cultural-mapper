@@ -14,6 +14,10 @@ city <- location('../../Data/Queries/LA_Geotagged.csv',
                            -118.723549, 33.694679, -117.929466, 34.33926)
 zone <- city$zone
 
+# OSM Data
+data.shape_amenities<-readOGR(dsn="../../Data/Queries/los-angeles_california_osm_amenities.shp")
+amenities <- cbind(data.shape_amenities@data, data.shape_amenities@coords)
+
 # Create Color Palette
 pal <- brewer.pal(9, "Set1")
 
@@ -32,7 +36,7 @@ ui <- fluidPage(
            
     ),
     column(9,
-           leafletOutput("map1")
+           leafletOutput("map1", height = 500)
     )
   ),
   fluidRow(
@@ -96,14 +100,19 @@ server <- function(input, output, session) {
       addCircles(lng=subset_time$long,
                        lat=subset_time$lat,
                        color = factpal(subset_time$language),
-                       radius = 50,
+                       radius = 75,
                        stroke = FALSE, fillOpacity = .5,
                        popup = paste0(subset_time$created_at,
                                       "<br>",
                                       subset_time$language),
                        group = subset_time$language,
                        weight = 0
-                 )
+                 ) %>%
+      addMarkers(amenities$coords.x1, amenities$coords.x2,
+                 popup = paste0(amenities$name,
+                                "<br>",
+                                amenities$type),group = amenities$type)%>%
+      addLayersControl(overlayGroups = amenities$type)
   })
   
   observeEvent(input$dygraph1_date_window, {
@@ -117,17 +126,18 @@ server <- function(input, output, session) {
     subset_time <- isolate(times())
     
     leafletProxy("map1") %>%
-      clearMarkers() %>%
+      # clearMarkers() %>%
       clearShapes() %>%
       addCircles(lng=subset_time$long,
                        lat=subset_time$lat,
                        color = factpal(subset_time$language),
-                       radius = 50,
+                       radius = 75,
                        stroke = FALSE, fillOpacity = .5,
                        popup = paste0(subset_time$created_at,
                                       "<br>",
                                       subset_time$language),
-                       group = subset_time$language, weight = 0)
+                       group = subset_time$language, weight = 0) %>%
+      addLayersControl(overlayGroups = amenities$type)
   })
 }
 
