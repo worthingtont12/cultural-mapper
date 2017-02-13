@@ -11,6 +11,14 @@ train <- sample.int(nrow(topics_merged_clean),nrow(topics_merged_clean)/2)
 train
 
 # Need to project the coordinates for distance purposes...
+require(rgdal)
+# http://spatialreference.org/ref/epsg/3497/
+
+location.meters <- project(cbind(topics_merged_clean$long,
+                                 topics_merged_clean$lat),
+                           proj = '+init=espg:3497')
+
+# Needs to be in WG84
 
 
 # Create a model on 50% of the data
