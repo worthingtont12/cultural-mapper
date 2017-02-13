@@ -41,17 +41,17 @@ lines(data_merge[hull,3], data_merge[hull,2])
 
 
 # Summarize by languages
-library(dplyr)
-library(timeDate)
+require(dplyr)
+require(timeDate)
 lang_sum <- data_merge %>%
   group_by(language) %>%
   count() %>%
   arrange(desc(n))
 lang_sum
 
-library(ggplot2)
-library(ggmap)
-library(maps)
+require(ggplot2)
+require(ggmap)
+require(maps)
 
 # Get Base LA Map
 map <- ggmap(get_map(location = c(-118.723549,33.694679,-117.929466,34.33926)))
