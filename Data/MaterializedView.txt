@@ -1,0 +1,16 @@
+CREATE MATERIALIZED VIEW geometries_test
+AS
+SELECT id,
+	CAST(created_at as timestamptz), 
+    text, 
+    text_lang, 
+    user_handle, 
+    user_lang, 
+    long, lat,
+    ST_MakePoint(CAST(long AS FLOAT), CAST(lat AS FLOAT)) AS geo_point
+FROM la_city_primary NATURAL JOIN la_city_secondary
+WITH NO DATA;
+
+CREATE UNIQUE INDEX tweet_id ON geometries_test (id);
+
+REFRESH MATERIALIZED VIEW geometries_test;

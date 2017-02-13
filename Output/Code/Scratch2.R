@@ -1,3 +1,97 @@
+#### Scratch ####
+
+# This is equivalent to input$lang
+temp <- list("Danish")
+
+# create a filtered list by language - rounded has to be character or CT, not LT
+subset <- subset(geo_filter) %>% filter(language %in% temp)#input$lang)
+
+
+
+# From https://github.com/rstudio/dygraphs/issues/63
+dyVisibility <- function (dygraph, visibility = TRUE){
+  dygraph$x$attrs$visibility <- visibility
+  dygraph
+}
+
+library(tidyr)
+library(xts)
+library(RColorBrewer)
+
+pal <- brewer.pal(9, "Set1")
+pal_sub <- pal[1:length(temp)]
+
+
+countLang <- function(subset){
+  require(dplyr)
+  require(xts)
+  require(tidyr)
+  Lang_sum <- subset %>%
+    group_by(language, rounded) %>%
+    summarise(count=n()) %>%
+    spread(language,count, fill = 0) %>%
+    arrange(rounded)
+  Lang_sum$rounded <- as.POSIXct(Lang_sum$rounded, tz = zone)
+  the_xts<-xts(Lang_sum[,-1], order.by=Lang_sum$rounded, tz = zone)
+  
+  return(the_xts)
+}
+
+geo_filter$rounded <- as.character.Date(geo_filter$rounded)
+
+
+visible <- names(the_xts) %in% temp
+
+test <- dygraph(the_xts) %>%
+  dyOptions(colors = pal_sub,
+            logscale = F, connectSeparatedPoints = TRUE,
+            useDataTimezone = TRUE,
+            retainDateWindow = TRUE) %>%
+  dyHighlight(highlightSeriesBackgroundAlpha = .2,
+              highlightSeriesOpts = list(strokeWidth = 3)) %>%
+  dyRoller(rollPeriod = 6) %>%
+  dyRangeSelector(dateWindow = c(max(Lang_sum$rounded) - as.difftime(7, units = "days"),
+                                 max(Lang_sum$rounded))) %>%
+  dyVisibility(visibility=visible)
+
+test
+test %>% dyVisibility(visibility=visible)
+
+
+
+factpal <- colorFactor(pal_sub, subset$language)
+
+map <- leaflet() %>%
+  addProviderTiles("CartoDB.Positron") %>%
+  addCircleMarkers(lng=subset$long,
+                   lat=subset$lat,
+                   color = factpal(subset$language),
+                   radius = 5,
+                   stroke = FALSE, fillOpacity = .5,
+                   popup = paste0(subset$created_at,
+                                  "<br>",
+                                  subset$language),
+                   group = subset$language
+  ) %>%
+  addLegend("bottomright", colors = factpal,
+            labels = temp,
+            title = "Languages",
+            opacity = 1) %>%
+  addLayersControl(
+    overlayGroups = unique(color$language),
+    options = layersControlOptions(collapsed = TRUE),
+    position = 'topleft'
+  ) %>% hideGroup(c("English","Unknown"))
+
+
+
+
+
+
+
+
+
+
 library(dygraphs)
 library(xts)
 library(tidyr)
