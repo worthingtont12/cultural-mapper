@@ -19,20 +19,20 @@ dtm = vectorizer.fit_transform(df_en.final_combined_text).toarray()
 corpus_tfidf = pd.DataFrame(dtm)
 
 # permute the ifidf
-random_corpus_tfidf = np.random.permutation(corpus_tfidf)
+random_corpus_tfidf = pd.DataFrame(np.random.permutation(corpus_tfidf))
 
 # label the permuted matrix
-random_corpus_tfidf['random'] = np.zeros(shape=(373602, 1))
+random_corpus_tfidf['random'] = np.zeros(shape=(len(df_en['final_combined_text']), 1))
 
 # label the non-permuted matrix
-corpus_tfidf['random'] = np.ones(shape=(373602, 1))
+corpus_tfidf['random'] = np.ones(shape=(len(df_en['final_combined_text']), 1))
 
 # cocatenate matrixes
 tfidfs = pd.concat([random_corpus_tfidf, corpus_tfidf])
 
 # splitting target attribute from examples
-X = corpus_tfidf.columns[: -1]
-Y = corpus_tfidf.loc[:, ['random']]
+X = tfidfs[tfidfs.columns[:-1]]
+Y = np.array(tfidfs.loc[:, ['random']])
 
 # Random Forest
 seed = 7
@@ -40,7 +40,7 @@ rf = RandomForestClassifier(n_jobs=-1)
 
 # Cross Validate
 kfold = model_selection.KFold(n_splits=10, random_state=seed)
-results = model_selection.cross_val_score(rf, X, Y, cv=kfold)
+results = model_selection.cross_val_score(rf, X, Y.ravel(), cv=kfold)
 
 # results
 print(results.mean())
