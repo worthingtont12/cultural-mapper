@@ -52,7 +52,7 @@ df = df[~df['text'].str.contains("Want to work in")]
 df = df[~df['text'].str.contains("Can you recommend anyone for this")]
 df = df[~df['text'].str.contains("CareerArc")]
 
-df1 = df[df['source'].str.contains("Twitter for")]
+df1 = df[df['source'].str.contains("for Blackberry")]
 df2 = df[df['source'].str.contains("for Android")]
 df3 = df[df['source'].str.contains("for iOS")]
 df4 = df[df['source'].str.contains("for iPhone")]
