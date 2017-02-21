@@ -13,7 +13,7 @@ logging.basicConfig(format='%(asctime)s : %(levelname)s : %(message)s', level=lo
 # import data
 df_en['final_combined_text'] = df_en['final_combined_text'].apply(str)
 # creating tfidf matrix
-vectorizer = text.TfidfVectorizer(max_df=0.025, min_df=1000)
+vectorizer = text.TfidfVectorizer(max_df=0.075, min_df=1000)
 dtm = vectorizer.fit_transform(df_en.final_combined_text).toarray()
 
 corpus_tfidf = pd.DataFrame(dtm)
