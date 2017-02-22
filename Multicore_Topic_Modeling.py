@@ -74,7 +74,9 @@ for n in range(len(df_en['final_combined_text'])):
 df_en['top_topic'] = topic_assignment
 df_en['topic_prob'] = topic_probabilities
 
+print(df_en['top_topic'].value_counts())
+
 # saving results
 lda.save('Topic_Modeling/Data/en_lda.model')
-df_en.to_csv('Topic_Modeling/Data/English_LA.csv',
+df_en.to_csv('Topic_Modeling/Data/75Data/English_LA.csv',
              columns=['user_id', 'user_language', 'top_topic', 'topic_prob'])
