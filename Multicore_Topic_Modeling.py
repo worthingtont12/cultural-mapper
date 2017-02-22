@@ -44,8 +44,8 @@ class MyCorpus(object):
 
 
 corpus = MyCorpus()
-corpora.MmCorpus.serialize('Topic_Modeling/Data/en_corpus.mm', corpus)  # Save corpus to disk
-corpus = corpora.MmCorpus('Topic_Modeling/Data/en_corpus.mm')  # Load corpus
+corpora.MmCorpus.serialize('Topic_Modeling/Data/75Data/en_corpus.mm', corpus)  # Save corpus to disk
+corpus = corpora.MmCorpus('Topic_Modeling/Data/75Data/en_corpus.mm')  # Load corpus
 
 # creating tfidf matrix
 tfidf = models.TfidfModel(corpus)
