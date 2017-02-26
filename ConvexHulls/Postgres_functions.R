@@ -3,7 +3,7 @@ library(RPostgreSQL)
 connectDB <- function(city){
   require(RPostgreSQL)
   # Load in the keys
-  source('keys.R')
+  source('../ConvexHulls/keys.R')
   # Create DB name, joining city name 
   name = paste("culturalmapper", city, sep = "_")
   pg = dbDriver("PostgreSQL")
