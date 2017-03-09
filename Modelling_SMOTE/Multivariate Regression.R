@@ -17,6 +17,8 @@ require(sp)
 # H/T: http://stackoverflow.com/questions/18639967/converting-latitude-and-longitude-points-to-utm
 
 LongLatToUTM<-function(x,y,zone){
+  require(rgdal)
+  require(sp)
   xy <- data.frame(ID = 1:length(x), EW = x, NS = y)
   coordinates(xy) <- c("EW", "NS")
   proj4string(xy) <- CRS("+proj=longlat +datum=WGS84")  ## for example
@@ -51,6 +53,26 @@ preds <- predict(model_predict,newdata = topic_meters[topic_meters$fold != 1,])
 
 plot(x=topic_meters$EW[topic_meters$fold != 1], y=topic_meters$NS[topic_meters$fold != 1], col='red')
 points(model_predict$fitted.values)
+
+
+ead(model_predict$residuals)
+head(model_predict$model)
+head(topic_meters[topic_meters$fold ==1,])
+head(model_predict$fitted.values)
+
+# 
+temp <- model_predict$model[0:1]
+
+
+topic_meters[6,c('EW','NS')]-temp[2,1]
+
+temp <- model_predict$fitted.values
+
+topic_meters[5,c('EW','NS')]-temp[1,]
+
+model_predict$residuals[1:2,]^2
+# So this is the distance in X, Y - square both, sum, and sqrt for distance!
+
 
 
 

@@ -43,6 +43,23 @@ clean <- inner_join(clean, topic_assignments %>%
                    by = 'user_id')
 
 
+# http://spatialreference.org/ref/epsg/3497/
+# H/T: http://stackoverflow.com/questions/18639967/converting-latitude-and-longitude-points-to-utm
+
+LongLatToUTM<-function(x,y,zone){
+  # Need to project the coordinates to meters for distance purposes...
+  require(rgdal)
+  require(sp)
+  xy <- data.frame(ID = 1:length(x), EW = x, NS = y)
+  coordinates(xy) <- c("EW", "NS")
+  proj4string(xy) <- CRS("+proj=longlat +datum=WGS84")
+  res <- spTransform(xy, CRS(paste("+proj=utm +zone=",zone," ellps=WGS84",sep='')))
+  return(as.data.frame(res))
+}
+
+meters <- LongLatToUTM(clean$long,clean$lat,11)
+
+topic_meters <- cbind(clean,meters[,2:3])
 
 
 #### Desciptive Stats ####
@@ -70,6 +87,10 @@ map + geom_count(aes(x = long, y = lat, alpha = .5), data = temp)
 
 # There's a heavy concentration in Downtown LA - likely due to generic posts
 # tagged with the location of "Los Angeles"
+
+# See how the top points stack up against the total number of tweets
+top_points <- top_points %>% mutate(percent = 100*tweets/sum(tweets))
+# The central point is over 10% of the data.
 
 # Look at topic assignment distribution
 ggplot(clean, aes(x=top_topic))+geom_bar()
@@ -137,3 +158,154 @@ AlphaHull(clean)
 
 # By topic
 AlphaHull(clean, feature = 'top_topic')
+
+
+#### Multivariate Regression ####
+library(dplyr)
+
+
+# A function to generate test folds
+generate_folds <- function(df, k){
+  require(dplyr)
+  set.seed(12345)
+  df %>% mutate(fold = sample.int(k, nrow(df), replace = T))
+  
+}
+
+# Set aside a 50-50 train/test set
+topic_meters <- generate_folds(topic_meters,2)
+
+# Set up a multivariate model
+model_predict <- lm(cbind(EW,NS)~dow_sin+dow_cos+hour_sin+hour_cos+top_topic+topic_prob, 
+                    data = topic_meters[topic_meters$fold == 1,])
+
+summary(model_predict)
+
+# The residuals of the model are the differences in lattitude and longitude, 
+# respectively. Summing the squares of these values and taking the square root
+# provides us with Euclidean Distance.
+
+mean(sqrt(rowSums(model_predict$residuals^2)))
+
+# Error is 13.574km for the training set.
+
+# Predict with the test set!
+preds <- predict(model_predict,newdata = topic_meters[topic_meters$fold != 1,])
+
+topic_meters %>% 
+  filter(fold != 1) %>% 
+  transmute((EW-preds[,1])^2, (NS-preds[,2])^2) %>%
+  rowSums %>%
+  sqrt %>%
+  mean
+
+# The Eclidean error here is also approximately 13.5km.
+
+plot(x=topic_meters$EW[topic_meters$fold != 1], y=topic_meters$NS[topic_meters$fold != 1], col='red')
+points(preds)
+
+# Everything is underestimated towards the center, no doubt due to the high
+# concentration of points there.
+
+clean %>% 
+  filter(geo_point %in% top_points$geo_point[1:10]) %>%
+  group_by(geo_point,source) %>% 
+  count() %>%
+  arrange(desc(n))
+
+clean %>% 
+  group_by(source)%>%
+  count() %>%
+  arrange(desc(n)) %>%
+  mutate(percent = 100*n/sum(n))
+
+# All of the top points come from Instagram - which accounts for 88.6 percent of
+# all geo-tagged tweets!
+
+# remodel, ignoring the top point
+
+model_no_center <- lm(cbind(EW,NS)~dow_sin+dow_cos+hour_sin+hour_cos+top_topic+topic_prob, 
+                      data = topic_meters[topic_meters$fold == 1 & 
+                                            topic_meters$geo_point != top_points$geo_point[1],]
+                      )
+
+summary(model_no_center)
+
+mean(sqrt(rowSums(model_no_center$residuals^2)))
+
+# Error is 14.386km for the training set.
+
+# Predict with the test set!
+preds <- predict(model_no_center,newdata = topic_meters[topic_meters$fold != 1 &
+                                                          topic_meters$geo_point != top_points$geo_point[1],])
+
+topic_meters %>% 
+  filter(fold != 1,
+         geo_point != top_points$geo_point[1]) %>% 
+  transmute((EW-preds[,1])^2, (NS-preds[,2])^2) %>%
+  rowSums %>%
+  sqrt %>%
+  mean
+
+# Error is 14.410km for test set.
+
+# Let's try it without Instagram posts
+model_no_IG <- lm(cbind(EW,NS)~dow_sin+dow_cos+hour_sin+hour_cos+top_topic+topic_prob, 
+                      data = topic_meters[topic_meters$fold == 1 & 
+                                            topic_meters$source != "Instagram",]
+)
+
+summary(model_no_IG)
+
+mean(sqrt(rowSums(model_no_IG$residuals^2)))
+
+# Error is 16.58km for the training set.
+
+# Predict with the test set!
+preds <- predict(model_no_IG,newdata = topic_meters[topic_meters$fold != 1 &
+                                                          topic_meters$source != "Instagram",])
+
+topic_meters %>% 
+  filter(fold != 1,
+         source != "Instagram") %>% 
+  transmute((EW-preds[,1])^2, (NS-preds[,2])^2) %>%
+  rowSums %>%
+  sqrt %>%
+  mean
+
+# Training data error is also 16.58km
+
+# Residuals vs. Fitted Values
+plot(rstudent(model_no_IG)[,'EW']~model_no_IG$fitted.values[,'EW'])
+plot(rstudent(model_no_IG)[,'NS']~model_no_IG$fitted.values[,'NS'])
+# These don't have a constant variance at all....
+
+
+# Remove topics
+model_no_IG_topics <- lm(cbind(EW,NS)~dow_sin+dow_cos+hour_sin+hour_cos, 
+                  data = topic_meters[topic_meters$fold == 1 & 
+                                        topic_meters$source != "Instagram",]
+)
+
+summary(model_no_IG_topics)
+
+mean(sqrt(rowSums(model_no_IG_topics$residuals^2)))
+
+# Error is 16.58km for the training set.
+
+# Predict with the test set!
+preds <- predict(model_no_IG_topics,newdata = topic_meters[topic_meters$fold != 1 &
+                                                      topic_meters$source != "Instagram",])
+
+topic_meters %>% 
+  filter(fold != 1,
+         source != "Instagram") %>% 
+  transmute((EW-preds[,1])^2, (NS-preds[,2])^2) %>%
+  rowSums %>%
+  sqrt %>%
+  mean
+
+anova(model_no_IG, model_no_IG_topics)
+# But the ANOVA shows that the model with the topics/probability is
+# statistically significant!
+
