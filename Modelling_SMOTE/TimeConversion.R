@@ -31,4 +31,5 @@ topics_angluar <- topics_merged_clean %>%
                   )
 
 
+as.numeric(wday(data$tz, label = T))
 
