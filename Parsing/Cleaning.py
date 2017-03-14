@@ -10,17 +10,18 @@ df = primary2
 
 
 def text_clean(dirtytext):
-    """Cleans text by stripping out unnecessary characters.
+    """
+    Clean text by stripping out unnecessary characters.
     Parameters
     ----------
     dirtytext : The text to be cleaned.
     """
     tmp = re.sub("'", '', dirtytext)
     tmp = re.sub(",", '', tmp)
-    tmp = re.sub("(@\S*)|(https?://\S*)", " ", tmp)
-    tmp = ' '.join(re.sub("(\w+:\/\/\S+)", " ", tmp).split())
-    tmp = re.sub('[\s]+', ' ', tmp)
-    tmp = re.sub('[^\w]', ' ', tmp)
+    tmp = re.sub(r"(@\S*)|(https?://\S*)", " ", tmp)
+    tmp = ' '.join(re.sub(r"(\w+:\/\/\S+)", " ", tmp).split())
+    tmp = re.sub(r'[\s]+', ' ', tmp)
+    tmp = re.sub(r'[^\w]', ' ', tmp)
     tmp = re.sub(' +', ' ', tmp)
     tmp = re.sub('[1|2|3|4|5|6|7|8|9|0]', '', tmp)
     tmp = re.sub('nan', ' ', tmp)
@@ -130,9 +131,9 @@ hashtags = []
 # Iterate over the text, extracting and adding
 
 for tweet in dffiltered['author.text']:
-    mentions.append(re.findall('@\S*', tweet))
-    links.append(re.findall('https?://\S*', tweet))
-    hashtags.append(re.findall('#\S*', tweet))
+    mentions.append(re.findall(r'@\S*', tweet))
+    links.append(re.findall(r'https?://\S*', tweet))
+    hashtags.append(re.findall(r'#\S*', tweet))
 
 # Append features as a new column to the existing dataframe.
 dffiltered['hashtags'] = hashtags
@@ -150,7 +151,7 @@ hashtags1 = []
 
 for tweet in dffiltered['q_author.text']:
     mentions1.append(re.findall(r'@\S*', tweet))
-    links1.append(re.findall('https?://\S*', tweet))
+    links1.append(re.findall(r'https?://\S*', tweet))
     hashtags1.append(re.findall(r'#\S*', tweet))
 
 # Append features as a new column to the existing dataframe.

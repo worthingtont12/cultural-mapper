@@ -1,9 +1,4 @@
-"""
-
-This is a listener for tweets in Istanbul.
-Thank you Mohammad al Boni for your initial assistance.
-
-"""
+"""This is a listener for tweets in Istanbul."""
 import datetime
 import time
 import sys
