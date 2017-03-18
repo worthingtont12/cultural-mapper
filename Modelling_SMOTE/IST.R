@@ -1,3 +1,6 @@
+# Source the location metadata
+source("IST_meta.R")
+
 # Source the Postgres Functions
 source('../ConvexHulls/Postgres_functions.R')
 
@@ -7,26 +10,26 @@ source('../ConvexHulls/HullFunctions.R')
 #### Get the data from AWS ####
 
 # Create connection to the RDS instance
-con <- connectDB("LA")
+con <- connectDB(db)
 
 # Get the raw count of items, as well as the aggregate count, grouped by location
 
 new_raw_count = dbGetQuery(con, "SELECT COUNT(*)
-                        FROM geometries_filter
-                  ")
+                           FROM geometries_filter
+                           ")
 
 top_points = dbGetQuery(con, "SELECT COUNT(*) AS tweets, geo_point
-                              FROM geometries_filter
-                              GROUP BY geo_point
-                              ORDER BY tweets DESC
+                        FROM geometries_filter
+                        GROUP BY geo_point
+                        ORDER BY tweets DESC
                         ")
 
 data = dbGetQuery(con, "SELECT *
-                        FROM geometries_filter")
+                  FROM geometries_filter")
 # Disconnect
 disconnectDB(con)
 
-
+  
 #### Clean and Merge the Data ####
 library(dplyr)
 library(readr)
@@ -39,13 +42,13 @@ topic_assignments <- read_csv('English_LA075.csv')
 
 # Merge topic assignments with individual geo-tagged tweets
 clean <- inner_join(clean, topic_assignments %>% 
-                     select(user_id, top_topic, topic_prob),
-                   by = 'user_id')
+                      select(user_id, top_topic, topic_prob),
+                    by = 'user_id')
 
 # Source the Spatial Functions
 source("SpatialUtil.R")
 
-meters <- LongLatToUTM(clean$long,clean$lat,11)
+meters <- LongLatToM(clean$long,clean$lat,11)
 
 topic_meters <- cbind(clean,meters)
 
@@ -64,7 +67,7 @@ ggplot(temp, aes(x=reorder(geo_point, -table(geo_point)[geo_point])))+geom_bar()
 # Clearly, we have a class imbalance. Where is it?
 
 # Get Base LA Map
-map <- ggmap(get_map(location = c(-118.723549,33.694679,-117.929466,34.33926)))
+map <- ggmap(get_map(location = bbox))
 
 # Density plot
 map + stat_density2d(aes(x = long, y = lat, fill = ..level.., alpha = ..level..),
@@ -140,13 +143,6 @@ map + geom_density2d(aes(x = long, y = lat,
                      data = clean[clean$language == "English",]) +
   facet_wrap(~ hour, nrow = 4)
 
-#### Alpha Hulls by Language ####
-source("../ConvexHulls/Alpha Hulls.R")
-AlphaHull(clean)
-
-# By topic
-AlphaHull(clean, feature = 'top_topic')
-
 
 #### Multivariate Regression ####
 library(dplyr)
@@ -164,7 +160,7 @@ generate_folds <- function(df, k){
 topic_meters <- generate_folds(topic_meters,2)
 
 # Set up a multivariate model
-model_predict <- lm(cbind(EW,NS)~dow_sin+dow_cos+hour_sin+hour_cos+top_topic+topic_prob, 
+model_predict <- lm(cbind(EW.m,NS.m)~dow_sin+dow_cos+hour_sin+hour_cos+top_topic+topic_prob, 
                     data = topic_meters[topic_meters$fold == 1,])
 
 summary(model_predict)
@@ -182,14 +178,14 @@ preds <- predict(model_predict,newdata = topic_meters[topic_meters$fold != 1,])
 
 topic_meters %>% 
   filter(fold != 1) %>% 
-  transmute((EW-preds[,1])^2, (NS-preds[,2])^2) %>%
+  transmute((EW.m-preds[,1])^2, (NS.m-preds[,2])^2) %>%
   rowSums %>%
   sqrt %>%
   mean
 
 # The Eclidean error here is also approximately 13.5km.
 
-plot(x=topic_meters$EW[topic_meters$fold != 1], y=topic_meters$NS[topic_meters$fold != 1], col='red')
+plot(x=topic_meters$EW.m[topic_meters$fold != 1], y=topic_meters$NS.m[topic_meters$fold != 1], col='red')
 points(preds)
 
 # Everything is underestimated towards the center, no doubt due to the high
@@ -197,7 +193,7 @@ points(preds)
 
 clean %>% 
   filter(geo_point %in% top_points$geo_point[1:10]) %>%
-  group_by(geo_point,source) %>% 
+  group_by(lat,long,source) %>% 
   count() %>%
   arrange(desc(n))
 
@@ -212,10 +208,10 @@ clean %>%
 
 # remodel, ignoring the top point
 
-model_no_center <- lm(cbind(EW,NS)~dow_sin+dow_cos+hour_sin+hour_cos+top_topic+topic_prob, 
+model_no_center <- lm(cbind(EW.m,NS.m)~dow_sin+dow_cos+hour_sin+hour_cos+top_topic+topic_prob, 
                       data = topic_meters[topic_meters$fold == 1 & 
                                             topic_meters$geo_point != top_points$geo_point[1],]
-                      )
+)
 
 summary(model_no_center)
 
@@ -230,7 +226,7 @@ preds <- predict(model_no_center,newdata = topic_meters[topic_meters$fold != 1 &
 topic_meters %>% 
   filter(fold != 1,
          geo_point != top_points$geo_point[1]) %>% 
-  transmute((EW-preds[,1])^2, (NS-preds[,2])^2) %>%
+  transmute((EW.m-preds[,1])^2, (NS.m-preds[,2])^2) %>%
   rowSums %>%
   sqrt %>%
   mean
@@ -238,9 +234,9 @@ topic_meters %>%
 # Error is 14.410km for test set.
 
 # Let's try it without Instagram posts
-model_no_IG <- lm(cbind(EW,NS)~dow_sin+dow_cos+hour_sin+hour_cos+top_topic+topic_prob, 
-                      data = topic_meters[topic_meters$fold == 1 & 
-                                            topic_meters$source != "Instagram",]
+model_no_IG <- lm(cbind(EW.m,NS.m)~dow_sin+dow_cos+hour_sin+hour_cos+top_topic+topic_prob, 
+                  data = topic_meters[topic_meters$fold == 1 & 
+                                        topic_meters$source != "Instagram",]
 )
 
 summary(model_no_IG)
@@ -251,12 +247,12 @@ mean(sqrt(rowSums(model_no_IG$residuals^2)))
 
 # Predict with the test set!
 preds <- predict(model_no_IG,newdata = topic_meters[topic_meters$fold != 1 &
-                                                          topic_meters$source != "Instagram",])
+                                                      topic_meters$source != "Instagram",])
 
 topic_meters %>% 
   filter(fold != 1,
          source != "Instagram") %>% 
-  transmute((EW-preds[,1])^2, (NS-preds[,2])^2) %>%
+  transmute((EW.m-preds[,1])^2, (NS.m-preds[,2])^2) %>%
   rowSums %>%
   sqrt %>%
   mean
@@ -264,15 +260,15 @@ topic_meters %>%
 # Training data error is also 16.58km
 
 # Residuals vs. Fitted Values
-plot(rstudent(model_no_IG)[,'EW']~model_no_IG$fitted.values[,'EW'])
-plot(rstudent(model_no_IG)[,'NS']~model_no_IG$fitted.values[,'NS'])
+plot(rstudent(model_no_IG)[,'EW.m']~model_no_IG$fitted.values[,'EW.m'])
+plot(rstudent(model_no_IG)[,'NS.m']~model_no_IG$fitted.values[,'NS.m'])
 # These don't have a constant variance at all....
 
 
 # Remove topics
-model_no_IG_topics <- lm(cbind(EW,NS)~dow_sin+dow_cos+hour_sin+hour_cos, 
-                  data = topic_meters[topic_meters$fold == 1 & 
-                                        topic_meters$source != "Instagram",]
+model_no_IG_topics <- lm(cbind(EW.m,NS.m)~dow_sin+dow_cos+hour_sin+hour_cos, 
+                         data = topic_meters[topic_meters$fold == 1 & 
+                                               topic_meters$source != "Instagram",]
 )
 
 summary(model_no_IG_topics)
@@ -283,12 +279,12 @@ mean(sqrt(rowSums(model_no_IG_topics$residuals^2)))
 
 # Predict with the test set!
 preds <- predict(model_no_IG_topics,newdata = topic_meters[topic_meters$fold != 1 &
-                                                      topic_meters$source != "Instagram",])
+                                                             topic_meters$source != "Instagram",])
 
 topic_meters %>% 
   filter(fold != 1,
          source != "Instagram") %>% 
-  transmute((EW-preds[,1])^2, (NS-preds[,2])^2) %>%
+  transmute((EW.m-preds[,1])^2, (NS.m-preds[,2])^2) %>%
   rowSums %>%
   sqrt %>%
   mean
@@ -304,21 +300,21 @@ library(dplyr)
 
 # This threw an error....
 mvrf.test <- build_forest_predict(topic_meters %>% 
-                                  filter(fold == 1, source != "Instagram") %>%
-                                  select(text_lang,user_lang,source,weekend,hour,day,top_topic,topic_prob),
-                                topic_meters %>% 
-                                  filter(fold == 1, source != "Instagram") %>%
-                                  select(EW, NS),
-                                n_tree = 500, m_feature = round(sqrt(8)),min_leaf=9,
-                                topic_meters %>% 
-                                  filter(fold != 1, source != "Instagram") %>%
-                                  select(text_lang,user_lang,source,weekend,hour,day,top_topic,topic_prob))
+                                    filter(fold == 1, source != "Instagram") %>%
+                                    select(text_lang,user_lang,source,weekend,hour,day,top_topic,topic_prob),
+                                  topic_meters %>% 
+                                    filter(fold == 1, source != "Instagram") %>%
+                                    select(EW, NS),
+                                  n_tree = 500, m_feature = round(sqrt(8)),min_leaf=9,
+                                  topic_meters %>% 
+                                    filter(fold != 1, source != "Instagram") %>%
+                                    select(text_lang,user_lang,source,weekend,hour,day,top_topic,topic_prob))
 
 
 # cforest also allows for multivariate response.
 library(partykit)
 
-cforest.test <- cforest(cbind(EW,NS)~text_lang+user_lang+source+weekend+hour+day+top_topic+topic_prob, 
+cforest.test <- cforest(cbind(EW.m,NS.m)~text_lang+user_lang+source+weekend+hour+day+top_topic+topic_prob, 
                         data = topic_meters[topic_meters$fold == 1 & 
                                               topic_meters$source != "Instagram",],
                         ntree = 500, trace = T)
