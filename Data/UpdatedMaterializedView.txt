@@ -1,5 +1,9 @@
+'''Codes via espg.io'''
+
 '''epsg 26745 is feet!'''
 '''NAD 83(HARN) should be meters - LA is CA Zone V, epsg projection 2770'''
+
+''' LA query '''
 CREATE MATERIALIZED VIEW geometries_filter
 AS
 
@@ -27,9 +31,68 @@ CREATE UNIQUE INDEX tweet_id2 ON geometries_filter (id);
 
 REFRESH MATERIALIZED VIEW geometries_filter;
 
+'''Manhattan City block ~ 274m '''
+
+''' Istanbul Query '''
+CREATE MATERIALIZED VIEW geometries_filter
+AS
+
+WITH casted AS(
+	SELECT id, CAST(created_at as timestamptz) as created_at, source, text, text_lang, user_id,
+					user_handle, user_lang
+	FROM istanbul_city_primary
+	WHERE source ILIKE ANY(ARRAY['% for %', '%twitter %', '%tron%','%Foursquare%','%Instagram%'])
+), secondary_cast AS(
+	SELECT id, CAST(long as FLOAT) as long, CAST(lat as FLOAT) as lat
+	FROM istanbul_city_secondary
+)
+
+SELECT secondary_cast.id, timezone('Europe/Istanbul',created_at) as tz, lat, long,
+				text_lang, user_lang, user_id, source,
+				ST_Transform(ST_SetSRID(ST_MakePoint(long, lat),4326),5637) AS geo_point
+FROM secondary_cast INNER JOIN casted ON secondary_cast.id = casted.id
+WHERE lat >= 40.802731 AND lat <= 41.23595 AND
+			long >= 28.448009 AND long <= 29.45787 AND
+			timezone('Europe/Istanbul',created_at) >= '2016-10-28' AND
+			timezone('Europe/Istanbul',created_at) <= '2017-01-27'
+WITH NO DATA;
+
+CREATE UNIQUE INDEX tweet_id2 ON geometries_filter (id);
+
+REFRESH MATERIALIZED VIEW geometries_filter;
+
+
+''' Chicago Materialized View '''
+CREATE MATERIALIZED VIEW geometries_filter
+AS
+
+WITH casted AS(
+	SELECT id, CAST(created_at as timestamptz) as created_at, source, text, text_lang, user_id,
+					user_handle, user_lang
+	FROM chicago_city_primary
+	WHERE source ILIKE ANY(ARRAY['% for %', '%twitter %', '%tron%','%Foursquare%','%Instagram%'])
+), secondary_cast AS(
+	SELECT id, CAST(long as FLOAT) as long, CAST(lat as FLOAT) as lat
+	FROM chicago_city_secondary
+)
+
+SELECT secondary_cast.id, timezone('America/Chicago',created_at) as tz, lat, long,
+				text_lang, user_lang, user_id, source,
+				ST_Transform(ST_SetSRID(ST_MakePoint(long, lat),4326),2790) AS geo_point
+FROM secondary_cast INNER JOIN casted ON secondary_cast.id = casted.id
+WHERE lat >= 41.624851 AND lat <= 42.07436 AND
+			long >= -87.968437 AND long <= -87.397217 AND
+			timezone('America/Chicago',created_at) >= '2016-10-28' AND
+			timezone('America/Chicago',created_at) <= '2017-01-27'
+WITH NO DATA;
+
+CREATE UNIQUE INDEX tweet_id2 ON geometries_filter (id);
+
+REFRESH MATERIALIZED VIEW geometries_filter;
+
+
+''' additional queries '''
 REFRESH MATERIALIZED VIEW CONCURRENTLY geometries_filter;
 
 SELECT *, CASE point_geo
 WHEN ST_DWithinD(geo_point, center, 200)
-
-'''Manhattan City block ~ 274m '''

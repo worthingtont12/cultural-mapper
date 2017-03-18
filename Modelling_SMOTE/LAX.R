@@ -309,3 +309,28 @@ anova(model_no_IG, model_no_IG_topics)
 # But the ANOVA shows that the model with the topics/probability is
 # statistically significant!
 
+
+#### Multivariate Random Forests ####
+library(MultivariateRandomForest)
+library(dplyr)
+
+# This threw an error....
+mvrf.test <- build_forest_predict(topic_meters %>% 
+                                  filter(fold == 1, source != "Instagram") %>%
+                                  select(text_lang,user_lang,source,weekend,hour,day,top_topic,topic_prob),
+                                topic_meters %>% 
+                                  filter(fold == 1, source != "Instagram") %>%
+                                  select(EW, NS),
+                                n_tree = 500, m_feature = round(sqrt(8)),min_leaf=9,
+                                topic_meters %>% 
+                                  filter(fold != 1, source != "Instagram") %>%
+                                  select(text_lang,user_lang,source,weekend,hour,day,top_topic,topic_prob))
+
+
+# cforest also allows for multivariate response.
+library(partykit)
+
+cforest.test <- cforest(cbind(EW,NS)~text_lang+user_lang+source+weekend+hour+day+top_topic+topic_prob, 
+                        data = topic_meters[topic_meters$fold == 1 & 
+                                              topic_meters$source != "Instagram",],
+                        ntree = 500, trace = T)
