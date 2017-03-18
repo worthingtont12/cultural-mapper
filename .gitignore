@@ -1,5 +1,6 @@
 corpus.mm
 corpus.mm.index
+Cultural_Mapper/Analysis/login_info.py
 Topic_Modeling/corpus.mm
 Topic_Modeling/corpus.mm.index
 Topic_Modeling/Data/en_corpus.mm
