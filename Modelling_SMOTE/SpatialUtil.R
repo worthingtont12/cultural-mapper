@@ -20,6 +20,7 @@ LongLatToUTM<-function(long,lat,zone){
   return(as.data.frame(res))
 }
 
+# Projecting to meters using EPSG transforms
 LongLatToM <- function (long,lat,epsg){
   require(rgdal)
   # Bind the longitude and latitude
@@ -30,4 +31,25 @@ LongLatToM <- function (long,lat,epsg){
   # Project
   res <- spTransform(xy, CRS(paste0("+init=epsg:",epsg)))
   return(as.data.frame(res))
+}
+
+# A function to find the number of grid points in each direction. It takes a 
+# ggmap object, the spacing of grid points in meters, the utm zone or EPSG 
+# number, and the projection as arguments. Internally, it calls either
+# LongLatToUTM of LongLatToM (the latter by default)
+
+findN <- function(map, grid = 200, zone,proj="epsg"){
+  require(dplyr)
+  # extract the coordinates for the map's bounding box, and convert to meters
+  df <- cbind(range(map$data$lon),range(map$data$lat))
+  if (proj == "utm"){df <- LongLatToUTM(df[,1],df[,2],zone)
+  } else { 
+    df <- LongLatToM(df[,1],df[,2],zone)
+  }
+  # Divide the difference (in meters) by the size of the grid to determine the
+  # number of points in each direction
+  lat.diff <- diff(df$NS.m)/grid
+  long.diff <- diff(df$EW.m)/grid
+  
+  return (c(lat.diff, long.diff))
 }
