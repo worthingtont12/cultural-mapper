@@ -15,7 +15,7 @@ conn = psycopg2.connect(
 
 # Reading in Data
 df = pd.read_csv(
-    "/Users/tylerworthington/Git_Repos/Data/Cultural_Mapper_Data/LA/English_LA/035Data/035Data/English_LA.csv")
+    "/Users/tylerworthington/Git_Repos/Data/Cultural_Mapper_Data/LA/English_LA/075Data/English_LA.csv")
 primary = psql.read_sql(
     "SELECT * FROM la_city_primary WHERE created_at > '2016-10-28' AND created_at < '2017-01-28' LIMIT 10", conn)
 
@@ -38,8 +38,5 @@ fulldf['Date'] = fulldf['Date'].apply(lambda row: datetime.strptime(row, '%Y-%m-
 
 # converting to categorical variable
 fulldf["top_topic"] = fulldf["top_topic"].astype('category')
-#
+
 # #time series plots
-# df_yearly = fulldf.groupby('Date')
-# yearly_plot = sns.tsplot(df_yearly['top_topic'].count(), df_yearly.sum().index)
-# yearly_plot.set_title('Number of Accidents Per Year')
