@@ -73,7 +73,7 @@ merge_langs <- function(df){
       hour_cos = cos(deg.to.rad(as.numeric(hour)*(360/24))),
       # Clean up the source, removing HTML tags
       source = gsub(pattern = "<.+\">|</a>", "",source)
-    )
+    ) 
 }
 
 
@@ -126,23 +126,24 @@ stat_chull <- function(mapping = NULL, data = NULL, geom = "polygon",
 merge_topics <- function(data, path){
   require(readr)
   require(dplyr)
+  require(stringr)
   # Obtain a list of all files in the path
   filenames <- list.files(path = path, full.names = T)
-  # For each file in the above which contains the "db" variable (sourced from the
-  # metadata file), insert the csv file into a list.
-  data.list <- lapply(filenames[grep(db, filenames)],function(x){read_csv(x)} %>%
+  # For each .csv file in the above which contains the "db" variable (sourced from the
+  # metadata file), read the file and insert the data frame into a list.
+  data.list <- lapply(filenames[intersect(grep(db, filenames),grep(".csv",filenames))],
+                      function(x){read_csv(x)} %>%
                         select(user_id, user_language, top_topic, topic_prob))
   # return all of the topics for a given locale.
   temp.topics <- Reduce(function(x,y){rbind(x,y)},data.list)
-  # Remove all columns but those necessary
-  temp.topics <- temp.topics %>%
-    select(user_id, user_language, top_topic, topic_prob)
   # Join the topics with the data
   temp <- left_join(data, temp.topics, by = "user_id")
   # Create a new feature, "lang.topic", which combines a user's language with
   # the corresponding topic if it exists. If not, returns the user's language.
-  temp$lang.topic <- ifelse(is.na(head(temp$user_language,100)), 
+  temp$lang.topic <- ifelse(is.na(temp$user_language), 
                             as.character(temp$language),
-                            paste("Topic",temp$top_topic,"-",temp$user_language))
-  temp
+                            paste("Topic",str_extract(temp$top_topic,"[0-9]+"),
+                                  "-",temp$user_language))
+  temp %>% 
+    filter(!(source %in% c("Twitter for Windows", "altın dükkan twitter robotu")))
 }
