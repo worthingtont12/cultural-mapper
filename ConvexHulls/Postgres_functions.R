@@ -54,7 +54,16 @@ merge_langs <- function(df){
   data_merge %>% mutate(
     weekend = isWeekend(tz), # Weekends
     hour = hour(round(tz, unit='hours')), #Extract the rounded hour of the day.
-    day = wday(tz, label = T) # Day of the week
+    day = wday(tz, label = T), # Day of the week
+    # Binning the hour into 4-hour widths!
+    hour.cut = cut(hour,
+                   breaks = c(0,4,8,12,16,20,23),
+                   include.lowest = T,
+                   right = F,
+                   ordered_result = T,
+                   labels = c("12am-4am","4am-8am",
+                              "8am-12pm","12pm-4pm",
+                              "4pm-8pm","8pm-12am"))
     ) %>% mutate(
       # Break apart day and month into sin/cos, which will be used to measure
       # distance later.
