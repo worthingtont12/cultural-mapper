@@ -9,7 +9,6 @@ from Parsing.Language_processing import df_en
 
 logging.basicConfig(format='%(asctime)s : %(levelname)s : %(message)s', level=logging.INFO)
 
-
 # import data
 df_en['final_combined_text'] = df_en['final_combined_text'].apply(str)
 # creating tfidf matrix

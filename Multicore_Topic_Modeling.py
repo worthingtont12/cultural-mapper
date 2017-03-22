@@ -13,7 +13,8 @@ logging.basicConfig(format='%(asctime)s : %(levelname)s : %(message)s', level=lo
 
 
 def max_val(l, i):
-    """Function takes the highest value in a list within a list.
+    """
+    Function takes the highest value in a list within a list.
 
     Parameters
     ----------

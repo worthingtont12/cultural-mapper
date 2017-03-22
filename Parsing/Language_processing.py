@@ -10,7 +10,8 @@ df = dffiltered
 
 
 def process(text, lang):
-    """Function to deal with tokenizing, stemming or lemmantizing, and stop word filtering.
+    """
+    Function to deal with tokenizing, stemming or lemmantizing, and stop word filtering.
 
     Parameters
     ----------
