@@ -146,4 +146,5 @@ merge_topics <- function(data, path){
                                   "-",temp$user_language))
   temp %>% 
     filter(!(source %in% c("Twitter for Windows", "altın dükkan twitter robotu")))
+  temp
 }

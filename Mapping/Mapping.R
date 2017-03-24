@@ -14,8 +14,8 @@ clean.topics <- merge_topics(clean, "Topic_Data/")
 source("SpatialUtil.R")
 
 # Convert to meters
-meters <- LongLatToM(clean$long,clean$lat,epsg)
-topic_meters <- cbind(clean,meters)
+meters <- LongLatToM(clean.topics$long,clean.topics$lat,epsg)
+topic_meters <- cbind(clean.topics,meters)
 
 
 #### Density Maps ####
@@ -85,7 +85,7 @@ map + scale_color_brewer(palette = "Set1") +
              data = clean.topics %>%
                filter(language %in% all_langs$language[1:6]), fill = NA) + 
   ggtitle(paste("Convex Hull of Top 6 Languages in",db)) + 
-  ggsave(paste0("Outputs/",db,"-ConvHull.pdf"), width = 11, height = 8.5, units = "in")
+  ggsave(paste0("Outputs/",db,"-ConvHull.png"), width = 11, height = 8.5, units = "in")
 
 # png(temp,file = paste0("Outputs/",db,"%d.png"), width = 500, height = 500, units = "px")
 # dev.off()
@@ -96,7 +96,7 @@ map + scale_color_brewer(palette = "Set1") +
              data = clean.topics %>%
                filter(source != "Instagram",language %in% all_langs$language[1:6]), fill = NA)+ 
   ggtitle(paste("Convex Hull of Top 6 Languages in",db,"(No Instagram)")) + 
-  ggsave(paste0("Outputs/",db,"-ConvHullNoIG.pdf"), width = 11, height = 8.5, units = "in")
+  ggsave(paste0("Outputs/",db,"-ConvHullNoIG.png"), width = 11, height = 8.5, units = "in")
 
 #### Convex Hulls by Topic ####
 
@@ -104,19 +104,20 @@ map + scale_color_brewer(palette = "Set1") +
   stat_chull(aes(x = as.numeric(long), y = as.numeric(lat), color = lang.topic),
              data = clean.topics %>% filter(lang.topic %in% top_langs$lang.topic[0:6]), fill = NA) + 
   ggtitle(paste("Convex Hull of Top 6 Topics in",db,"(No Instagram)")) + 
-  ggsave(paste0("Outputs/",db,"-ConvHullTopic.pdf"), width = 11, height = 8.5, units = "in")
+  ggsave(paste0("Outputs/",db,"-ConvHullTopic.png"), width = 11, height = 8.5, units = "in")
 
 #### Density Maps ####
 
 # Density plot with all points for top 6 languages
-map + scale_color_brewer(palette = "Set1") +
-  geom_density2d(aes(x = long, y = lat, color = lang.topic),
+map + scale_color_brewer(palette = "Set1", name ="Topics") +
+  geom_density2d(aes(x = long, y = lat, color = lang.topic), alpha = .5,
                  n = grid.points,
                  data = clean.topics %>% filter(source != "Instagram",
                                                 lang.topic %in% top_langs$lang.topic[1:6])) + 
   facet_grid(day ~ hour.cut) + 
-  ggtitle(paste("Densities of Top 6 Topics in",db,"by Day by Hour")) + 
-  ggsave(paste0("Outputs/",db,"-TopicDensity_DayHour.pdf"), width = 11, height = 8.5, units = "in")
+  ggtitle(paste("Densities of Top 6 Topics in",db,"by Day by Hour"))  + 
+  theme(legend.position = "bottom", legend.box = "horizontal")+ 
+  ggsave(paste0("Outputs/",db,"-TopicDensity_DayHour.png"), width = 11, height = 8.5, units = "in")
 
 # Turkish Density by Day - Sundays see the largest time - clear hubs!
 map + stat_density2d(aes(x = long, y = lat, fill = ..level..), geom = "polygon",
@@ -125,7 +126,7 @@ map + stat_density2d(aes(x = long, y = lat, fill = ..level..), geom = "polygon",
   facet_wrap( ~ day, nrow = 2) +
   scale_fill_distiller(palette = "Spectral") + 
   ggtitle(paste("Density of",all_langs$language[1],"Tweets in",db,"by Day")) + 
-  ggsave(paste0("Outputs/",db,"-TopLangDensity_Day.pdf"), width = 11, height = 8.5, units = "in")
+  ggsave(paste0("Outputs/",db,"-TopLangDensity_Day.png"), width = 11, height = 8.5, units = "in")
 
 # English density by day of the week
 map + stat_density2d(aes(x = long, y = lat, 
@@ -136,7 +137,7 @@ map + stat_density2d(aes(x = long, y = lat,
   facet_wrap(~ day, nrow = 2) +
   scale_fill_distiller(palette = "Spectral") + 
   ggtitle(paste("Density of",all_langs$language[2],"Tweets in",db,"by Day")) + 
-  ggsave(paste0("Outputs/",db,"-2LangDensity.pdf"), width = 11, height = 8.5, units = "in")
+  ggsave(paste0("Outputs/",db,"-2LangDensity.png"), width = 11, height = 8.5, units = "in")
 
 
 # Map of top language at midnight
@@ -148,7 +149,7 @@ map + stat_density2d(aes(x = long, y = lat,
                                                     hour.cut == "8pm-12am")) +
   facet_wrap(~ day, nrow = 2) + 
   ggtitle(paste("Density of",all_langs$language[1],"Tweets in",db,"at Midnight")) + 
-  ggsave(paste0("Outputs/",db,"-TopLangMidnight.pdf"), width = 11, height = 8.5, units = "in")
+  ggsave(paste0("Outputs/",db,"-TopLangMidnight.png"), width = 11, height = 8.5, units = "in")
 
 # Sunday is highest? Why? Perhaps the NYE effect.
 
@@ -172,22 +173,31 @@ map +
                                                 tz <= "2017-01-01"
                  )) + theme(legend.position = "none") +
   scale_fill_distiller(palette = "Spectral") + 
-  ggsave(paste0("Outputs/",db,"-TopLangNYE.pdf"), width = 11, height = 8.5, units = "in")
+  ggsave(paste0("Outputs/",db,"-TopLangNYE.png"), width = 11, height = 8.5, units = "in")
 
 # All other Sundays
-map + stat_density2d(aes(x = long, y = lat, 
-                         fill = ..level..), geom = "polygon",
-                     n = grid.points,
-                     data = clean.topics %>% filter(user_language == all_langs$language[1],
-                                                    source != "Instagram",
-                                                    hour.cut == "8pm-12am",
-                                                    tz < "2016-12-31",
-                                                    tz > "2017-01-01"
-                     )) +
+map +
+  geom_point(aes(x = long, y = lat, color = lang.topic), alpha = .1,
+             data = clean.topics %>% filter(user_language == all_langs$language[1:6],
+                                            source != "Instagram",
+                                            hour.cut == "8pm-12am",
+                                            tz != strftime("2016-01-01"),
+                                            day == "Sun"
+             )) +
+  stat_density2d(aes(x = long, y = lat, 
+                     fill = ..level..), geom = "polygon",
+                 n = grid.points,
+                 data = clean.topics %>% filter(user_language == all_langs$language[1:6],
+                                                source != "Instagram",
+                                                hour.cut == "8pm-12am",
+                                                tz != strftime("2017-01-01"),
+                                                day == "Sun"
+                 ))+
   scale_fill_distiller(palette = "Spectral") + 
+  theme(legend.position = "none") + 
   ggtitle(paste("Density of",all_langs$language[1],
                 "Tweets on Sundays (not including New Year's) from 12am-4am")) + 
-  ggsave(paste0("Outputs/",db,"-TopLangSunNoNYE.pdf"), width = 11, height = 8.5, units = "in")
+  ggsave(paste0("Outputs/",db,"-TopLangSunNoNYE.png"), width = 11, height = 8.5, units = "in")
 
 # Top Topic By Day, By Hour
 map + stat_density2d(aes(x = long, y = lat, 
@@ -197,9 +207,24 @@ map + stat_density2d(aes(x = long, y = lat,
                                                     source != "Instagram"
                      )) +
   ggtitle(paste("Density of",top_langs$lang.topic[1],
-                "Tweets by Day, by Hour")) + 
+                "Tweets by Day, by Hour")) +
+  scale_fill_distiller(palette = "Spectral")+ 
   facet_grid(day ~ hour.cut) + 
-ggsave(paste0("Outputs/",db,"-TopTopic_hour_Day.pdf"), width = 11, height = 8.5, units = "in")
+ggsave(paste0("Outputs/",db,"-TopTopic_hour_Day.png"), width = 11, height = 8.5, units = "in")
+
+# Top Topic by Hour, Mondays
+map + stat_density2d(aes(x = long, y = lat, 
+                         fill = ..level..), geom = "polygon",
+                     n = grid.points,
+                     data = clean.topics %>% filter(lang.topic == top_langs$lang.topic[1],
+                                                    source != "Instagram", day == "Mon"
+                     )) +
+  ggtitle(paste("Density of",top_langs$lang.topic[1],
+                "Tweets by Hour in",db,"on Mondays")) +
+  scale_fill_distiller(palette = "Spectral")+ 
+  facet_grid(~ hour.cut) + 
+  ggsave(paste0("Outputs/",db,"-TopTopic_hour_MON.png"), width = 11, height = 8.5, units = "in")
+
 
 # 2nd Topic By Day, By Hour
 map + stat_density2d(aes(x = long, y = lat, 
@@ -212,7 +237,7 @@ map + stat_density2d(aes(x = long, y = lat,
   ggtitle(paste("Density of",top_langs$lang.topic[2],
                 "Tweets by Day, by Hour")) + 
   facet_grid(day ~ hour.cut) +
-ggsave(paste0("Outputs/",db,"-2ndTopic_hour_Day.pdf"), width = 11, height = 8.5, units = "in")
+ggsave(paste0("Outputs/",db,"-2ndTopic_hour_Day.png"), width = 11, height = 8.5, units = "in")
 
 # 8th Topic By Day, By Hour
 map + stat_density2d(aes(x = long, y = lat, 
@@ -225,9 +250,9 @@ map + stat_density2d(aes(x = long, y = lat,
   ggtitle(paste("Density of",top_langs$lang.topic[8],
                 "Tweets by Day, by Hour")) + 
   facet_grid(day ~ hour.cut) +
-ggsave(paste0("Outputs/",db,"-8thTopic_hour_Day.pdf"), width = 11, height = 8.5, units = "in")
+ggsave(paste0("Outputs/",db,"-8thTopic_hour_Day.png"), width = 11, height = 8.5, units = "in")
 
-# Top 6 Topics At Noon
+# Top 6 Topics Weekday vs. Weekend
 map + stat_density2d(aes(x = long, y = lat, 
                          fill = ..level..), geom = "polygon",
                      n = grid.points,
@@ -237,4 +262,4 @@ map + stat_density2d(aes(x = long, y = lat,
   scale_fill_distiller(palette = "Spectral") + 
   ggtitle(paste("Density of Top 6 Topics, Week vs. Weekends")) + 
   facet_grid(weekend~lang.topic) + 
-ggsave(paste0("Outputs/",db,"-TopTopics_weekends.pdf"), width = 11, height = 8.5, units = "in")
+ggsave(paste0("Outputs/",db,"-TopTopics_weekends.png"), width = 11, height = 8.5, units = "in")

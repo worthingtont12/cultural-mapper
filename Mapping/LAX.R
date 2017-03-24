@@ -49,6 +49,17 @@ meters <- LongLatToUTM(clean$long,clean$lat,11)
 
 topic_meters <- cbind(clean,meters)
 
+## Assigning Topics by user
+# Read in topic assignments output from python
+clean.topics <- merge_topics(clean, "Topic_Data/")
+
+# Source the Spatial Functions
+source("SpatialUtil.R")
+
+# Convert to meters
+meters <- LongLatToM(clean.topics$long,clean.topics$lat,epsg)
+topic_meters <- cbind(clean.topics,meters)
+
 
 #### Desciptive Stats ####
 library(dplyr)
@@ -71,7 +82,7 @@ map + stat_density2d(aes(x = long, y = lat, fill = ..level.., alpha = ..level..)
                      data = temp)
 
 # Aggregate by size
-map + geom_count(aes(x = long, y = lat, alpha = .5), data = temp)
+map + geom_count(aes(x = long, y = lat, alpha = .5, color = "red"), data = temp)
 
 # There's a heavy concentration in Downtown LA - likely due to generic posts
 # tagged with the location of "Los Angeles"
@@ -164,7 +175,7 @@ generate_folds <- function(df, k){
 topic_meters <- generate_folds(topic_meters,2)
 
 # Set up a multivariate model
-model_predict <- lm(cbind(EW,NS)~dow_sin+dow_cos+hour_sin+hour_cos+top_topic+topic_prob, 
+model_predict <- lm(cbind(EW.m,NS.m)~dow_sin+dow_cos+hour_sin+hour_cos+top_topic+topic_prob, 
                     data = topic_meters[topic_meters$fold == 1,])
 
 summary(model_predict)
@@ -173,7 +184,7 @@ summary(model_predict)
 # respectively. Summing the squares of these values and taking the square root
 # provides us with Euclidean Distance.
 
-mean(sqrt(rowSums(model_predict$residuals^2)))
+mean(sqrt(rowSums(model_predict$residuals^2)))/1000
 
 # Error is 13.574km for the training set.
 
@@ -182,10 +193,10 @@ preds <- predict(model_predict,newdata = topic_meters[topic_meters$fold != 1,])
 
 topic_meters %>% 
   filter(fold != 1) %>% 
-  transmute((EW-preds[,1])^2, (NS-preds[,2])^2) %>%
-  rowSums %>%
+  transmute((EW.m-preds[,1])^2, (NS.m-preds[,2])^2) %>%
+  rowSums %>% 
   sqrt %>%
-  mean
+  mean(na.rm=T)
 
 # The Eclidean error here is also approximately 13.5km.
 
@@ -199,7 +210,10 @@ clean %>%
   filter(geo_point %in% top_points$geo_point[1:10]) %>%
   group_by(geo_point,source) %>% 
   count() %>%
-  arrange(desc(n))
+  arrange(desc(n)) %>%
+  mutate(percent = round(100*n/nrow(clean),2)) %>% head(10)
+
+
 
 clean %>% 
   group_by(source)%>%
@@ -212,7 +226,7 @@ clean %>%
 
 # remodel, ignoring the top point
 
-model_no_center <- lm(cbind(EW,NS)~dow_sin+dow_cos+hour_sin+hour_cos+top_topic+topic_prob, 
+model_no_center <- lm(cbind(EW.m,NS.m)~dow_sin+dow_cos+hour_sin+hour_cos+top_topic+topic_prob, 
                       data = topic_meters[topic_meters$fold == 1 & 
                                             topic_meters$geo_point != top_points$geo_point[1],]
                       )
@@ -230,17 +244,18 @@ preds <- predict(model_no_center,newdata = topic_meters[topic_meters$fold != 1 &
 topic_meters %>% 
   filter(fold != 1,
          geo_point != top_points$geo_point[1]) %>% 
-  transmute((EW-preds[,1])^2, (NS-preds[,2])^2) %>%
+  transmute((EW.m-preds[,1])^2, (NS.m-preds[,2])^2) %>%
   rowSums %>%
   sqrt %>%
-  mean
+  mean(na.rm=T)
 
 # Error is 14.410km for test set.
 
 # Let's try it without Instagram posts
-model_no_IG <- lm(cbind(EW,NS)~dow_sin+dow_cos+hour_sin+hour_cos+top_topic+topic_prob, 
+model_no_IG <- lm(cbind(EW.m,NS.m)~dow_sin+dow_cos+hour_sin+hour_cos+lang.topic+topic_prob, 
                       data = topic_meters[topic_meters$fold == 1 & 
-                                            topic_meters$source != "Instagram",]
+                                            topic_meters$source != "Instagram" &
+                                            topic_meters$topic_prob >0,]
 )
 
 summary(model_no_IG)
@@ -256,10 +271,10 @@ preds <- predict(model_no_IG,newdata = topic_meters[topic_meters$fold != 1 &
 topic_meters %>% 
   filter(fold != 1,
          source != "Instagram") %>% 
-  transmute((EW-preds[,1])^2, (NS-preds[,2])^2) %>%
+  transmute((EW.m-preds[,1])^2, (NS.m-preds[,2])^2) %>%
   rowSums %>%
   sqrt %>%
-  mean
+  mean(na.rm=T)
 
 # Training data error is also 16.58km
 
@@ -270,9 +285,10 @@ plot(rstudent(model_no_IG)[,'NS']~model_no_IG$fitted.values[,'NS'])
 
 
 # Remove topics
-model_no_IG_topics <- lm(cbind(EW,NS)~dow_sin+dow_cos+hour_sin+hour_cos, 
+model_no_IG_topics <- lm(cbind(EW.m,NS.m)~dow_sin+dow_cos+hour_sin+hour_cos, 
                   data = topic_meters[topic_meters$fold == 1 & 
-                                        topic_meters$source != "Instagram",]
+                                        topic_meters$source != "Instagram" &
+                                        topic_meters$topic_prob >0,]
 )
 
 summary(model_no_IG_topics)
@@ -293,7 +309,7 @@ topic_meters %>%
   sqrt %>%
   mean
 
-anova(model_no_IG, model_no_IG_topics)
+anova(model_no_IG_topics,model_no_IG)
 # But the ANOVA shows that the model with the topics/probability is
 # statistically significant!
 
