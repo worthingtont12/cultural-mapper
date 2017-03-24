@@ -1,5 +1,6 @@
 """Uncovering Top 15 Words in Predetermined Clusters"""
 import numpy as np
+import pandas as pd
 from sklearn.feature_extraction.text import TfidfVectorizer
 from Parsing.Language_processing import df_en
 
