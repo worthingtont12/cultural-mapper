@@ -8,3 +8,6 @@ bbox <- c(-87.968437, 41.624851, -87.397217, 42.07436)
 utm_zone <- 16
 
 epsg <- 2790
+
+# Time zone
+tz <- "America/Chicago"
