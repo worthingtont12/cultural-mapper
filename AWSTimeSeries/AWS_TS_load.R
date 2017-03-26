@@ -1,3 +1,4 @@
+#### Get the City Data
 # Load in the helper functions
 source("Postgres_functions.R")
 source("SpatialUtil.R")
@@ -32,14 +33,32 @@ disconnectDB(con)
 #### Merging and Cleaning ####
 library(dplyr)
 library(lubridate)
+library(tidyr)
 
-# Merge in Humna-readable languages
-clean <- merge_langs(loc.data)
-
-# Drop uneccesary columns, extract date
-clean <- clean %>%
-  select(-dow_sin,-dow_cos,-hour_sin,-hour_cos) %>%
-  mutate(date= format(tz, "%d %b %Y"))
+# Load the Twitter language registry
+registry <- load_langs()
+# Merge the language by the users' selected language!
+data_merge <- left_join(loc.data, registry)
+data_merge$language <- as.factor(data_merge$language)
+# Clean up the source, Extract the Date
+data_merge <- data_merge %>% 
+  mutate(source = gsub(pattern = "<.+\">|</a>", "",source),
+         date = format(tzone, "%d %b %Y"))
 
 # Merge Topics
-clean.topics <- merge_topics(clean, "Topic_Data/")
+clean.topics <- merge_topics(data_merge, "Topic_Data/")
+
+# Remove duplicate files
+rm(loc.data, data_merge)
+
+# Aggregate count by date and topic
+counts <- clean.topics %>% 
+  mutate(date = as.Date(date,"%d %b %Y")) %>%
+  filter(!(lang.topic %in% registry$language)) %>%
+  group_by(date, lang.topic) %>% count
+
+counts <- counts %>% 
+  spread(lang.topic,n) %>%
+  arrange(date)
+
+plot.ts(counts$date,counts$`Topic 0 - Turkish`)
