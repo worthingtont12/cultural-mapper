@@ -11,7 +11,7 @@ from login_info import user, host, password
 #%matplotlib inline
 # Connection to database
 conn = psycopg2.connect(
-    "dbname='culturalmapper_Istanbul' user=%s host=%s password=%s" % (user, host, password))
+    "dbname='culturalmapper_Chicago' user=%s host=%s password=%s" % (user, host, password))
 
 # Reading in Data
 # Topic Assignments
@@ -20,21 +20,21 @@ conn = psycopg2.connect(
 #
 # # Raw Tweets
 # primary = psql.read_sql(
-#     "SELECT * FROM la_city_primary WHERE created_at > '2016-10-28' AND created_at < '2017-01-28'", conn)
+#     "SELECT * FROM ch_city_primary WHERE created_at > '2016-10-28' AND created_at < '2017-01-28'", conn)
 #
-# df = pd.read_csv(
-#     "/Users/tylerworthington/Git_Repos/Data/Cultural_Mapper_Data/Chicago/035Data/English_Chicago.csv")
-#
-# # Raw Tweets
-# primary = psql.read_sql(
-#     "SELECT * FROM chicago_city_primary WHERE created_at > '2016-10-28' AND created_at < '2017-01-28'", conn)
-
 df = pd.read_csv(
-    "/Users/tylerworthington/Git_Repos/Data/Cultural_Mapper_Data/Istanbul/Combined_Istanbul_035.csv")
+    "/Users/tylerworthington/Git_Repos/Data/Cultural_Mapper_Data/Chicago/035Data/English_Chicago.csv")
 
 # Raw Tweets
 primary = psql.read_sql(
-    "SELECT * FROM istanbul_city_primary WHERE created_at > '2016-10-28' AND created_at < '2017-01-28'", conn)
+    "SELECT * FROM chicago_city_primary WHERE created_at > '2016-10-28' AND created_at < '2017-01-28'", conn)
+#
+# df = pd.read_csv(
+#     "/Users/tylerworthington/Git_Repos/Data/Cultural_Mapper_Data/Istanbul/Combined_Istanbul_035.csv")
+#
+# # Raw Tweets
+# primary = psql.read_sql(
+#     "SELECT * FROM istanbul_city_primary WHERE created_at > '2016-10-28' AND created_at < '2017-01-28'", conn)
 
 # Dropping uneeded variables
 df.drop(['Unnamed: 0'], inplace=True, axis=1)
@@ -55,7 +55,7 @@ fulldf['Time'] = fulldf['created_at'].apply(lambda row: row.split()[1])
 
 # Sorting
 fulldf['Date1'] = pd.to_datetime(fulldf.Date)
-fulldf = fulldf.sort('Date1')
+fulldf = fulldf.sort_values(by='Date1')
 # converting to categorical variable
 fulldf["top_topic"] = fulldf["top_topic"].astype('category')
 
@@ -108,42 +108,42 @@ dailyplot_woelection_percentage.set_xticklabels(rotation=90)
 dailyplot_woelection_percentage.savefig(
     "Graphs/Istanbul/Turkish_Daily_Plot_WOELECTION_Percentage.png")
 
-#################### Day of The Week Plots#####################
-# """
-# Plot Activity Throughout Days of the Week
-# """
-# # Creating new variable for day of the week
-# fulldf['Day of Week'] = fulldf['Date1'].apply(lambda row: row.weekday())
-#
-# # Mapping integer to name of day
-# map_days = {0: "Monday", 1: "Tuesday", 2: "Wednesday",
-#             3: "Thursday", 4: "Friday", 5: "Saturday", 6: "Sunday"}
-#
-# fulldf['Day of Week'] = fulldf['Day of Week'].map(map_days)
-#
-# # Day of Week Plot
-# dayoftheweek = sns.factorplot(x="Day of Week", y="count",
-#                               hue="top_topic", estimator=np.sum, data=fulldf)
-# dayoftheweek.set_xticklabels(rotation=90)
-# dayoftheweek.savefig("Graphs/Chicago/Day_of_The_Week.png")
-#
-# # Day of the Week As Percentage of Topic
-# dayoftheweek_percentage = sns.factorplot(x="Day of Week", y="topic_percentage", hue="top_topic",
-#                                          estimator=np.sum, data=fulldf, size=10, aspect=6)
-#
-# dayoftheweek_percentage.set_xticklabels(rotation=90)
-#
-# dayoftheweek_percentage.savefig("Graphs/Chicago/Day_of_The_Week_Percentage.png")
-#
-# # Day of the Week without Election aftermath
-# dayoftheweek_without_election = fulldf[fulldf.Date != '2016-11-09']
-# dayoftheweek_woaftermath = sns.factorplot(x="Day of Week", y="count", hue="top_topic",
-#                                           estimator=np.sum, data=dayoftheweek_without_election)
-# dayoftheweek_woaftermath.set_xticklabels(rotation=90)
-# dayoftheweek_woaftermath.savefig("Graphs/Chicago/Day_of_The_Week_WO_Election.png")
-#
-# # Day of the Week without Election aftermath as percentage
-# dayoftheweek_woaftermath_percentage = sns.factorplot(x="Day of Week", y="topic_percentage", hue="top_topic",
-#                                                      estimator=np.sum, data=dayoftheweek_without_election, size=10, aspect=6)
-# dayoftheweek_woaftermath_percentage.set_xticklabels(rotation=90)
-# dayoftheweek_woaftermath_percentage.savefig("Graphs/Chicago/Day_of_The_Week__WO_Percentage.png")
+################### Day of The Week Plots#####################
+"""
+Plot Activity Throughout Days of the Week
+"""
+# Creating new variable for day of the week
+fulldf['Day of Week'] = fulldf['Date1'].apply(lambda row: row.weekday())
+
+# Mapping integer to name of day
+map_days = {0: "Monday", 1: "Tuesday", 2: "Wednesday",
+            3: "Thursday", 4: "Friday", 5: "Saturday", 6: "Sunday"}
+
+fulldf['Day of Week'] = fulldf['Day of Week'].map(map_days)
+
+# Day of Week Plot
+dayoftheweek = sns.factorplot(x="Day of Week", y="count",
+                              hue="top_topic", estimator=np.sum, data=fulldf)
+dayoftheweek.set_xticklabels(rotation=90)
+dayoftheweek.savefig("Graphs/Chicago/Day_of_The_Week.png")
+
+# Day of the Week As Percentage of Topic
+dayoftheweek_percentage = sns.factorplot(x="Day of Week", y="topic_percentage", hue="top_topic",
+                                         estimator=np.sum, data=fulldf, size=10, aspect=6)
+
+dayoftheweek_percentage.set_xticklabels(rotation=90)
+
+dayoftheweek_percentage.savefig("Graphs/Chicago/Day_of_The_Week_Percentage.png")
+
+# Day of the Week without Election aftermath
+dayoftheweek_without_election = fulldf[fulldf.Date != '2016-11-09']
+dayoftheweek_woaftermath = sns.factorplot(x="Day of Week", y="count", hue="top_topic",
+                                          estimator=np.sum, data=dayoftheweek_without_election)
+dayoftheweek_woaftermath.set_xticklabels(rotation=90)
+dayoftheweek_woaftermath.savefig("Graphs/Chicago/Day_of_The_Week_WO_Election.png")
+
+# Day of the Week without Election aftermath as percentage
+dayoftheweek_woaftermath_percentage = sns.factorplot(x="Day of Week", y="topic_percentage", hue="top_topic",
+                                                     estimator=np.sum, data=dayoftheweek_without_election, size=10, aspect=6)
+dayoftheweek_woaftermath_percentage.set_xticklabels(rotation=90)
+dayoftheweek_woaftermath_percentage.savefig("Graphs/Chicago/Day_of_The_Week__WO_Percentage.png")
