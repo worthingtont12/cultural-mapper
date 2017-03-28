@@ -209,8 +209,6 @@ com_topic_la <- com_topic_la[com_topic_la$membership_la == 8 | com_topic_la$memb
                                com_topic_la$membership_la == 29 |com_topic_la$membership_la == 32 |com_topic_la$membership_la == 33,]
 
 write.csv(com_topic_la, file = "communities_la.csv")
-
-
 colnames(memb_type_la) <- c("Source", "Modularity Class")
 
 #### graph 
@@ -229,6 +227,7 @@ write.csv(graph, file = "edges_la.csv")
 
 
 ############ Chicago 
+setwd("~/Desktop/corpus")
 tdm_ch <- read.MM('en_corpus_chicago.mm')
 tdm1_ch <- t(tdm_ch)
 ncol(tdm1_ch)
@@ -270,12 +269,13 @@ membership_ch <- louvain$membership
 com_topic_ch <- cbind(nodes, membership_ch)
 com_topic_ch <- as.data.frame(com_topic_ch)
 #com_topic_ch$membership_ch <- as.numeric(com_topic_la$membership_ch)
-com_topic_ch <- com_topic_ch[com_topic_ch$membership_ch == 12 | com_topic_ch$membership_ch == 15 |com_topic_ch$membership_ch == 16 | 
-                               com_topic_ch$membership_ch == 18 |com_topic_ch$membership_ch == 24 |com_topic_ch$membership_ch == 25 |
-                               com_topic_ch$membership_ch == 29 |com_topic_ch$membership_ch == 32 |com_topic_ch$membership_ch == 33 |
-                               com_topic_ch$membership_ch == 34 |com_topic_ch$membership_ch == 35 |com_topic_ch$membership_ch == 37,]
+com_topic_ch <- com_topic_ch[com_topic_ch$membership_ch == 9 | com_topic_ch$membership_ch == 20 |com_topic_ch$membership_ch == 22 | 
+                               com_topic_ch$membership_ch == 23 |com_topic_ch$membership_ch == 25 |com_topic_ch$membership_ch == 26 |
+                               com_topic_ch$membership_ch == 27 |com_topic_ch$membership_ch == 29 |com_topic_ch$membership_ch == 31 |
+                               com_topic_ch$membership_ch == 32 |com_topic_ch$membership_ch == 33 |com_topic_ch$membership_ch == 34 |
+                               com_topic_ch$membership_ch == 35 | com_topic_ch$membership_ch == 36,]
 
-write.csv(com_topic_la, file = "communities_chicago.csv")
+write.csv(com_topic_ch, file = "communities_chicago.csv")
 
 colnames(memb_type_ch) <- c("Source", "Modularity Class")
 
@@ -289,7 +289,7 @@ graph <- cbind(graph, type)
 colnames(graph) <- c("Source", "Target", "Weight", "Type")
 graph[,"Weight"] <- as.numeric(graph[,"Weight"])*1000
 
-graph <- merge(graph, memb_type_la, by = "Source")
+graph <- merge(graph, memb_type_ch, by = "Source")
 write.csv(nodes, file = "nodes_ch.csv")
 write.csv(graph, file = "edges_ch.csv")
 
@@ -418,3 +418,92 @@ graph[,"Weight"] <- as.numeric(graph[,"Weight"])*1000
 graph <- merge(graph, memb_type_tr, by = "Source")
 write.csv(nodes, file = "nodes_tr.csv")
 write.csv(graph, file = "edges_tr.csv")
+
+setwd("~/Desktop/Cultural_Mapper/Louvain_Clustering/communities")
+
+# merging LA
+comm_la <- read.csv("communities_la.csv")
+en_la <- read.csv("English_LA.csv")
+colnames(comm_la) <- c("", "Index", "membership_la")
+colnames(en_la) <- c("Index", "user_id", "user_language", "top_topic", "topic_prob")
+
+en_la$Index <- c(1:354013)
+merged_la <- merge(comm_la, en_la, by = "Index")
+merged_la$Var.2 <- NULL
+
+write.csv(merged_la, file = "merged_la.csv")
+merged_la$user_id
+table(merged_la$membership_la)
+
+## Analyzing subgroups in Los Angeles (Working with the biggest one labeled '22')
+table(merged_la$membership_la)
+subgroup_la <- merged_la[merged_la$membership_la == 22,]
+#running Louvain Algorithm in subgroup_la
+setwd("~/Desktop/corpus")
+tdm_la <- read.MM('en_corpus_la.mm')
+tdm1_la <- t(tdm_la)
+ncol(tdm1_la)
+tdm1_la <- tdm1_la[, subgroup_la$Index]
+ncol(tdm1_la)
+
+tdm1_la <- as.matrix(tdm1_la)
+cosine_sim_mat_la <- cosSparse(tdm1_la, norm = norm2)
+cosine_sim_mat_la <- as.matrix(cosine_sim_mat_la)
+diag(cosine_sim_mat_la) <- 0
+rownames(cosine_sim_mat_la) <- c(1:149)
+colnames(cosine_sim_mat_la) <- c(1:149)
+
+#### graph for LA subgroup
+
+ig <- graph.adjacency(cosine_sim_mat_la, mode="undirected", weighted=TRUE)
+
+nodes <- cbind(as.character(c(1:149)))
+colnames(nodes) <- c("ID")
+
+#### louvain for LA subgroup
+
+louvain <- cluster_louvain(graph = ig)
+
+louvain_sizesComm <- sizes(louvain)
+louvain_numComm <- length(louvain_sizesComm)
+louvain_modularity <- modularity(louvain)
+
+print(louvain_numComm)
+print(louvain_sizesComm)
+print(louvain_modularity)
+sub_membership_la <- louvain$membership
+
+subcom_topic_la <- cbind(nodes, sub_membership_la)
+subcom_topic_la <- as.data.frame(subcom_topic_la)
+subcom_topic_la <- subcom_topic_la[subcom_topic_la$sub_membership_la == 4 | subcom_topic_la$sub_membership_la == 6 |subcom_topic_la$sub_membership_la == 9 | 
+                                     subcom_topic_la$sub_membership_la == 12 |subcom_topic_la$sub_membership_la == 13 |subcom_topic_la$sub_membership_la == 15 |
+                                     subcom_topic_la$sub_membership_la == 16 |subcom_topic_la$sub_membership_la == 17,]
+
+write.csv(subcom_topic_la, file = "sub_community_la.csv")
+colnames(subcom_topic_la) <- c("Source", "Modularity Class")
+#### graph for LA subgroup
+
+graph <- cbind( get.edgelist(ig) , round( E(ig)$weight, 3))
+type <- rep("Undirected",nrow(graph))
+graph <- cbind(graph, type)
+
+
+colnames(graph) <- c("Source", "Target", "Weight", "Type")
+graph[,"Weight"] <- as.numeric(graph[,"Weight"])*1000
+
+graph <- merge(graph, subcom_topic_la, by = "Source")
+write.csv(nodes, file = "nodes_subcomm_la.csv")
+write.csv(graph, file = "edges_subcomm_la.csv")
+
+
+# merging Chicago
+comm_ch <- read.csv("communities_chicago.csv")
+en_ch <- read.csv("English_Chicago.csv")
+colnames(comm_ch) <- c("", "Index", "membership_ch")
+colnames(en_ch) <- c("Index", "user_id", "user_language", "top_topic", "topic_prob")
+
+en_ch$Index <- c(1:221032)
+merged_ch <- merge(comm_ch, en_ch, by = "Index")
+merged_ch$Var.2 <- NULL
+
+write.csv(merged_ch, file = "merged_ch.csv")
