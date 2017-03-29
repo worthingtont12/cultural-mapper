@@ -1,4 +1,4 @@
-"""Time Series Analysis of Topic Activity"""
+"""Exploratory Time Series Analysis of Topic Activity"""
 import pandas as pd
 from pandas.tools.plotting import lag_plot
 import statsmodels.api as sm
@@ -8,12 +8,12 @@ import scipy.fftpack
 from statsmodels.tsa.stattools import adfuller
 from statsmodels.tsa.arima_model import ARIMA
 # data
-from Topic_Analysis import fulldf
+from Cleaning import fulldf
 
 
 def test_stationarity(timeseries):
     """
-    Simplification of the adfuller function in the statsmodels module.
+    Simplification of the adfuller function in the statsmodels module to only display necessary statistics.
     """
     # Perform Dickey-Fuller test:
     print('Dickey-Fuller Test:')
@@ -26,8 +26,10 @@ def test_stationarity(timeseries):
 
 # dropping first day of series
 fulldf = fulldf[fulldf.Date1 != '2016-10-28']
+
 # cast to string
 fulldf["top_topic"] = fulldf["top_topic"].apply(str)
+
 # list of 20 topics
 topics = (fulldf["top_topic"].unique())
 topics = list(topics)
