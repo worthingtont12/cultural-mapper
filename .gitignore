@@ -44,3 +44,19 @@ ConvexHulls/keys.R
 ConvexHulls/.RData
 
 ConvexHulls/.Rhistory
+
+Modelling_SMOTE/.Rhistory
+
+Modelling_SMOTE/.RData
+
+Data_Collection/.DS_Store
+
+Modelling_SMOTE/ISTData.RData
+
+Modelling_SMOTE/CHIData.RData
+
+*.RData
+
+Mapping/Mapping.Rproj
+
+AWSTimeSeries/keys.R

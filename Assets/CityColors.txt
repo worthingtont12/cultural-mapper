@@ -1,0 +1,5 @@
+# Colors in RGB
+
+Los Angeles: 19	145	67
+Chicago: 181	222	242
+Istanbul: 225	19	36

@@ -1,0 +1,37 @@
+''' Raw Merge of SQL count'''
+SELECT COUNT(*)
+FROM la_city_primary INNER JOIN la_city_secondary USING(id);
+'''1,917,901'''
+
+''' Adding in Geofilter '''
+SELECT COUNT(*)
+FROM la_city_primary INNER JOIN la_city_secondary USING(id)
+WHERE CAST(lat as FLOAT) >= 33.694679 AND CAST(lat as FLOAT) <= 34.33926 AND
+			CAST(long as FLOAT) >= -118.723549 AND CAST(long as FLOAT) <= -117.929466
+'''1,358,440'''
+
+''' Adding in time filter '''
+SELECT COUNT(*)
+FROM la_city_primary INNER JOIN la_city_secondary USING(id)
+WHERE CAST(lat as FLOAT) >= 33.694679 AND CAST(lat as FLOAT) <= 34.33926 AND
+			CAST(long as FLOAT) >= -118.723549 AND CAST(long as FLOAT) <= -117.929466 AND
+      CAST(created_at as timestamptz) BETWEEN '2016-10-28' AND '2017-01-27'
+'''1,086,020, include 687k TweetMyJobs'''
+
+''' Filtering out Spambots '''
+SELECT COUNT(*)
+FROM la_city_primary INNER JOIN la_city_secondary USING(id)
+WHERE CAST(lat as FLOAT) >= 33.694679 AND CAST(lat as FLOAT) <= 34.33926 AND
+			CAST(long as FLOAT) >= -118.723549 AND CAST(long as FLOAT) <= -117.929466 AND
+      CAST(created_at as timestamptz) BETWEEN '2016-10-28' AND '2017-01-27' AND
+      source ILIKE ANY(ARRAY['% for %', '%twitter %', '%tron%','%Foursquare%','%Instagram%'])
+'''778,845'''
+
+'''Adjusting for timezone '''
+SELECT COUNT(*)
+FROM la_city_primary INNER JOIN la_city_secondary USING(id)
+WHERE CAST(lat as FLOAT) >= 33.694679 AND CAST(lat as FLOAT) <= 34.33926 AND
+			CAST(long as FLOAT) >= -118.723549 AND CAST(long as FLOAT) <= -117.929466 AND
+      timezone('America/Los_Angeles',CAST(created_at as timestamptz)) BETWEEN '2016-10-28' AND '2017-01-27' AND
+      source ILIKE ANY(ARRAY['% for %', '%twitter %', '%tron%','%Foursquare%','%Instagram%'])
+''' 778,432 '''
