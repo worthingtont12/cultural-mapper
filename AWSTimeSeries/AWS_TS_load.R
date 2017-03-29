@@ -1,5 +1,4 @@
-# Load in the Location metadata
-source("IST_meta.R")
+
 
 #### Get the City Data ####
 # Load in the helper functions
@@ -29,6 +28,10 @@ text_lang, user_lang, user_id, source
 
 # Disconnect
 disconnectDB(con)
+
+# Save the image!!
+save.image(paste0("~/Cultural_Mapper/AWSTimeSeries/RData/",db,".RData"))
+
 
 #### Merging and Cleaning ####
 library(dplyr)
@@ -158,7 +161,7 @@ count.TopicDay <- clean.topics %>%
   summarise(avg = mean(n))
 
 # Sample cross-correlation plot; 0 is significant, so just use straight correlation
-autoplot(Ccf(counts$`Topic 1 - Turkish`, counts$`Topic 12 - Turkish`))
+autoplot(Ccf(counts$`Topic 0 - English`, counts$`Topic 1 - English`))
 
 # Initialize a Data Frame to hold the correlations
 corrs <- as.data.frame(matrix(0, nrow = ncol(counts)-1, ncol(counts)))
@@ -327,57 +330,58 @@ dev.off()
 
 
 #### Daily Counts & Plots thereof ####
-library(ggplot2)
-library(dplyr)
-library(tidyr)
-library(lubridate)
 
-# find the number of unique users by language
-unique.users <- clean.topics %>% 
-  group_by(lang.topic) %>%
-  filter(!is.na(lang.topic)) %>%
-  mutate(users = length(unique(user_id))) %>%
-  select(lang.topic, users) %>% 
-  unique %>%
-  arrange(desc(users))
-
-# Summarize the count by topic, by day
-count.TopicDay <- clean.topics %>%
-  mutate(day = wday(tzone, label = T)) %>%
-  group_by(lang.topic, day, time = as.Date(tzone)) %>%
-  tally() %>%
-  ungroup %>%
-  group_by(lang.topic, day) %>%
-  summarise(avg = mean(n))
-
-# Normalize daily averages by the number of users within each topic
-PerUser <- left_join(count.TopicDay, unique.users, on = lang.topic) %>%
-  mutate(avgPerUser = avg/users)
-
-# Plot of top 10 topics
-PerUser %>% 
-  filter(lang.topic %in% top_topics$lang.topic[1:10]) %>%
-  ggplot(aes(x=day, y = avgPerUser, color = lang.topic, group = lang.topic)) + 
-  geom_line() + 
-  ggtitle(paste("Average Tweets per User in",db,"by Day"))  + 
-  theme(legend.position = "bottom", legend.box = "horizontal") #+ 
-  ggsave(paste0("Outputs/",db,"-TopicDensity_DayHourALL.png"), width = 11, height = 8.5, units = "in")
-  
-
-PerUser %>% 
-  filter(lang.topic %in% top_topics$lang.topic[15:20]) %>%
-  ggplot(aes(x=day, y = avgPerUser, color = lang.topic, group = lang.topic))+ geom_line()
-
-
-# Plot of top 6 topics
-count.TopicDay %>%
-  filter(lang.topic %in% top_topics$lang.topic[1:6]) %>%
-  ggplot(aes(x=day, y = avg, color = lang.topic, group = lang.topic)) +
-  scale_color_discrete() +
-  geom_line()
-
-count.TopicDay %>%
-  filter(lang.topic %in% top_topics$lang.topic[15:20]) %>%
-  ggplot(aes(x=day, y = avg, color = lang.topic, group = lang.topic)) +
-  scale_color_discrete() +
-  geom_line()
+# library(ggplot2)
+# library(dplyr)
+# library(tidyr)
+# library(lubridate)
+# 
+# # find the number of unique users by language
+# unique.users <- clean.topics %>% 
+#   group_by(lang.topic) %>%
+#   filter(!is.na(lang.topic)) %>%
+#   mutate(users = length(unique(user_id))) %>%
+#   select(lang.topic, users) %>% 
+#   unique %>%
+#   arrange(desc(users))
+# 
+# # Summarize the count by topic, by day
+# count.TopicDay <- clean.topics %>%
+#   mutate(day = wday(tzone, label = T)) %>%
+#   group_by(lang.topic, day, time = as.Date(tzone)) %>%
+#   tally() %>%
+#   ungroup %>%
+#   group_by(lang.topic, day) %>%
+#   summarise(avg = mean(n))
+# 
+# # Normalize daily averages by the number of users within each topic
+# PerUser <- left_join(count.TopicDay, unique.users, on = lang.topic) %>%
+#   mutate(avgPerUser = avg/users)
+# 
+# # Plot of top 10 topics
+# PerUser %>% 
+#   filter(lang.topic %in% top_topics$lang.topic[1:10]) %>%
+#   ggplot(aes(x=day, y = avgPerUser, color = lang.topic, group = lang.topic)) + 
+#   geom_line() + 
+#   ggtitle(paste("Average Tweets per User in",db,"by Day"))  + 
+#   theme(legend.position = "bottom", legend.box = "horizontal") #+ 
+#   ggsave(paste0("Outputs/",db,"-TopicDensity_DayHourALL.png"), width = 11, height = 8.5, units = "in")
+#   
+# 
+# PerUser %>% 
+#   filter(lang.topic %in% top_topics$lang.topic[15:20]) %>%
+#   ggplot(aes(x=day, y = avgPerUser, color = lang.topic, group = lang.topic))+ geom_line()
+# 
+# 
+# # Plot of top 6 topics
+# count.TopicDay %>%
+#   filter(lang.topic %in% top_topics$lang.topic[1:6]) %>%
+#   ggplot(aes(x=day, y = avg, color = lang.topic, group = lang.topic)) +
+#   scale_color_discrete() +
+#   geom_line()
+# 
+# count.TopicDay %>%
+#   filter(lang.topic %in% top_topics$lang.topic[15:20]) %>%
+#   ggplot(aes(x=day, y = avg, color = lang.topic, group = lang.topic)) +
+#   scale_color_discrete() +
+#   geom_line()
