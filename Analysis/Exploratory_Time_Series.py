@@ -1,4 +1,4 @@
-"""Time Series Analysis of Topic Activity"""
+"""Exploratory Time Series Analysis of Topic Activity"""
 import pandas as pd
 from pandas.tools.plotting import lag_plot
 import statsmodels.api as sm
@@ -8,12 +8,12 @@ import scipy.fftpack
 from statsmodels.tsa.stattools import adfuller
 from statsmodels.tsa.arima_model import ARIMA
 # data
-from Topic_Analysis import fulldf
+from Cleaning import fulldf
 
 
 def test_stationarity(timeseries):
     """
-    Simplification of the adfuller function in the statsmodels module.
+    Simplification of the adfuller function in the statsmodels module to only display necessary statistics.
     """
     # Perform Dickey-Fuller test:
     print('Dickey-Fuller Test:')
@@ -26,8 +26,10 @@ def test_stationarity(timeseries):
 
 # dropping first day of series
 fulldf = fulldf[fulldf.Date1 != '2016-10-28']
+
 # cast to string
 fulldf["top_topic"] = fulldf["top_topic"].apply(str)
+
 # list of 20 topics
 topics = (fulldf["top_topic"].unique())
 topics = list(topics)
@@ -47,12 +49,12 @@ for i in topics:
 
     # density plots
     Users.plot(kind='kde')
-    plt.savefig("Graphs/LA/Time_Series/density_Topic" + str(i) + ".png")
+    plt.savefig("Graphs/Chicago/Time_Series/density_Topic" + str(i) + ".png")
     plt.close()
 
     # bar graphs
     Users.hist()
-    plt.savefig("Graphs/LA/Time_Series/histogram_Topic" + str(i) + ".png")
+    plt.savefig("Graphs/Chicago/Time_Series/histogram_Topic" + str(i) + ".png")
     plt.close()
 
     # rolling average plots
@@ -63,7 +65,7 @@ for i in topics:
     fig = Users.rolling(window=6, center=False).mean().plot(label='Rolling 7 Day Mean')
     fig = Users.rolling(window=12, center=False).mean().plot(label='Rolling 14 Day Mean')
     fig = ts.legend(loc='best')
-    plt.savefig("Graphs/LA/Time_Series/Rolling_Average_Plots_Topic" + str(i) + ".png")
+    plt.savefig("Graphs/Chicago/Time_Series/Rolling_Average_Plots_Topic" + str(i) + ".png")
     plt.close()
 
     # ACF and PACF plots
@@ -72,7 +74,7 @@ for i in topics:
     fig = sm.graphics.tsa.plot_acf(Users, lags=40, ax=ax1)
     ax2 = fig.add_subplot(212)
     fig = sm.graphics.tsa.plot_pacf(Users, lags=40, ax=ax2)
-    plt.savefig("Graphs/LA/Time_Series/acf_pacf_plot_Topic" + str(i) + ".png")
+    plt.savefig("Graphs/Chicago/Time_Series/acf_pacf_plot_Topic" + str(i) + ".png")
     plt.close()
 
     # testing stationarity
@@ -86,12 +88,12 @@ for i in topics:
     fig = sm.graphics.tsa.plot_acf(Usersdiff.dropna(inplace=False), lags=40, ax=ax1)
     ax2 = fig.add_subplot(212)
     fig = sm.graphics.tsa.plot_pacf(Usersdiff.dropna(inplace=False), lags=40, ax=ax2)
-    plt.savefig("Graphs/LA/Time_Series/Differenced_acf_pacf_plot_Topic" + str(i) + ".png")
+    plt.savefig("Graphs/Chicago/Time_Series/Differenced_acf_pacf_plot_Topic" + str(i) + ".png")
     plt.close()
 
     # lag plot
     lag_plot(Usersdiff)
-    plt.savefig("Graphs/LA/Time_Series/lag_plot_Topic" + str(i) + ".png")
+    plt.savefig("Graphs/Chicago/Time_Series/lag_plot_Topic" + str(i) + ".png")
     plt.close()
 
     # ARIMA model testing 1st lag
@@ -104,5 +106,5 @@ for i in topics:
     plt.plot(Usersdiff.dropna(inplace=False))
     plt.plot(fit_AR.fittedvalues + Usersdiff.dropna(inplace=False).mean(), color='red')
     plt.title('Model Fit')
-    plt.savefig("Graphs/LA/Time_Series/fitted_plot_Topic" + str(i) + ".png")
+    plt.savefig("Graphs/Chicago/Time_Series/fitted_plot_Topic" + str(i) + ".png")
     plt.close()
