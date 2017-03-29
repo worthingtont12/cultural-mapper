@@ -61,5 +61,5 @@ extract_coefs <- function(models){
 coefs <- extract_coefs(models)
 smooth.coefs <- extract_coefs(smooth.models)
 
-write.csv(coefs,"model_coefficients.csv")
-write.csv(smooth.coefs,"smooth_model_coefficients.csv")
+write.csv(coefs,paste0(db,"_model_coefficients.csv"))
+write.csv(smooth.coefs,paste0("Outputs/",db,"_smooth_model_coefficients.csv"))
