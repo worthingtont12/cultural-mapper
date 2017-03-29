@@ -5,6 +5,7 @@ library(lubridate)
 
 unique.users <- clean.topics %>% 
   group_by(lang.topic) %>%
+  filter(!is.na(lang.topic)) %>%
   mutate(users = length(unique(user_id))) %>%
   select(lang.topic, users) %>% unique
 

@@ -55,6 +55,7 @@ rm(loc.data, data_merge)
 counts <- clean.topics %>% 
   mutate(date = as.Date(date,"%d %b %Y")) %>%
   filter(!(lang.topic %in% registry$language)) %>%
+  filter(!is.na(lang.topic)) %>%
   group_by(date, lang.topic) %>% count
 
 counts <- counts %>% 
