@@ -141,6 +141,7 @@ unique.users <- clean.topics %>%
 # Top topics, by count
 top_topics <- clean.topics %>%
   group_by(lang.topic) %>% 
+  filter(!is.na(lang.topic)) %>%
   count() %>%
   arrange(desc(n))
 
@@ -263,7 +264,6 @@ dev.off()
 tweetcount <- clean.topics %>% 
   mutate(date = as.Date(date,"%d %b %Y")) %>%
   filter(lang.topic %in% top_topics$lang.topic[1:20]) %>%
-  filter(!is.na(lang.topic)) %>%
   group_by(date, lang.topic) %>% count
 
 activityPerUser <- left_join(tweetcount,unique.users, by ="lang.topic") %>% 
