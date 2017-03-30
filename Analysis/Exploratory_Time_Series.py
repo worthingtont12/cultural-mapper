@@ -3,10 +3,12 @@ import pandas as pd
 from pandas.tools.plotting import lag_plot
 import statsmodels.api as sm
 from matplotlib import pyplot as plt
+
 # Time series
 import scipy.fftpack
 from statsmodels.tsa.stattools import adfuller
 from statsmodels.tsa.arima_model import ARIMA
+
 # data
 from Cleaning import fulldf
 

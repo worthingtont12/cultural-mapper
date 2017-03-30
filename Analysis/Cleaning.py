@@ -28,7 +28,8 @@ len(primary)
 
 # Merge datasets
 fulldf = pd.merge(primary, df, on=['user_id'], how='left')
-fulldf.dropna(inplace=True)  # dropping where I don't have topic assignments
+fulldf.top_topic = fulldf.top_topic.fillna(value=fulldf.user_lang)
+# dropping where I don't have topic assignments
 
 # stripping date and time from created_at
 fulldf['Date'] = fulldf['tzone'].apply(lambda row: str(row).split()[0])
@@ -51,11 +52,45 @@ community_size = dict(zip(communitysize.index, communitysize.values))
 fulldf["topic_percentage"] = (1 / fulldf["top_topic"].map(community_size))
 
 # Assigning heirarchial clustering results to topics
-cluster_mapping_istanbul = {"Turkish_0": 5, "Turkish_1": 4, "Turkish_2": 4, "Turkish_16": 3,
-                            "Turkish_3": 4, "Turkish_9": 1, "Turkish_4": 4, "Turkish_7":  2,
-                            "Turkish_8": 4, "Turkish_5": 4, "Turkish_13": 1, "Turkish_14": 5, "Turkish_15": 1, "Turkish_12": 1, "Turkish_6": 4, "Turkish_10": 1, "Turkish_11": 3, "English_0": 5, "English_2": 5, "English_1": 5}
+cluster_mapping_istanbul = {"Arabic": 1,
+                            "French": 2,
+                            "German": 2,
+                            "Russian": 3,
+                            "English0": 2,
+                            "Turkish0": 2,
+                            "Turkish13": 3,
+                            "Turkish16": 4,
+                            "English1": 2,
+                            "Turkish1": 5,
+                            "English2": 2,
+                            "Turkish2": 5,
+                            "Turkish3": 5,
+                            "Turkish4": 5,
+                            "Turkish5": 5,
+                            "Turkish6": 5,
+                            "Turkish7": 4,
+                            "Turkish8": 5,
+                            "Turkish9": 3}
 
-cluster_mapping_chicago = {0: 5, 1: 4, 2: 4, 3: 3, 4: 4, 5: 1, 6: 4,
-                           7:  2, 8: 4, 9: 4, 10: 1, 11: 5, 12: 1, 13: 1, 14: 4, 15: 1, 16: 3, 17: 5, 18: 5, 19: 5}
+cluster_mapping_chicago = {0: 4, 1: 4, 2: 4, 3: 4, 4: 4, 5: 4, 6: 4,
+                           7:  3, 8: 5, 9: 2, 10: 1, 11: 2, 12: 2, 13: 2, 14: 2, 15: 2, 16: 2, 17: 2, 18: 5, 'es': 5}
 
-fulldf["Cluster"] = fulldf["top_topic"].map(cluster_mapping_chicago)
+cluster_mapping_la = {"Arabic": 1,
+                      "French": 2,
+                      "Japanese": 3,
+                      "Portuguese": 4,
+                      "Spanish": 2,
+                      0: 3,
+                      12: 5,
+                      15: 5,
+                      16: 5,
+                      17: 5,
+                      19: 5,
+                      5: 3,
+                      6: 3,
+                      7: 3,
+                      8: 5,
+                      9: 5}
+
+fulldf["Cluster"] = fulldf["top_topic"].map(cluster_mapping_istanbul)
+fulldf["Cluster"].dropna(inplace=True)
