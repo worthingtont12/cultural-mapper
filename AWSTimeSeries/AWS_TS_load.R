@@ -30,7 +30,7 @@ text_lang, user_lang, user_id, source
 disconnectDB(con)
 
 # Save the image!!
-save.image(paste0("~/Cultural_Mapper/AWSTimeSeries/RData/",db,".RData"))
+#save.image(paste0("~/Cultural_Mapper/AWSTimeSeries/RData/",db,".RData"))
 
 
 #### Merging and Cleaning ####
@@ -161,7 +161,7 @@ count.TopicDay <- clean.topics %>%
   summarise(avg = mean(n))
 
 # Sample cross-correlation plot; 0 is significant, so just use straight correlation
-autoplot(Ccf(counts$`Topic 0 - English`, counts$`Topic 1 - English`))
+# autoplot(Ccf(counts$`Topic 0 - English`, counts$`Topic 1 - English`))
 
 # Initialize a Data Frame to hold the correlations
 corrs <- as.data.frame(matrix(0, nrow = ncol(counts)-1, ncol(counts)))
@@ -178,9 +178,9 @@ for (i in 2:ncol(counts)){
 # Insert 0's for NA values
 corrs[is.na(corrs)] <- 0
 
-
+dissim <- 1-corrs[,-1]
 # Create clusters using the correlations as the distance metric
-clusters <- hclust(as.dist(corrs[,-1]))
+clusters <- hclust(as.dist(dissim))
 plot(clusters,  labels = corrs$topic)
 
 # Five clusters
@@ -227,8 +227,9 @@ for (i in 2:ncol(activityPerUser)){
 
 corrs.norm[is.na(corrs.norm)] <- 0
 
+dissim <- 1-corrs.norm[,-1]
 # Create clusters using the correlations as the distance metric
-clusters2 <- hclust(as.dist(corrs.norm[,-1]))
+clusters2 <- hclust(as.dist(dissim))
 plot(clusters2,  labels = corrs.norm$topic)
 
 # Five clusters
@@ -280,9 +281,9 @@ for (i in 2:ncol(tweetcount)){
 # Insert 0's for NA values
 corrs[is.na(corrs)] <- 0
 
-
+dissim <- 1-corrs[,-1]
 # Create clusters using the correlations as the distance metric
-clusters <- hclust(as.dist(corrs[,-1]))
+clusters <- hclust(as.dist(dissim))
 plot(clusters,  labels = corrs$topic)
 
 # Five clusters
@@ -312,8 +313,9 @@ for (i in 2:ncol(activityPerUser)){
 
 corrs.norm[is.na(corrs.norm)] <- 0
 
+dissim <- 1-corrs.norm[,-1]
 # Create clusters using the correlations as the distance metric
-clusters2 <- hclust(as.dist(corrs.norm[,-1]))
+clusters2 <- hclust(as.dist(dissim))
 plot(clusters2,  labels = corrs.norm$topic)
 
 # Five clusters
