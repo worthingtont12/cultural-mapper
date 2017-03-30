@@ -30,7 +30,7 @@ text_lang, user_lang, user_id, source
 disconnectDB(con)
 
 # Save the image!!
-save.image(paste0("~/Cultural_Mapper/AWSTimeSeries/RData/",db,".RData"))
+#save.image(paste0("~/Cultural_Mapper/AWSTimeSeries/RData/",db,".RData"))
 
 
 #### Merging and Cleaning ####
