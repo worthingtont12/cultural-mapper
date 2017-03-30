@@ -1,5 +1,3 @@
-
-
 #### Get the City Data ####
 # Load in the helper functions
 source("Postgres_functions.R")
@@ -52,7 +50,7 @@ data_merge <- data_merge %>%
 clean.topics <- merge_topics(data_merge, "Topic_Data/")
 
 # Remove duplicate files
-rm(loc.data, data_merge)
+#rm(loc.data, data_merge)
 
 # Aggregate count by date and topic
 counts <- clean.topics %>% 
@@ -69,6 +67,9 @@ counts <- clean.topics %>%
 counts <- counts %>% 
   spread(lang.topic,n) %>%
   arrange(date)
+
+# Turn NAs to 0
+counts[is.na(counts)] <- 0
 
 # Top topics, by count
 top_topics <- clean.topics %>%
@@ -91,7 +92,7 @@ arimaTrace <- function(data, ic = "aicc"){
   require(forecast)
   require(dplyr)
   out <- capture.output({
-    fit <- auto.arima(data,ic=ic,trace=T,,stepwise = F, parallel = T)
+    fit <- auto.arima(data,ic=ic,trace=T,stepwise = F, parallel = T)
   })
   fit$trace <- read.table(t <- textConnection(out), sep=":", col.names = c("model",ic)) %>% arrange(AIC)
   close(t)
@@ -128,15 +129,6 @@ extract_coefs <- function(models){
 coefs <- extract_coefs(models)
 smooth.coefs <- extract_coefs(smooth.models)
 
-# Write the outputs to CSV
-write.csv(coefs,paste0("Outputs/",db,"_model_coefficients.csv"))
-write.csv(smooth.coefs,paste0("Outputs/",db,"_smooth_model_coefficients.csv"))
-
-
-#### Correlation Clustering ####
-library(ggplot2)
-library(forecast)
-
 # find the number of unique users by language
 unique.users <- clean.topics %>% 
   group_by(lang.topic) %>%
@@ -151,6 +143,29 @@ top_topics <- clean.topics %>%
   group_by(lang.topic) %>% 
   count() %>%
   arrange(desc(n))
+
+
+coefs2 <- top_topics[1:20,] %>% 
+  rename(tweets = n) %>%
+  left_join(unique.users, by ="lang.topic") %>%
+  mutate (avg = (tweets/users)) %>% 
+  left_join(coefs, by = c("lang.topic"="topic"))
+
+smooth.coefs2 <- top_topics[1:20,] %>% 
+  rename(tweets = n) %>%
+  left_join(unique.users, by ="lang.topic") %>%
+  mutate (avg = (tweets/users)) %>% 
+  left_join(smooth.coefs, by = c("lang.topic"="topic"))
+
+# Write the outputs to CSV
+write.csv(coefs2,paste0("Outputs/",db,"_model_coefficients.csv"))
+write.csv(smooth.coefs2,paste0("Outputs/",db,"_smooth_model_coefficients.csv"))
+
+
+#### Correlation Clustering ####
+library(ggplot2)
+library(forecast)
+
 # Summarize the count by topic, by day
 count.TopicDay <- clean.topics %>%
   mutate(day = wday(tzone, label = T)) %>%
@@ -192,7 +207,7 @@ library(sparcl)
 # colors the leaves of a dendrogram
 png(paste0("Outputs/",db,"-AllTopicsDendrogram.png"),width = 11, height = 8.5, units = "in", res = 300)
 ColorDendrogram(clusters, y = clust, labels = names(clust),
-                main = paste("Dendrogram of Topics in",db),
+                main = paste("Dendrogram of All Topics in",db),
                 xlab = "Topics", sub = "",
                 branchlength = .2)
 dev.off()
@@ -238,12 +253,12 @@ norm.clust <- cutree(clusters2, k =5)
 png(paste0("Outputs/",db,"-AllTopicsNormDendrogram.png"),width = 11, height = 8.5, units = "in", res = 300)
 # colors the leaves of a dendrogram
 ColorDendrogram(clusters2, y = norm.clust, labels = names(norm.clust),
-                main = paste("Dendrogram of in",db),
-                xlab = "Topics", sub = "",
+                main = paste("Dendrogram of All Topics in",db),
+                xlab = "Topics", sub = "Normalized by Tweets per User",
                 branchlength = .2)
 dev.off()
 
-#### Dendrograms for top 10 Topics  ####
+#### Dendrograms for top 20 Topics  ####
 
 tweetcount <- clean.topics %>% 
   mutate(date = as.Date(date,"%d %b %Y")) %>%
@@ -325,7 +340,7 @@ png(paste0("Outputs/",db,"-Top20TopicsNormDendrogram.png"),width = 11, height = 
 # colors the leaves of a dendrogram
 ColorDendrogram(clusters2, y = norm.clust, labels = names(norm.clust), 
                 main = paste("Dendrogram of Top 20 Topics in",db),
-                xlab = "Topics", sub = "",
+                xlab = "Topics", sub = "Normalized by Tweets per User",
                 branchlength = .2)
 dev.off()
 
