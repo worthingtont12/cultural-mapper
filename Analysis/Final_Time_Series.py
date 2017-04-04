@@ -9,7 +9,6 @@ import seaborn as sns
 
 # import data
 from Cleaning import fulldf
-#%matplotlib inline
 # group together topics by cluster assignment and date
 Users = fulldf.groupby(['Date1', 'Cluster', 'top_topic'])[
     'topic_percentage'].aggregate(sum).unstack()
@@ -31,31 +30,36 @@ df["Date"] = Dates
 df["Cluster"] = Clusters
 df["Median_Counts"] = Medians
 
-# Cluster 1 time series
+
 df_cluster1 = df[df.Cluster == 1]
 cluster1_series = pd.Series(df_cluster1["Median_Counts"].as_matrix(), index=df_cluster1["Date"])
-
+print(df_cluster1)
+cluster1_series.describe()
 # Cluster 2 time series
 df_cluster2 = df[df.Cluster == 2]
 cluster2_series = pd.Series(df_cluster2["Median_Counts"].as_matrix(), index=df_cluster2["Date"])
-
+cluster2_series.describe()
 # Cluster 3 time series
 df_cluster3 = df[df.Cluster == 3]
 cluster3_series = pd.Series(df_cluster3["Median_Counts"].as_matrix(), index=df_cluster3["Date"])
-
+cluster3_series.describe()
 # Cluster 4 time series
 df_cluster4 = df[df.Cluster == 4]
 cluster4_series = pd.Series(df_cluster4["Median_Counts"].as_matrix(), index=df_cluster4["Date"])
-
+cluster4_series.describe()
 # Cluster 5 time series
 df_cluster5 = df[df.Cluster == 5]
 cluster5_series = pd.Series(df_cluster5["Median_Counts"].as_matrix(), index=df_cluster5["Date"])
+cluster5_series.describe()
 
 ######################Plotting Entire Time Series With Rolling Average Plots###########
-fig = plt.figure(figsize=(20, 10))
+fig = plt.figure(figsize=(7, 4), dpi=300)
+
 ts = fig.add_subplot(1, 1, 1)
-plt.xlabel('Date')
-plt.ylabel('Median Tweets Per User in Community')
+#fig.set_xlabel('Date', fontsize=8)
+plt.xlabel('Date', fontsize='small')
+
+plt.ylabel('Median Tweets Per User in Community', fontsize=8)
 fig = cluster1_series.plot(color="forestgreen", label='Cluster 1')
 fig = cluster1_series.rolling(window=7, center=False).mean().plot(
     color='lightgreen', linestyle='dashed', label='Cluster 1 Rolling 7 Day Mean')
@@ -68,14 +72,14 @@ fig = cluster3_series.plot(color='indigo', label='Cluster 3')
 fig = cluster3_series.rolling(window=7, center=False).mean().plot(
     color='darkorchid', linestyle='dashed', label='Cluster 3 Rolling 7 Day Mean')
 
-fig = cluster4_series.plot(color='steelblue', label='Cluster 4')
+fig = cluster4_series.plot(color='#ff7f00', label='Cluster 4')
 fig = cluster4_series.rolling(window=7, center=False).mean().plot(
-    color='lightskyblue', linestyle='dashed', label='Cluster 4 Rolling 7 Day Mean')
+    color='#fc8d62', linestyle='dashed', label='Cluster 4 Rolling 7 Day Mean')
 
 fig = cluster5_series.plot(color='indianred', label='Cluster 5')
 fig = cluster5_series.rolling(window=7, center=False).mean().plot(
     color='lightcoral', linestyle='dashed', label='Cluster 5 Rolling 7 Day Mean')
-fig = ts.legend(loc='best')
+fig = ts.legend(loc='best', prop={'size': 4})
 plt.savefig("Graphs/Istanbul/Final_Rollingandpercentage.png")
 plt.close()
 
@@ -93,7 +97,7 @@ df = df.sort_values(by='Day of Week')
 df1 = df[df.Date != '2016-11-09']
 df1 = df[df.Date != '2016-11-02']
 
-###### Day of the Week Series#####
+# ##### Day of the Week Series#####
 # cluster 1
 # before filter
 cluster1 = df[df.Cluster == 1]
@@ -160,8 +164,6 @@ dow_series5 = dow_series5[['Monday', 'Tuesday', 'Wednesday',
                            'Thursday', 'Friday', 'Saturday', 'Sunday']]
 
 
-series5.plot(color='blue', label='Cluster')
-dow_series5.plot(color='blue', linestyle='dashed', label='Cluster')
 # Day of Week Plot
 fig = plt.figure(figsize=(20, 10))
 ts = fig.add_subplot(1, 1, 1)

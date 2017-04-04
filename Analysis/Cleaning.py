@@ -8,7 +8,6 @@ from login_info import user, host, password
 
 # sql command
 from SQL_Commands import Istanbul_Sql
-
 #######Importing and Cleaning######
 # connect to database
 conn = psycopg2.connect(
@@ -34,7 +33,7 @@ fulldf.top_topic = fulldf.top_topic.fillna(value=fulldf.user_lang)
 # stripping date and time from created_at
 fulldf['Date'] = fulldf['tzone'].apply(lambda row: str(row).split()[0])
 fulldf['Time'] = fulldf['tzone'].apply(lambda row: str(row).split()[1])
-
+fulldf['Date']
 # Sorting
 fulldf['Date1'] = pd.to_datetime(fulldf.Date)
 fulldf = fulldf.sort_values(by='Date1')
@@ -52,40 +51,63 @@ community_size = dict(zip(communitysize.index, communitysize.values))
 fulldf["topic_percentage"] = (1 / fulldf["top_topic"].map(community_size))
 
 # Assigning heirarchial clustering results to topics
-cluster_mapping_istanbul = {"Arabic": 1,
-                            "French": 2,
-                            "German": 2,
-                            "Russian": 3,
-                            "English0": 2,
-                            "Turkish0": 2,
-                            "Turkish13": 3,
-                            "Turkish16": 4,
-                            "English1": 2,
-                            "Turkish1": 5,
-                            "English2": 2,
-                            "Turkish2": 5,
-                            "Turkish3": 5,
-                            "Turkish4": 5,
-                            "Turkish5": 5,
-                            "Turkish6": 5,
-                            "Turkish7": 4,
-                            "Turkish8": 5,
-                            "Turkish9": 3}
+cluster_mapping_istanbul = {"ar": 1,
+                            "fr": 2,
+                            "de": 2,
+                            "ru": 3,
+                            "es": 1,
+                            "English_0": 2,
+                            "Turkish_0": 2,
+                            "Turkish_13": 3,
+                            "Turkish_16": 4,
+                            "English_1": 2,
+                            "Turkish_1": 5,
+                            "English_2": 2,
+                            "Turkish_2": 5,
+                            "Turkish_3": 5,
+                            "Turkish_4": 5,
+                            "Turkish_5": 5,
+                            "Turkish_6": 5,
+                            "Turkish_7": 4,
+                            "Turkish_8": 5,
+                            "Turkish_9": 3, }
 
-cluster_mapping_chicago = {0: 4, 1: 4, 2: 4, 3: 4, 4: 4, 5: 4, 6: 4,
-                           7:  3, 8: 5, 9: 2, 10: 1, 11: 2, 12: 2, 13: 2, 14: 2, 15: 2, 16: 2, 17: 2, 18: 5, 'es': 5}
-
-cluster_mapping_la = {"Arabic": 1,
-                      "French": 2,
-                      "Japanese": 3,
-                      "Portuguese": 4,
-                      "Spanish": 2,
+cluster_mapping_chicago = {"es": 1,
+                           0: 2,
+                           10: 3,
+                           11: 4,
+                           12: 4,
+                           13: 4,
+                           14: 4,
+                           15: 4,
+                           16: 4,
+                           17: 4,
+                           18: 1,
+                           1: 2,
+                           2: 2,
+                           3: 2,
+                           4: 2,
+                           5: 2,
+                           6: 2,
+                           7: 5,
+                           8: 1,
+                           9: 4,
+                           'ar': 7}
+cluster_mapping_la = {"ar": 1,
+                      "fr": 2,
+                      "ja": 3,
+                      "pt": 4,
+                      "es": 2,
                       0: 3,
                       12: 5,
                       15: 5,
                       16: 5,
                       17: 5,
                       19: 5,
+                      1: 3,
+                      2: 3,
+                      3: 3,
+                      4: 3,
                       5: 3,
                       6: 3,
                       7: 3,
