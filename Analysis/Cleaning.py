@@ -7,17 +7,17 @@ import psycopg2
 from login_info import user, host, password
 
 # sql command
-from SQL_Commands import Istanbul_Sql
+from SQL_Commands import LA_Sql
 #######Importing and Cleaning######
 # connect to database
 conn = psycopg2.connect(
-    "dbname='culturalmapper_Istanbul' user=%s host=%s password=%s" % (user, host, password))
+    "dbname='culturalmapper_LA' user=%s host=%s password=%s" % (user, host, password))
 
 # import csv locally
 df = pd.read_csv(
-    "/Users/tylerworthington/Git_Repos/Data/Cultural_Mapper_Data/Istanbul/Combined_Istanbul_035.csv")
+    "/Users/tylerworthington/Git_Repos/Data/Cultural_Mapper_Data/LA/English_LA/035Data/035Data/English_LA.csv")
 # Query database for data within interested time frame
-primary = psql.read_sql(Istanbul_Sql, conn)
+primary = psql.read_sql(LA_Sql, conn)
 
 # Dropping uneeded variables
 df.drop(['Unnamed: 0'], inplace=True, axis=1)
@@ -114,5 +114,5 @@ cluster_mapping_la = {"ar": 1,
                       8: 5,
                       9: 5}
 
-fulldf["Cluster"] = fulldf["top_topic"].map(cluster_mapping_istanbul)
+fulldf["Cluster"] = fulldf["top_topic"].map(cluster_mapping_la)
 fulldf["Cluster"].dropna(inplace=True)

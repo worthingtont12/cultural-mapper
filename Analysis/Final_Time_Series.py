@@ -53,13 +53,14 @@ cluster5_series = pd.Series(df_cluster5["Median_Counts"].as_matrix(), index=df_c
 cluster5_series.describe()
 
 ######################Plotting Entire Time Series With Rolling Average Plots###########
-fig = plt.figure(figsize=(7, 4), dpi=300)
+fig = plt.figure(figsize=(8, 3.75), dpi=300)
 
 ts = fig.add_subplot(1, 1, 1)
 #fig.set_xlabel('Date', fontsize=8)
 plt.xlabel('Date', fontsize='small')
 
 plt.ylabel('Median Tweets Per User in Community', fontsize=8)
+plt.ylim(ymax=.8, ymin=0)
 fig = cluster1_series.plot(color="forestgreen", label='Cluster 1')
 fig = cluster1_series.rolling(window=7, center=False).mean().plot(
     color='lightgreen', linestyle='dashed', label='Cluster 1 Rolling 7 Day Mean')
@@ -80,7 +81,7 @@ fig = cluster5_series.plot(color='indianred', label='Cluster 5')
 fig = cluster5_series.rolling(window=7, center=False).mean().plot(
     color='lightcoral', linestyle='dashed', label='Cluster 5 Rolling 7 Day Mean')
 fig = ts.legend(loc='best', prop={'size': 4})
-plt.savefig("Graphs/Istanbul/Final_Rollingandpercentage.png")
+plt.savefig("Graphs/LA/Final_Rollingandpercentage.png", dpi=300)
 plt.close()
 
 #########Day of the week plots##########
@@ -190,4 +191,4 @@ series5.plot(color='royalblue', label='Cluster 5')
 dow_series5.plot(color='royalblue', linestyle='dashed', label='Cluster 5: After Outliers Removed')
 
 fig = ts.legend(loc='best')
-plt.savefig("Graphs/Istanbul/Final_Day_of_The_Week.png")
+plt.savefig("Graphs/LA/Final_Day_of_The_Week.png")
