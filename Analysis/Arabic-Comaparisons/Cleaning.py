@@ -16,7 +16,6 @@ conn = psycopg2.connect(
 # import csv locally
 df = pd.read_csv(
     "/Users/tylerworthington/Git_Repos/Data/Cultural_Mapper_Data/LA/English_LA/035Data/035Data/English_LA.csv")
-
 # Query database for data within interested time frame
 primary = psql.read_sql(LA_Sql, conn)
 
@@ -28,19 +27,16 @@ len(primary)
 
 # Merge datasets
 fulldf = pd.merge(primary, df, on=['user_id'], how='left')
-
-# dropping where I don't have topic assignments
 fulldf.top_topic = fulldf.top_topic.fillna(value=fulldf.user_lang)
+# dropping where I don't have topic assignments
 
 # stripping date and time from created_at
 fulldf['Date'] = fulldf['tzone'].apply(lambda row: str(row).split()[0])
 fulldf['Time'] = fulldf['tzone'].apply(lambda row: str(row).split()[1])
 fulldf['Date']
-
 # Sorting
-fulldf['Date1'] = pd.to_datetime(fulldf.Date)  # convert to datetime
+fulldf['Date1'] = pd.to_datetime(fulldf.Date)
 fulldf = fulldf.sort_values(by='Date1')
-
 # converting to categorical variable
 fulldf["top_topic"] = fulldf["top_topic"].astype('category')
 
@@ -97,7 +93,6 @@ cluster_mapping_chicago = {"es": 1,
                            8: 1,
                            9: 4,
                            'ar': 7}
-
 cluster_mapping_la = {"ar": 1,
                       "fr": 2,
                       "ja": 3,
@@ -119,8 +114,5 @@ cluster_mapping_la = {"ar": 1,
                       8: 5,
                       9: 5}
 
-# mapping topic assignmnets to cluster assignments
 fulldf["Cluster"] = fulldf["top_topic"].map(cluster_mapping_la)
-
-# dropping whoever doesnt have cluster assignments
 fulldf["Cluster"].dropna(inplace=True)

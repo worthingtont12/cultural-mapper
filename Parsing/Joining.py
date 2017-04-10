@@ -4,9 +4,11 @@ import pandas.io.sql as psql
 import psycopg2
 from Parsing.login_info import user, host, password
 
+# connect to db
 conn = psycopg2.connect(
     "dbname='culturalmapper_LA' user=%s host=%s password=%s" % (user, host, password))
 
+# query database
 primary = psql.read_sql(
     "SELECT * FROM la_city_primary WHERE created_at > '2016-10-28' AND created_at < '2017-01-28'", conn)
 quoted = psql.read_sql(
@@ -33,7 +35,6 @@ primary1 = pd.merge(primary, quoted, on='id', how='left')
 
 # merge with user desc
 primary2 = pd.merge(primary1, user_desc, on=['user_id', 'id'], how='left')
-
 
 # free up memory
 del primary1, primary, quoted, user_desc

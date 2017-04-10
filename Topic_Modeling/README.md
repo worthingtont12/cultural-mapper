@@ -1,8 +1,9 @@
 # Procedure
-The topic modeling script in the root directory pulls in the cleaned data created from the files in the Parsing folder.The script takes advantage of parallelization using the ldamulticore function in the gensim module. After reading in the data it creates a TF-IDF matrix that is used for topic modeling. The topic modeling algorithm used is Latent Dirichlet Allocation.
+The topic modeling scripts in the this directory pull in the cleaned data created from the files in the Parsing folder.The script takes advantage of parallelization using the ldamulticore function in the gensim module. After reading in the data it creates a TF-IDF matrix that is used for topic modeling. The topic modeling algorithm used is Latent Dirichlet Allocation.
 
-To run script navigate to root directory and run this line:
+To run script move topic modeling file to root directory and run this following line:
 ```shell
+$ mv Multicore_Topic_Modeling.py ~/Cultural_Mapper
 $ python Multicore_Topic_Modeling.py > Topic_Modeling/desiredoutputpath.txt
 ```
 

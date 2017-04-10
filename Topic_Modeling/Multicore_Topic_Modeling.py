@@ -5,6 +5,7 @@ from operator import itemgetter
 from gensim import corpora, models
 from gensim.models.ldamulticore import LdaMulticore
 # local modules
+# move this file to root directory in order for this to load properly
 from Parsing.Language_processing import df_en
 # logging
 logging.basicConfig(format='%(asctime)s : %(levelname)s : %(message)s', level=logging.INFO)
@@ -12,17 +13,17 @@ logging.basicConfig(format='%(asctime)s : %(levelname)s : %(message)s', level=lo
 # functions
 
 
-def max_val(l, i):
+def max_val(maxed_value, index):
     """
     Function takes the highest value in a list within a list.
 
     Parameters
     ----------
-    l : .
-    i : .
+    maxed_value : Value to operate on.
+    index : First value of list.
 
     """
-    return max(enumerate(map(itemgetter(i), l)), key=itemgetter(1))
+    return max(enumerate(map(itemgetter(index), maxed_value)), key=itemgetter(1))
 
 
 # import data
@@ -45,8 +46,12 @@ class MyCorpus(object):
 
 
 corpus = MyCorpus()
-corpora.MmCorpus.serialize('Topic_Modeling/Data/75Data/en_corpus.mm', corpus)  # Save corpus to disk
-corpus = corpora.MmCorpus('Topic_Modeling/Data/75Data/en_corpus.mm')  # Load corpus
+
+# Save corpus to disk
+corpora.MmCorpus.serialize('Topic_Modeling/Data/75Data/en_corpus.mm', corpus)
+
+# Load corpus
+corpus = corpora.MmCorpus('Topic_Modeling/Data/75Data/en_corpus.mm')
 
 # creating tfidf matrix
 tfidf = models.TfidfModel(corpus)
@@ -65,7 +70,7 @@ K = lda.num_topics
 topicWordProbMat = lda.print_topics(K)
 print(topicWordProbMat)
 
-# assigning Topic to documents
+# assigning Topic to documents with probability fit
 topic_assignment = []
 topic_probabilities = []
 for n in range(len(df_en['final_combined_text'])):
@@ -74,8 +79,6 @@ for n in range(len(df_en['final_combined_text'])):
 
 df_en['top_topic'] = topic_assignment
 df_en['topic_prob'] = topic_probabilities
-
-print(df_en['top_topic'].value_counts())
 
 # saving results
 lda.save('Topic_Modeling/Data/en_lda.model')

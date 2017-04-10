@@ -1,4 +1,4 @@
-"""Exploratory Time Series Analysis of Topic Activity"""
+"""Exploratory Time Series Analysis of Topic Activity."""
 import pandas as pd
 from pandas.tools.plotting import lag_plot
 import statsmodels.api as sm
@@ -16,6 +16,8 @@ from Cleaning import fulldf
 def test_stationarity(timeseries):
     """
     Simplification of the adfuller function in the statsmodels module to only display necessary statistics.
+    ----------
+    timeseries : Time series of interest. Must be numpy series object.
     """
     # Perform Dickey-Fuller test:
     print('Dickey-Fuller Test:')
@@ -38,6 +40,7 @@ topics = list(topics)
 
 # loop through all topics to create graphs for each
 for i in topics:
+    # break line for outputs
     print("################Topic" + str(i) + "Results#################")
 
     # subset where topic equals i
@@ -67,6 +70,7 @@ for i in topics:
     fig = Users.rolling(window=6, center=False).mean().plot(label='Rolling 7 Day Mean')
     fig = Users.rolling(window=12, center=False).mean().plot(label='Rolling 14 Day Mean')
     fig = ts.legend(loc='best')
+    # save plot
     plt.savefig("Graphs/Chicago/Time_Series/Rolling_Average_Plots_Topic" + str(i) + ".png")
     plt.close()
 
@@ -76,6 +80,7 @@ for i in topics:
     fig = sm.graphics.tsa.plot_acf(Users, lags=40, ax=ax1)
     ax2 = fig.add_subplot(212)
     fig = sm.graphics.tsa.plot_pacf(Users, lags=40, ax=ax2)
+    # save plot
     plt.savefig("Graphs/Chicago/Time_Series/acf_pacf_plot_Topic" + str(i) + ".png")
     plt.close()
 
@@ -90,6 +95,7 @@ for i in topics:
     fig = sm.graphics.tsa.plot_acf(Usersdiff.dropna(inplace=False), lags=40, ax=ax1)
     ax2 = fig.add_subplot(212)
     fig = sm.graphics.tsa.plot_pacf(Usersdiff.dropna(inplace=False), lags=40, ax=ax2)
+    # save plot
     plt.savefig("Graphs/Chicago/Time_Series/Differenced_acf_pacf_plot_Topic" + str(i) + ".png")
     plt.close()
 
@@ -108,5 +114,6 @@ for i in topics:
     plt.plot(Usersdiff.dropna(inplace=False))
     plt.plot(fit_AR.fittedvalues + Usersdiff.dropna(inplace=False).mean(), color='red')
     plt.title('Model Fit')
+    # save plot
     plt.savefig("Graphs/Chicago/Time_Series/fitted_plot_Topic" + str(i) + ".png")
     plt.close()

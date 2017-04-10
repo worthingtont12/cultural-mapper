@@ -1,4 +1,5 @@
-"""Uncovering Structure in TF-IDF."""
+"""Uncovering Structure in TF-IDF. Unfortantely this was not useful as the tf-idf matrixes were to sparse. Thus, when they were permuted they were virtually similar. A future approach should look at singular value decomposition to collapse the dimension space or perhaps word2vec.
+"""
 import logging
 import numpy as np
 import pandas as pd
@@ -7,14 +8,15 @@ import sklearn.feature_extraction.text as text
 from sklearn import model_selection
 from Parsing.Language_processing import df_en
 
+# log updates
 logging.basicConfig(format='%(asctime)s : %(levelname)s : %(message)s', level=logging.INFO)
 
 # import data
 df_en['final_combined_text'] = df_en['final_combined_text'].apply(str)
+
 # creating tfidf matrix
 vectorizer = text.TfidfVectorizer(max_df=0.075, min_df=1000)
 dtm = vectorizer.fit_transform(df_en.final_combined_text).toarray()
-
 corpus_tfidf = pd.DataFrame(dtm)
 
 # permute the ifidf
@@ -33,7 +35,7 @@ tfidfs = pd.concat([random_corpus_tfidf, corpus_tfidf])
 X = tfidfs[tfidfs.columns[:-1]]
 Y = np.array(tfidfs.loc[:, ['random']])
 
-# Random Forest
+# Random Forest Model
 seed = 7
 rf = RandomForestClassifier(n_jobs=-1)
 
