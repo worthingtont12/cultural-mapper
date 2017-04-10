@@ -9,6 +9,7 @@ import seaborn as sns
 
 # import data
 from Cleaning import fulldf
+
 # group together topics by cluster assignment and date
 Users = fulldf.groupby(['Date1', 'Cluster', 'top_topic'])[
     'topic_percentage'].aggregate(sum).unstack()
@@ -30,10 +31,9 @@ df["Date"] = Dates
 df["Cluster"] = Clusters
 df["Median_Counts"] = Medians
 
-
-df_cluster1 = df[df.Cluster == 1]
+# Cluster 1 time series
+df_cluster1 = df[df.Cluster == 1]  # subset by cluster assignment
 cluster1_series = pd.Series(df_cluster1["Median_Counts"].as_matrix(), index=df_cluster1["Date"])
-print(df_cluster1)
 cluster1_series.describe()
 # Cluster 2 time series
 df_cluster2 = df[df.Cluster == 2]
@@ -53,14 +53,18 @@ cluster5_series = pd.Series(df_cluster5["Median_Counts"].as_matrix(), index=df_c
 cluster5_series.describe()
 
 ######################Plotting Entire Time Series With Rolling Average Plots###########
+# specifing figure size and pixel ratio
 fig = plt.figure(figsize=(8, 3.75), dpi=300)
-
 ts = fig.add_subplot(1, 1, 1)
-#fig.set_xlabel('Date', fontsize=8)
+
+# format of xlabel
 plt.xlabel('Date', fontsize='small')
 
+# format of ylabel
 plt.ylabel('Median Tweets Per User in Community', fontsize=8)
 plt.ylim(ymax=.8, ymin=0)
+
+# Time series plots of raw values with roling averages
 fig = cluster1_series.plot(color="forestgreen", label='Cluster 1')
 fig = cluster1_series.rolling(window=7, center=False).mean().plot(
     color='lightgreen', linestyle='dashed', label='Cluster 1 Rolling 7 Day Mean')
@@ -80,32 +84,38 @@ fig = cluster4_series.rolling(window=7, center=False).mean().plot(
 fig = cluster5_series.plot(color='indianred', label='Cluster 5')
 fig = cluster5_series.rolling(window=7, center=False).mean().plot(
     color='lightcoral', linestyle='dashed', label='Cluster 5 Rolling 7 Day Mean')
+# legend
 fig = ts.legend(loc='best', prop={'size': 4})
+
+# save plot
 plt.savefig("Graphs/LA/Final_Rollingandpercentage.png", dpi=300)
 plt.close()
 
 #########Day of the week plots##########
+# map date to day of the week
 df['Day of Week'] = df['Date'].apply(lambda row: row.weekday())
 
-# Mapping integer to name of day
+# Mapping integer result from before to name of day
 map_days = {0: "Monday", 1: "Tuesday", 2: "Wednesday",
             3: "Thursday", 4: "Friday", 5: "Saturday", 6: "Sunday"}
-
 df['Day of Week'] = df['Day of Week'].map(map_days)
 
+# sort by day of the week
 df = df.sort_values(by='Day of Week')
-# filter out outlier days
+
+# filter out outlier days ie Election Day , World Series
 df1 = df[df.Date != '2016-11-09']
 df1 = df[df.Date != '2016-11-02']
 
 # ##### Day of the Week Series#####
 # cluster 1
-# before filter
+# before outliers filtered out
 cluster1 = df[df.Cluster == 1]
 series1 = cluster1.groupby(['Day of Week'])[
     'Median_Counts'].aggregate(stat.mean)
 series1 = series1[['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']]
-# after filter
+
+# after outliers filtered out
 df1_cluster1 = df1[df1.Cluster == 1]
 dow_series1 = df1_cluster1.groupby(['Day of Week'])[
     'Median_Counts'].aggregate(stat.mean)
@@ -113,12 +123,13 @@ dow_series1 = dow_series1[['Monday', 'Tuesday', 'Wednesday',
                            'Thursday', 'Friday', 'Saturday', 'Sunday']]
 
 # cluster 2
-# before filter
+# before outliers filtered out
 cluster2 = df[df.Cluster == 2]
 series2 = cluster2.groupby(['Day of Week'])[
     'Median_Counts'].aggregate(stat.mean)
 series2 = series2[['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']]
-# after filter
+
+# after outliers filtered out
 df1_cluster2 = df1[df1.Cluster == 2]
 dow_series2 = df1_cluster2.groupby(['Day of Week'])[
     'Median_Counts'].aggregate(stat.mean)
@@ -126,12 +137,13 @@ dow_series2 = dow_series2[['Monday', 'Tuesday', 'Wednesday',
                            'Thursday', 'Friday', 'Saturday', 'Sunday']]
 
 # cluster 3
-# before filter
+# before outliers filtered out
 cluster3 = df[df.Cluster == 3]
 series3 = cluster3.groupby(['Day of Week'])[
     'Median_Counts'].aggregate(stat.mean)
 series3 = series3[['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']]
-# after filter
+
+# after outliers filtered out
 df1_cluster3 = df1[df1.Cluster == 3]
 dow_series3 = df1_cluster3.groupby(['Day of Week'])[
     'Median_Counts'].aggregate(stat.mean)
@@ -139,12 +151,13 @@ dow_series3 = dow_series3[['Monday', 'Tuesday', 'Wednesday',
                            'Thursday', 'Friday', 'Saturday', 'Sunday']]
 
 # cluster 4
-# before filter
+# before outliers filtered out
 cluster4 = df[df.Cluster == 4]
 series4 = cluster4.groupby(['Day of Week'])[
     'Median_Counts'].aggregate(stat.mean)
 series4 = series4[['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']]
-# after filter
+
+# after outliers filtered out
 df1_cluster4 = df1[df1.Cluster == 4]
 dow_series4 = df1_cluster4.groupby(['Day of Week'])[
     'Median_Counts'].aggregate(stat.mean)
@@ -152,12 +165,13 @@ dow_series4 = dow_series4[['Monday', 'Tuesday', 'Wednesday',
                            'Thursday', 'Friday', 'Saturday', 'Sunday']]
 
 # cluster 5
-# before filter
+# before outliers filtered out
 cluster5 = df[df.Cluster == 5]
 series5 = cluster5.groupby(['Day of Week'])[
     'Median_Counts'].aggregate(stat.mean)
 series5 = series5[['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']]
-# after filter
+
+# after outliers filtered out
 df1_cluster5 = df1[df1.Cluster == 5]
 dow_series5 = df1_cluster5.groupby(['Day of Week'])[
     'Median_Counts'].aggregate(stat.mean)
@@ -166,29 +180,38 @@ dow_series5 = dow_series5[['Monday', 'Tuesday', 'Wednesday',
 
 
 # Day of Week Plot
+# specify plot size
 fig = plt.figure(figsize=(20, 10))
 ts = fig.add_subplot(1, 1, 1)
+
+# xlabel
 plt.xlabel('Day of Week')
+
+# ylabel
 plt.ylabel('Median Tweets Per User in Community')
-# Cluster 1
+
+# Cluster 1 Before and After Filtering
 series1.plot(color='steelblue', label='Cluster 1')
 dow_series1.plot(color='steelblue', linestyle='dashed', label='Cluster 1: After Outliers Removed')
 
-# Cluster 2
+# Cluster 2 Before and After Filtering
 series2.plot(color='indigo', label='Cluster 2')
 dow_series2.plot(color='indigo', linestyle='dashed', label='Cluster 2: After Outliers Removed')
 
-# Cluster 3
+# Cluster 3 Before and After Filtering
 series3.plot(color='forestgreen', label='Cluster 3')
 dow_series3.plot(color='forestgreen', linestyle='dashed', label='Cluster 3: After Outliers Removed')
 
-# Cluster 4
+# Cluster 4 Before and After Filtering
 series4.plot(color='indianred', label='Cluster 4')
 dow_series4.plot(color='indianred', linestyle='dashed', label='Cluster 4: After Outliers Removed')
 
-# Cluster 5
+# Cluster 5 Before and After Filtering
 series5.plot(color='royalblue', label='Cluster 5')
 dow_series5.plot(color='royalblue', linestyle='dashed', label='Cluster 5: After Outliers Removed')
 
+# legend
 fig = ts.legend(loc='best')
+
+# save plot
 plt.savefig("Graphs/LA/Final_Day_of_The_Week.png")

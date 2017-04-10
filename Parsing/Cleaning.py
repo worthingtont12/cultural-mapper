@@ -2,6 +2,7 @@
 import re
 from Parsing.Joining import primary2
 import pandas as pd
+
 # Pulls in data frame created in previous sheet.
 # See README for describtion of process
 df = primary2
@@ -53,6 +54,7 @@ df = df[~df['text'].str.contains("Want to work in")]
 df = df[~df['text'].str.contains("Can you recommend anyone for this")]
 df = df[~df['text'].str.contains("CareerArc")]
 
+# filter in "good" sources
 df1 = df[df['source'].str.contains("for Blackberry")]
 df2 = df[df['source'].str.contains("for Android")]
 df3 = df[df['source'].str.contains("for iOS")]
@@ -65,6 +67,7 @@ df9 = df[df['source'].str.contains("Instagram")]
 df10 = df[df['source'].str.contains("Foursquare")]
 df11 = df[df['source'].str.contains("tron")]
 
+# concatenate filtered results
 dfs = [df1, df2, df3, df4, df5, df6, df7, df8, df9, df10, df11]
 dffiltered = pd.concat(dfs)
 
@@ -76,6 +79,7 @@ dffiltered = dffiltered[~dffiltered['user_id'].str.contains("37966969")]
 
 # number of documents
 print(len(dffiltered['user_id']))
+
 # transforming language variable for clearer interpretation
 map_lang = {'en': "English", 'fr': "French", 'und': "Unknown", 'ar': "Arabic", 'ja': "Japanese", 'es': "Spanish",
             'de': "German", 'it': 'Italian', 'id': "Indonesian", "pt": "Portuguese", 'ko': "Korean", 'tr': "Turkish",
@@ -113,13 +117,14 @@ dffiltered['c_q_user_lang'] = dffiltered[['user_id', 'q_user_lang']].groupby(
 # number of users
 print(len(dffiltered['user_id']))
 
-# drop non unique observations
-# dffiltered = dffiltered.loc[~dffiltered['user_id'].duplicated()]
+# dropping unneeded variables
 dffiltered.drop(['created_at', 'id', 'source', 'text',
                  'text_lang', 'user_location', 'user_handle', 'user_lang', 'q_id',
                  'q_created_at', 'q_text', 'q_text_lang', 'q_user_id',
                  'q_user_location', 'q_user_handle', 'q_user_lang'], inplace=True,
                 axis=1)
+
+# drop non unique observations
 dffiltered.drop_duplicates(subset='user_id', inplace=True)
 
 # handling @,#, and URL's
@@ -128,7 +133,7 @@ mentions = []
 links = []
 hashtags = []
 
-# Iterate over the text, extracting and adding
+# Iterate over the text, extracting links, hashtags, and mentions
 
 for tweet in dffiltered['author.text']:
     mentions.append(re.findall(r'@\S*', tweet))

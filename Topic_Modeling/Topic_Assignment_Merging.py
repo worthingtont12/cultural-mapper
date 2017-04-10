@@ -1,7 +1,8 @@
-"""Merging Different Language Topic Assignments"""
+"""Merging Together Different Language Topic Assignments"""
 import pandas as pd
 import matplotlib.pyplot as plt
 
+# importing data
 english = pd.read_csv(
     "/Users/tylerworthington/Git_Repos/Data/Cultural_Mapper_Data/Istanbul/English/035Data/English_Istanbul.csv")
 turkish = pd.read_csv(
@@ -19,5 +20,6 @@ english.top_topic = english.top_topic.apply(lambda row: "English_" + row)
 Istanbul = pd.concat([english, turkish])
 Istanbul.tail()
 
+# write out to csv
 Istanbul.to_csv(
     '/Users/tylerworthington/Git_Repos/Data/Cultural_Mapper_Data/Istanbul/Combined_Istanbul_035.csv')
