@@ -9,6 +9,7 @@ Over the course of 90 days from 10/29/16-1/26/17 we collected tweets from 3 regi
 * Los Angeles, CA, USA
 * Chicago, IL, USA
 * Istanbul, Turkey
+
 We chose these 3 regions because we wanted 3 highly populated diverse areas but also wanted to see if we could create a methodology that can be used on cities domestic and international.
 
 # Directory
@@ -19,8 +20,6 @@ We chose these 3 regions because we wanted 3 highly populated diverse areas but 
 * Parsing - Files used to clean and process the data.
 * SQL Queries - Important queries used throughout project.
 * Topic Modeling - Implemented topic modeling to cluster twitter users.
-
-
 
 # Purpose
 This project was completed for the Data Science Institute at UVa in fulfillment of the capstone project for the Master's of Science in Data Science.  
