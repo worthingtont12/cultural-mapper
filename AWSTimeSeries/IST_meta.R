@@ -1,5 +1,5 @@
 # Database name for string
- db <- "Istanbul"
+db <- "Istanbul"
 
 # Bounding Box for Istanbul
 bbox <- c(28.448009, 40.802731, 29.45787, 41.23595)
