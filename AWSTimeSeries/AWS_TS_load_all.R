@@ -49,7 +49,7 @@ data_merge <- data_merge %>%
 clean.topics <- merge_topics(data_merge, "Topic_Data/")
 
 # Remove duplicate files
-#rm(loc.data, data_merge)
+rm(loc.data, data_merge)
 
 # Aggregate count by date and topic
 counts <- clean.topics %>% 
@@ -80,12 +80,6 @@ top_topics <- clean.topics %>%
 #### Smoothing and ARIMA modeling ####
 library(forecast)
 
-# Apply 7-day rolling average
-counts_filtered <- apply(counts[,-1],2, stats::filter, rep(1/7,7))
-
-# Rebind to dates
-counts_filtered <- cbind(counts$date, as.data.frame(counts_filtered))
-
 # find the number of unique users by language
 unique.users <- clean.topics %>% 
   group_by(lang.topic) %>%
@@ -113,7 +107,6 @@ activityPerUser[is.na(activityPerUser)] <- 0
 
 # Read the coefficients from CSV
 coefs <- read.csv(paste0("Outputs/",db,"_model_coefficients.csv"))
-smooth.coefs <- read.csv(paste0("Outputs/",db,"_smooth_model_coefficients.csv"))
 
 #### Forecasting ####
 
@@ -132,7 +125,7 @@ test <- activityPerUser %>%
 # p,d, and q are standard ARIMA parameters, with s being the period
 # for seasonality, if applicable.
 
-fit <- function(x,h,p,d,q,P=0,D=0,Q=0,s){
+fit <- function(x,h,p,d,q,P=0,D=0,Q=0,s=1){
   forecast(Arima(x, order = c(p,d,q), seasonal = c(P,D,Q,s)), h=h)
 }
 
@@ -146,7 +139,7 @@ for(topic.i in names(train)[2:ncol(train)]){
     select(lang.topic, p,d,q) %>%
     filter (lang.topic == topic.i)
   for (i in 1:7){
-    CVresults <- tsCV(train[,topic.i], fit2, h=i, p = params$p, d = params$d, q= params$q)
+    CVresults <- tsCV(train[,topic.i], fit, h=i, p = params$p, d = params$d, q= params$q)
     CVmodels[CVmodels$lang.topic == topic.i,i+1] <- sum(CVresults[!is.na(CVresults)]^2)/sum(!is.na(CVresults))
   }
 }
