@@ -1,5 +1,6 @@
 corpus.mm
 corpus.mm.index
+Cultural_Mapper/Analysis/login_info.py
 Topic_Modeling/corpus.mm
 Topic_Modeling/corpus.mm.index
 Topic_Modeling/Data/en_corpus.mm
@@ -22,6 +23,7 @@ Data_Collection/Chicago/keys.py
 Data_Collection/Instanbul/keys.py
 Parsing/__pycache__
 .Rproj.user
+__pycache__
 
 Data/Queries/.Rhistory
 
@@ -36,7 +38,6 @@ Data/Queries/Istanbul.csv
 
 Output/Code/.RData
 
-Output/Code/.RData
 
 ConvexHulls/keys.R
 
@@ -57,3 +58,5 @@ Modelling_SMOTE/CHIData.RData
 *.RData
 
 Mapping/Mapping.Rproj
+
+AWSTimeSeries/keys.R

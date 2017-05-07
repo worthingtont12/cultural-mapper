@@ -10,7 +10,8 @@ df = dffiltered
 
 
 def process(text, lang):
-    """Function to deal with tokenizing, stemming or lemmantizing, and stop word filtering.
+    """
+    Function to deal with tokenizing, stemming or lemmantizing, and stop word filtering.
 
     Parameters
     ----------
@@ -50,6 +51,7 @@ df['final_combined_text'] = df[['cleaned_user_desc', 'cleaned_q_author_text',
 df['final_combined_text'] = df['final_combined_text'].apply(text_clean)
 df['final_combined_text'] = df['final_combined_text'].apply(str)
 
+print(df.shape)
 # Stop Words
 # english
 english = stopwords.words('english')

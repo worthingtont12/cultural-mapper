@@ -1,5 +1,4 @@
 """Topic Modeling on Authored Tweets Using Parralelized Latent Dirichlet Allocation."""
-import smtplib
 import logging
 from multiprocessing import cpu_count
 from operator import itemgetter
@@ -7,15 +6,15 @@ from gensim import corpora, models
 from gensim.models.ldamulticore import LdaMulticore
 # local modules
 from Parsing.Language_processing import df_en
-from Parsing.login_info import username, password2, recipient1
 # logging
 logging.basicConfig(format='%(asctime)s : %(levelname)s : %(message)s', level=logging.INFO)
 
-# Returns highest list of list
+# functions
 
 
 def max_val(l, i):
-    """Function takes the highest value in a list within a list.
+    """
+    Function takes the highest value in a list within a list.
 
     Parameters
     ----------
@@ -33,7 +32,7 @@ df_en['final_combined_text'] = df_en['final_combined_text'].apply(str)
 dictionary = corpora.Dictionary(line.lower().split() for line in df_en['final_combined_text'])
 
 # dimension reduction
-dictionary.filter_extremes(no_below=.04, no_above=0.75)
+dictionary.filter_extremes(no_below=1000, no_above=0.75)
 
 # formatting corpus for use
 
@@ -46,8 +45,8 @@ class MyCorpus(object):
 
 
 corpus = MyCorpus()
-corpora.MmCorpus.serialize('Topic_Modeling/Data/en_corpus.mm', corpus)  # Save corpus to disk
-corpus = corpora.MmCorpus('Topic_Modeling/Data/en_corpus.mm')  # Load corpus
+corpora.MmCorpus.serialize('Topic_Modeling/Data/75Data/en_corpus.mm', corpus)  # Save corpus to disk
+corpus = corpora.MmCorpus('Topic_Modeling/Data/75Data/en_corpus.mm')  # Load corpus
 
 # creating tfidf matrix
 tfidf = models.TfidfModel(corpus)
@@ -76,7 +75,9 @@ for n in range(len(df_en['final_combined_text'])):
 df_en['top_topic'] = topic_assignment
 df_en['topic_prob'] = topic_probabilities
 
+print(df_en['top_topic'].value_counts())
+
 # saving results
 lda.save('Topic_Modeling/Data/en_lda.model')
-df_en.to_csv('Topic_Modeling/Data/English_LA.csv',
+df_en.to_csv('Topic_Modeling/Data/75Data/English_LA.csv',
              columns=['user_id', 'user_language', 'top_topic', 'topic_prob'])

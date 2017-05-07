@@ -1,3 +1,4 @@
+"""This is a listener for tweets in Los Angeles."""
 import datetime
 import time
 import sys

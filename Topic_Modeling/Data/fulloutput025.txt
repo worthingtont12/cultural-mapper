@@ -1,0 +1,37 @@
+17925906
+English       17617815
+Spanish         125438
+Portuguese       47782
+Japanese         43777
+French           20159
+Arabic           12204
+Russian          11289
+Turkish           6251
+Italian           6188
+German            6028
+Korean            3941
+Chinese           3832
+Polish            3565
+Thai              2923
+Dutch             2390
+Indonesian        1644
+Romanian          1233
+Swedish           1179
+Ukrainian          635
+Finnish            600
+Vietnamese         530
+Danish             458
+Hungarian          291
+Hebrew             242
+Filipino           163
+Czech              101
+Norwegian           61
+Persian             44
+Malay               15
+Hindi                7
+Name: user_language, dtype: int64
+17925906
+(373602, 22)
+LdaModel(num_terms=4409, num_topics=20, decay=0.5, chunksize=2000)
+<type 'list'>
+[(0, u'0.007*"\'la\']" + 0.005*"\'tahoe\'," + 0.005*"\'lake\'," + 0.002*"\'rose\'," + 0.002*"u\'adventure\'," + 0.002*"\'cat\'," + 0.002*"\'bowl\'," + 0.001*"\'makeup\'," + 0.001*"\'ppl\'," + 0.001*"\'parade\',"'), (1, u'0.007*"\'angeles\']" + 0.006*"[\'live\'," + 0.006*"[\'instagram\'," + 0.004*"\'center\']" + 0.004*"\'night\']" + 0.003*"\'right\']" + 0.003*"u\'staple\'," + 0.003*"\'babe\'," + 0.002*"\'landed\'," + 0.002*"\'lucky\',"'), (2, u'0.007*"\'universal\'," + 0.006*"u\'studio\'," + 0.005*"[\'snapchat\'," + 0.004*"[\'la\'," + 0.004*"[\'always\'," + 0.004*"\'thank\']" + 0.004*"\'na\'," + 0.003*"\'hollywood\']" + 0.003*"u\'nigga\'," + 0.002*"u\'vibe\',"'), (3, u'0.003*"\'university\'," + 0.002*"\'happiest\'," + 0.002*"\'youtube\'," + 0.001*"\'king\'," + 0.001*"\'tasting\'," + 0.001*"\'senior\'," + 0.001*"\'earth\'," + 0.001*"u\'suck\'," + 0.001*"\'lt\'," + 0.001*"\'ppl\',"'), (4, u'0.004*"\'hollywood\']" + 0.002*"\'boyfriend\'," + 0.002*"u\'nigga\'," + 0.002*"\'asf\'," + 0.002*"u\'bitch\'," + 0.002*"\'tryna\'," + 0.002*"\'daddy\'," + 0.002*"\'gay\'," + 0.002*"\'cuz\'," + 0.001*"\'concert\',"'), (5, u'0.004*"[\'official\'," + 0.003*"\'womensmarch\'," + 0.003*"\'soccer\'," + 0.003*"\'womensmarchla\'," + 0.003*"\'year\']" + 0.002*"\'via\']" + 0.002*"\'baseball\'," + 0.001*"\'march\'," + 0.001*"\'whittier\'," + 0.001*"u\'right\',"'), (6, u'0.002*"\'vr\'," + 0.001*"\'princess\'," + 0.001*"u\'dog\'," + 0.001*"\'ppl\'," + 0.001*"\'tf\'," + 0.001*"\'gym\'," + 0.001*"\'sitting\'," + 0.001*"u\'bitch\'," + 0.001*"u\'nigga\'," + 0.001*"\'cuz\',"'), (7, u'0.011*"\'disneyland\']" + 0.002*"[\'los\'," + 0.002*"\'fullerton\'," + 0.002*"\'compton\'," + 0.001*"\'hillary\'," + 0.001*"\'watched\'," + 0.001*"\'john\'," + 0.001*"\'clinton\'," + 0.001*"\'griffith\'," + 0.001*"\'observatory\',"'), (8, u'0.010*"[\'happy\'," + 0.002*"u\'inquiry\'," + 0.002*"\'complexcon\'," + 0.002*"\'actor\'," + 0.002*"\'farm\'," + 0.002*"\'soundcloud\'," + 0.001*"\'concert\'," + 0.001*"u\'booking\'," + 0.001*"\'photography\'," + 0.001*"\'ocean\',"'), (9, u'0.005*"\'beach\']" + 0.002*"\'merry\'," + 0.002*"\'service\'," + 0.002*"\'queen\'," + 0.002*"\'code\'," + 0.001*"\'subscribe\'," + 0.001*"\'youtube\'," + 0.001*"\'hillary\'," + 0.001*"\'uk\'," + 0.001*"\'pablo\',"'), (10, u'0.022*"[]" + 0.004*"\'life\']" + 0.002*"\'park\']" + 0.002*"\'camp\'," + 0.002*"\'que\'," + 0.002*"\'flog\'," + 0.001*"\'gnaw\'," + 0.001*"\'hillary\'," + 0.001*"\'te\'," + 0.001*"\'clinton\',"'), (11, u'0.006*"\'home\']" + 0.002*"\'lt\'," + 0.002*"\'winery\'," + 0.002*"[\'professional\'," + 0.002*"\'varsity\'," + 0.002*"\'six\'," + 0.002*"\'softball\'," + 0.002*"u\'flag\'," + 0.002*"\'kanye\'," + 0.002*"[\'actress\',"'), (12, u'0.004*"[\'life\'," + 0.003*"\'founder\'," + 0.003*"\'director\'," + 0.003*"\'marketing\'," + 0.003*"\'alum\'," + 0.002*"\'student\'," + 0.002*"\'writer\'," + 0.002*"\'lover\'," + 0.002*"\'design\'," + 0.002*"u\'sport\',"'), (13, u'0.004*"\'adventure\'," + 0.004*"\'producer\'," + 0.004*"[\'music\'," + 0.003*"\'enthusiast\'," + 0.003*"\'dj\'," + 0.003*"\'losangeles\'," + 0.002*"\'editor\'," + 0.002*"\'park\']" + 0.002*"\'basketball\'," + 0.002*"u\'sport\',"'), (14, u'0.008*"\'sc\'," + 0.007*"[\'ig\'," + 0.006*"\'namm\'," + 0.004*"[\'god\'," + 0.003*"[\'make\'," + 0.002*"\'booking\'," + 0.002*"\'gym\'," + 0.002*"\'insta\'," + 0.002*"\'volleyball\'," + 0.002*"\'link\',"'), (15, u'0.007*"[\'sc\'," + 0.003*"\'huntington\'," + 0.003*"\'player\'," + 0.002*"\'click\'," + 0.002*"\'cast\'," + 0.002*"\'heisman\'," + 0.002*"\'deserves\'," + 0.002*"\'ballot\'," + 0.002*"\'heismanhouse\'," + 0.002*"\'bruh\',"'), (16, u'0.002*"\'lmfao\'," + 0.002*"\'fuckin\'," + 0.002*"\'boo\'," + 0.001*"u\'nigga\'," + 0.001*"\'tryna\'," + 0.001*"u\'feeling\'," + 0.001*"\'tf\'," + 0.001*"\'boyfriend\'," + 0.001*"\'ima\'," + 0.001*"\'ugly\',"'), (17, u'0.011*"\'francisco\'," + 0.010*"\'international\'," + 0.009*"\'ca\']" + 0.005*"\'monica\'," + 0.005*"u\'hill\'," + 0.004*"\'lax\'," + 0.004*"\'anaheim\'," + 0.004*"\'losangeles\'," + 0.004*"\'beverly\'," + 0.004*"\'cali\',"'), (18, u'0.009*"\'que\'," + 0.007*"\'en\'," + 0.007*"\'_\'," + 0.007*"\'el\'," + 0.004*"\'mi\'," + 0.003*"\'con\'," + 0.003*"[\'living\'," + 0.003*"\'por\'," + 0.003*"\'se\'," + 0.003*"u\'e\',"'), (19, u'0.005*"\'venice\'," + 0.005*"\'bridge\']" + 0.004*"\'yosemite\'," + 0.004*"\'golden\'," + 0.003*"\'gate\'," + 0.003*"\'sfo\'," + 0.002*"\'coast\'," + 0.002*"\'national\'," + 0.002*"\'delayed\'," + 0.002*"\'designer\',"')]
