@@ -1,0 +1,1754 @@
+################Topic1.0Results#################
+count       91.000000
+mean     30362.373626
+std       4021.875391
+min      24024.000000
+25%      28561.000000
+50%      29900.000000
+75%      31748.500000
+max      61072.000000
+Name: count, dtype: float64
+Dickey-Fuller Test:
+Test Statistic                -6.263671e+00
+p-value                        4.164018e-08
+#Lags Used                     0.000000e+00
+Number of Observations Used    9.000000e+01
+Critical Value (10%)          -2.584210e+00
+Critical Value (5%)           -2.894232e+00
+Critical Value (1%)           -3.505190e+00
+dtype: float64
+None
+Dickey-Fuller Test:
+Test Statistic                -7.872643e+00
+p-value                        4.938030e-12
+#Lags Used                     0.000000e+00
+Number of Observations Used    8.300000e+01
+Critical Value (10%)          -2.585713e+00
+Critical Value (5%)           -2.897048e+00
+Critical Value (1%)           -3.511712e+00
+dtype: float64
+                             ARIMA Model Results                              
+==============================================================================
+Dep. Variable:                D.count   No. Observations:                   83
+Model:                 ARIMA(1, 1, 0)   Log Likelihood                -837.899
+Method:                       css-mle   S.D. of innovations           5854.138
+Date:                Sun, 26 Mar 2017   AIC                           1681.798
+Time:                        22:24:22   BIC                           1689.054
+Sample:                    11-06-2016   HQIC                          1684.713
+                         - 01-27-2017                                         
+=================================================================================
+                    coef    std err          z      P>|z|      [95.0% Conf. Int.]
+---------------------------------------------------------------------------------
+const           -55.1324    446.632     -0.123      0.902      -930.515   820.251
+ar.L1.D.count    -0.4441      0.098     -4.551      0.000        -0.635    -0.253
+                                    Roots                                    
+=============================================================================
+                 Real           Imaginary           Modulus         Frequency
+-----------------------------------------------------------------------------
+AR.1           -2.2518           +0.0000j            2.2518            0.5000
+-----------------------------------------------------------------------------
+################Topic0.0Results#################
+count       91.000000
+mean     40249.769231
+std       6496.915778
+min      30694.000000
+25%      36887.000000
+50%      38965.000000
+75%      42346.500000
+max      88736.000000
+Name: count, dtype: float64
+Dickey-Fuller Test:
+Test Statistic                 -2.532754
+p-value                         0.107707
+#Lags Used                      3.000000
+Number of Observations Used    87.000000
+Critical Value (10%)           -2.584824
+Critical Value (5%)            -2.895382
+Critical Value (1%)            -3.507853
+dtype: float64
+None
+Dickey-Fuller Test:
+Test Statistic                -6.909388e+00
+p-value                        1.223457e-09
+#Lags Used                     0.000000e+00
+Number of Observations Used    8.300000e+01
+Critical Value (10%)          -2.585713e+00
+Critical Value (5%)           -2.897048e+00
+Critical Value (1%)           -3.511712e+00
+dtype: float64
+                             ARIMA Model Results                              
+==============================================================================
+Dep. Variable:                D.count   No. Observations:                   83
+Model:                 ARIMA(1, 1, 0)   Log Likelihood                -871.314
+Method:                       css-mle   S.D. of innovations           8757.735
+Date:                Sun, 26 Mar 2017   AIC                           1748.629
+Time:                        22:24:25   BIC                           1755.885
+Sample:                    11-06-2016   HQIC                          1751.544
+                         - 01-27-2017                                         
+=================================================================================
+                    coef    std err          z      P>|z|      [95.0% Conf. Int.]
+---------------------------------------------------------------------------------
+const           -47.6107    682.388     -0.070      0.945     -1385.067  1289.846
+ar.L1.D.count    -0.4137      0.099     -4.163      0.000        -0.609    -0.219
+                                    Roots                                    
+=============================================================================
+                 Real           Imaginary           Modulus         Frequency
+-----------------------------------------------------------------------------
+AR.1           -2.4170           +0.0000j            2.4170            0.5000
+-----------------------------------------------------------------------------
+################Topic2.0Results#################
+count       91.000000
+mean     17274.626374
+std       2624.394570
+min      13154.000000
+25%      16018.500000
+50%      17065.000000
+75%      17946.000000
+max      37460.000000
+Name: count, dtype: float64
+Dickey-Fuller Test:
+Test Statistic                 -1.831049
+p-value                         0.365159
+#Lags Used                      6.000000
+Number of Observations Used    84.000000
+Critical Value (10%)           -2.585482
+Critical Value (5%)            -2.896616
+Critical Value (1%)            -3.510712
+dtype: float64
+None
+Dickey-Fuller Test:
+Test Statistic                -8.100731e+00
+p-value                        1.302006e-12
+#Lags Used                     0.000000e+00
+Number of Observations Used    8.300000e+01
+Critical Value (10%)          -2.585713e+00
+Critical Value (5%)           -2.897048e+00
+Critical Value (1%)           -3.511712e+00
+dtype: float64
+                             ARIMA Model Results                              
+==============================================================================
+Dep. Variable:                D.count   No. Observations:                   83
+Model:                 ARIMA(1, 1, 0)   Log Likelihood                -803.946
+Method:                       css-mle   S.D. of innovations           3888.569
+Date:                Sun, 26 Mar 2017   AIC                           1613.891
+Time:                        22:24:28   BIC                           1621.148
+Sample:                    11-06-2016   HQIC                          1616.807
+                         - 01-27-2017                                         
+=================================================================================
+                    coef    std err          z      P>|z|      [95.0% Conf. Int.]
+---------------------------------------------------------------------------------
+const           -39.3906    295.648     -0.133      0.894      -618.850   540.068
+ar.L1.D.count    -0.4491      0.097     -4.632      0.000        -0.639    -0.259
+                                    Roots                                    
+=============================================================================
+                 Real           Imaginary           Modulus         Frequency
+-----------------------------------------------------------------------------
+AR.1           -2.2266           +0.0000j            2.2266            0.5000
+-----------------------------------------------------------------------------
+################Topic6.0Results#################
+count      91.00000
+mean     1106.32967
+std       221.44937
+min       757.00000
+25%       988.00000
+50%      1072.00000
+75%      1211.00000
+max      2086.00000
+Name: count, dtype: float64
+Dickey-Fuller Test:
+Test Statistic                 -3.658804
+p-value                         0.004731
+#Lags Used                      1.000000
+Number of Observations Used    89.000000
+Critical Value (10%)           -2.584410
+Critical Value (5%)            -2.894607
+Critical Value (1%)            -3.506057
+dtype: float64
+None
+Dickey-Fuller Test:
+Test Statistic                 -3.143116
+p-value                         0.023523
+#Lags Used                      7.000000
+Number of Observations Used    76.000000
+Critical Value (10%)           -2.587498
+Critical Value (5%)            -2.900395
+Critical Value (1%)            -3.519481
+dtype: float64
+                             ARIMA Model Results                              
+==============================================================================
+Dep. Variable:                D.count   No. Observations:                   83
+Model:                 ARIMA(1, 1, 0)   Log Likelihood                -588.147
+Method:                       css-mle   S.D. of innovations            288.795
+Date:                Sun, 26 Mar 2017   AIC                           1182.294
+Time:                        22:24:31   BIC                           1189.550
+Sample:                    11-06-2016   HQIC                          1185.209
+                         - 01-27-2017                                         
+=================================================================================
+                    coef    std err          z      P>|z|      [95.0% Conf. Int.]
+---------------------------------------------------------------------------------
+const            -0.9862     21.756     -0.045      0.964       -43.628    41.655
+ar.L1.D.count    -0.4626      0.097     -4.790      0.000        -0.652    -0.273
+                                    Roots                                    
+=============================================================================
+                 Real           Imaginary           Modulus         Frequency
+-----------------------------------------------------------------------------
+AR.1           -2.1616           +0.0000j            2.1616            0.5000
+-----------------------------------------------------------------------------
+################Topic5.0Results#################
+count      91.000000
+mean     2141.989011
+std       388.293775
+min      1524.000000
+25%      1962.500000
+50%      2114.000000
+75%      2275.500000
+max      5005.000000
+Name: count, dtype: float64
+Dickey-Fuller Test:
+Test Statistic                 -2.766799
+p-value                         0.063175
+#Lags Used                      4.000000
+Number of Observations Used    86.000000
+Critical Value (10%)           -2.585038
+Critical Value (5%)            -2.895784
+Critical Value (1%)            -3.508783
+dtype: float64
+None
+Dickey-Fuller Test:
+Test Statistic                 -3.463957
+p-value                         0.008962
+#Lags Used                      7.000000
+Number of Observations Used    76.000000
+Critical Value (10%)           -2.587498
+Critical Value (5%)            -2.900395
+Critical Value (1%)            -3.519481
+dtype: float64
+                             ARIMA Model Results                              
+==============================================================================
+Dep. Variable:                D.count   No. Observations:                   83
+Model:                 ARIMA(1, 1, 0)   Log Likelihood                -642.371
+Method:                       css-mle   S.D. of innovations            555.217
+Date:                Sun, 26 Mar 2017   AIC                           1290.741
+Time:                        22:24:34   BIC                           1297.998
+Sample:                    11-06-2016   HQIC                          1293.656
+                         - 01-27-2017                                         
+=================================================================================
+                    coef    std err          z      P>|z|      [95.0% Conf. Int.]
+---------------------------------------------------------------------------------
+const            -4.2781     43.386     -0.099      0.922       -89.313    80.757
+ar.L1.D.count    -0.4096      0.099     -4.126      0.000        -0.604    -0.215
+                                    Roots                                    
+=============================================================================
+                 Real           Imaginary           Modulus         Frequency
+-----------------------------------------------------------------------------
+AR.1           -2.4412           +0.0000j            2.4412            0.5000
+-----------------------------------------------------------------------------
+################Topic12.0Results#################
+count     91.000000
+mean     143.791209
+std       40.862511
+min       80.000000
+25%      110.500000
+50%      137.000000
+75%      171.500000
+max      302.000000
+Name: count, dtype: float64
+Dickey-Fuller Test:
+Test Statistic                 -2.437803
+p-value                         0.131350
+#Lags Used                      6.000000
+Number of Observations Used    84.000000
+Critical Value (10%)           -2.585482
+Critical Value (5%)            -2.896616
+Critical Value (1%)            -3.510712
+dtype: float64
+None
+Dickey-Fuller Test:
+Test Statistic                -6.722567e+00
+p-value                        3.453378e-09
+#Lags Used                     6.000000e+00
+Number of Observations Used    7.700000e+01
+Critical Value (10%)          -2.587223e+00
+Critical Value (5%)           -2.899878e+00
+Critical Value (1%)           -3.518281e+00
+dtype: float64
+                             ARIMA Model Results                              
+==============================================================================
+Dep. Variable:                D.count   No. Observations:                   83
+Model:                 ARIMA(1, 1, 0)   Log Likelihood                -432.891
+Method:                       css-mle   S.D. of innovations             44.515
+Date:                Sun, 26 Mar 2017   AIC                            871.782
+Time:                        22:24:36   BIC                            879.039
+Sample:                    11-06-2016   HQIC                           874.698
+                         - 01-27-2017                                         
+=================================================================================
+                    coef    std err          z      P>|z|      [95.0% Conf. Int.]
+---------------------------------------------------------------------------------
+const             0.3443      3.632      0.095      0.925        -6.774     7.463
+ar.L1.D.count    -0.3497      0.103     -3.398      0.001        -0.551    -0.148
+                                    Roots                                    
+=============================================================================
+                 Real           Imaginary           Modulus         Frequency
+-----------------------------------------------------------------------------
+AR.1           -2.8597           +0.0000j            2.8597            0.5000
+-----------------------------------------------------------------------------
+################Topic3.0Results#################
+count       91.000000
+mean      8930.230769
+std       1446.461668
+min       6968.000000
+25%       8206.000000
+50%       8834.000000
+75%       9275.000000
+max      20046.000000
+Name: count, dtype: float64
+Dickey-Fuller Test:
+Test Statistic                -6.225943e+00
+p-value                        5.088587e-08
+#Lags Used                     0.000000e+00
+Number of Observations Used    9.000000e+01
+Critical Value (10%)          -2.584210e+00
+Critical Value (5%)           -2.894232e+00
+Critical Value (1%)           -3.505190e+00
+dtype: float64
+None
+Dickey-Fuller Test:
+Test Statistic                -7.497519e+00
+p-value                        4.340032e-11
+#Lags Used                     0.000000e+00
+Number of Observations Used    8.300000e+01
+Critical Value (10%)          -2.585713e+00
+Critical Value (5%)           -2.897048e+00
+Critical Value (1%)           -3.511712e+00
+dtype: float64
+                             ARIMA Model Results                              
+==============================================================================
+Dep. Variable:                D.count   No. Observations:                   83
+Model:                 ARIMA(1, 1, 0)   Log Likelihood                -756.527
+Method:                       css-mle   S.D. of innovations           2197.191
+Date:                Sun, 26 Mar 2017   AIC                           1519.054
+Time:                        22:24:39   BIC                           1526.311
+Sample:                    11-06-2016   HQIC                          1521.970
+                         - 01-27-2017                                         
+=================================================================================
+                    coef    std err          z      P>|z|      [95.0% Conf. Int.]
+---------------------------------------------------------------------------------
+const           -21.5351    176.014     -0.122      0.903      -366.515   323.445
+ar.L1.D.count    -0.3747      0.101     -3.717      0.000        -0.572    -0.177
+                                    Roots                                    
+=============================================================================
+                 Real           Imaginary           Modulus         Frequency
+-----------------------------------------------------------------------------
+AR.1           -2.6686           +0.0000j            2.6686            0.5000
+-----------------------------------------------------------------------------RUNNING THE L-BFGS-B CODE
+
+           * * *
+
+Machine precision = 2.220D-16
+ N =            2     M =           12
+
+At X0         0 variables are exactly at the bounds
+
+At iterate    0    f=  1.00952D+01    |proj g|=  2.68976D-03
+
+           * * *
+
+Tit   = total number of iterations
+Tnf   = total number of function evaluations
+Tnint = total number of segments explored during Cauchy searches
+Skip  = number of BFGS updates skipped
+Nact  = number of active bounds at final generalized Cauchy point
+Projg = norm of the final projected gradient
+F     = final function value
+
+           * * *
+
+   N    Tit     Tnf  Tnint  Skip  Nact     Projg        F
+    2      4      6      1     0     0   1.776D-07   1.010D+01
+  F =   10.0951659580179     
+
+CONVERGENCE: REL_REDUCTION_OF_F_<=_FACTR*EPSMCH             
+
+ Cauchy                time 0.000E+00 seconds.
+ Subspace minimization time 0.000E+00 seconds.
+ Line search           time 0.000E+00 seconds.
+
+ Total User time 0.000E+00 seconds.
+
+RUNNING THE L-BFGS-B CODE
+
+           * * *
+
+Machine precision = 2.220D-16
+ N =            2     M =           12
+
+At X0         0 variables are exactly at the bounds
+
+At iterate    0    f=  1.04978D+01    |proj g|=  2.51692D-03
+
+           * * *
+
+Tit   = total number of iterations
+Tnf   = total number of function evaluations
+Tnint = total number of segments explored during Cauchy searches
+Skip  = number of BFGS updates skipped
+Nact  = number of active bounds at final generalized Cauchy point
+Projg = norm of the final projected gradient
+F     = final function value
+
+           * * *
+
+   N    Tit     Tnf  Tnint  Skip  Nact     Projg        F
+    2      4      6      1     0     0   1.776D-07   1.050D+01
+  F =   10.4977621324121     
+
+CONVERGENCE: REL_REDUCTION_OF_F_<=_FACTR*EPSMCH             
+
+ Cauchy                time 0.000E+00 seconds.
+ Subspace minimization time 0.000E+00 seconds.
+ Line search           time 0.000E+00 seconds.
+
+ Total User time 0.000E+00 seconds.
+
+RUNNING THE L-BFGS-B CODE
+
+           * * *
+
+Machine precision = 2.220D-16
+ N =            2     M =           12
+
+At X0         0 variables are exactly at the bounds
+
+At iterate    0    f=  9.68611D+00    |proj g|=  2.68638D-03
+
+At iterate    5    f=  9.68609D+00    |proj g|=  3.55271D-07
+
+At iterate   10    f=  9.68609D+00    |proj g|=  6.03961D-06
+
+At iterate   15    f=  9.68609D+00    |proj g|=  1.45306D-04
+
+At iterate   20    f=  9.68609D+00    |proj g|=  2.46914D-05
+
+           * * *
+
+Tit   = total number of iterations
+Tnf   = total number of function evaluations
+Tnint = total number of segments explored during Cauchy searches
+Skip  = number of BFGS updates skipped
+Nact  = number of active bounds at final generalized Cauchy point
+Projg = norm of the final projected gradient
+F     = final function value
+
+           * * *
+
+   N    Tit     Tnf  Tnint  Skip  Nact     Projg        F
+    2     21     47      1     0     0   2.469D-05   9.686D+00
+  F =   9.68609230000020     
+
+CONVERGENCE: REL_REDUCTION_OF_F_<=_FACTR*EPSMCH             
+
+ Cauchy                time 0.000E+00 seconds.
+ Subspace minimization time 0.000E+00 seconds.
+ Line search           time 0.000E+00 seconds.
+
+ Total User time 0.000E+00 seconds.
+
+RUNNING THE L-BFGS-B CODE
+
+           * * *
+
+Machine precision = 2.220D-16
+ N =            2     M =           12
+
+At X0         0 variables are exactly at the bounds
+
+At iterate    0    f=  7.08613D+00    |proj g|=  1.32303D-03
+
+At iterate    5    f=  7.08611D+00    |proj g|=  8.97060D-04
+
+At iterate   10    f=  7.08611D+00    |proj g|=  0.00000D+00
+
+           * * *
+
+Tit   = total number of iterations
+Tnf   = total number of function evaluations
+Tnint = total number of segments explored during Cauchy searches
+Skip  = number of BFGS updates skipped
+Nact  = number of active bounds at final generalized Cauchy point
+Projg = norm of the final projected gradient
+F     = final function value
+
+           * * *
+
+   N    Tit     Tnf  Tnint  Skip  Nact     Projg        F
+    2     10     16      1     0     0   0.000D+00   7.086D+00
+  F =   7.08610655176407     
+
+CONVERGENCE: NORM_OF_PROJECTED_GRADIENT_<=_PGTOL            
+
+ Cauchy                time 0.000E+00 seconds.
+ Subspace minimization time 0.000E+00 seconds.
+ Line search           time 0.000E+00 seconds.
+
+ Total User time 0.000E+00 seconds.
+
+RUNNING THE L-BFGS-B CODE
+
+           * * *
+
+Machine precision = 2.220D-16
+ N =            2     M =           12
+
+At X0         0 variables are exactly at the bounds
+
+At iterate    0    f=  7.73942D+00    |proj g|=  1.73515D-03
+
+At iterate    5    f=  7.73941D+00    |proj g|=  1.39533D-04
+
+At iterate   10    f=  7.73941D+00    |proj g|=  9.79838D-04
+
+At iterate   15    f=  7.73940D+00    |proj g|=  1.77636D-07
+
+           * * *
+
+Tit   = total number of iterations
+Tnf   = total number of function evaluations
+Tnint = total number of segments explored during Cauchy searches
+Skip  = number of BFGS updates skipped
+Nact  = number of active bounds at final generalized Cauchy point
+Projg = norm of the final projected gradient
+F     = final function value
+
+           * * *
+
+   N    Tit     Tnf  Tnint  Skip  Nact     Projg        F
+    2     16     21      1     0     0   8.882D-08   7.739D+00
+  F =   7.73940489073190     
+
+CONVERGENCE: REL_REDUCTION_OF_F_<=_FACTR*EPSMCH             
+
+ Cauchy                time 0.000E+00 seconds.
+ Subspace minimization time 0.000E+00 seconds.
+ Line search           time 0.000E+00 seconds.
+
+ Total User time 0.000E+00 seconds.
+
+RUNNING THE L-BFGS-B CODE
+
+           * * *
+
+Machine precision = 2.220D-16
+ N =            2     M =           12
+
+At X0         0 variables are exactly at the bounds
+
+At iterate    0    f=  5.21561D+00    |proj g|=  7.84883D-04
+
+At iterate    5    f=  5.21556D+00    |proj g|=  2.26485D-05
+
+At iterate   10    f=  5.21556D+00    |proj g|=  8.88178D-07
+
+           * * *
+
+Tit   = total number of iterations
+Tnf   = total number of function evaluations
+Tnint = total number of segments explored during Cauchy searches
+Skip  = number of BFGS updates skipped
+Nact  = number of active bounds at final generalized Cauchy point
+Projg = norm of the final projected gradient
+F     = final function value
+
+           * * *
+
+   N    Tit     Tnf  Tnint  Skip  Nact     Projg        F
+    2     12     19      1     0     0   0.000D+00   5.216D+00
+  F =   5.21555570244546     
+
+CONVERGENCE: NORM_OF_PROJECTED_GRADIENT_<=_PGTOL            
+
+ Cauchy                time 0.000E+00 seconds.
+ Subspace minimization time 0.000E+00 seconds.
+ Line search           time 0.000E+00 seconds.
+
+ Total User time 0.000E+00 seconds.
+
+RUNNING THE L-BFGS-B CODE
+
+           * * *
+
+Machine precision = 2.220D-16
+ N =            2     M =           12
+
+At X0         0 variables are exactly at the bounds
+
+At iterate    0    f=  9.11480D+00    |proj g|=  2.25793D-03
+
+At iterate    5    f=  9.11479D+00    |proj g|=  7.10543D-07
+
+At iterate   10    f=  9.11479D+00    |proj g|=  7.10543D-06
+
+At iterate   15    f=  9.11479D+00    |proj g|=  2.09788D-04
+
+At iterate   20    f=  9.11479D+00    |proj g|=  1.77636D-07
+
+           * * *
+
+Tit   = total number of iterations
+Tnf   = total number of function evaluations
+Tnint = total number of segments explored during Cauchy searches
+Skip  = number of BFGS updates skipped
+Nact  = number of active bounds at final generalized Cauchy point
+Projg = norm of the final projected gradient
+F     = final function value
+
+           * * *
+
+   N    Tit     Tnf  Tnint  Skip  Nact     Projg        F
+    2     21     30      1     0     0   0.000D+00   9.115D+00
+  F =   9.11478520878023     
+
+CONVERGENCE: NORM_OF_PROJECTED_GRADIENT_<=_PGTOL            
+
+ Cauchy                time 0.000E+00 seconds.
+ Subspace minimization time 0.000E+00 seconds.
+ Line search           time 0.000E+00 seconds.
+
+ Total User time 0.000E+00 seconds.
+
+RUNNING THE L-BFGS-B CODE
+
+           * * *
+
+Machine precision = 2.220D-16
+ N =            2     M =           12
+
+At X0         0 variables are exactly at the bounds
+
+At iterate    0    f=  8.38735D+00    |proj g|=  2.44871D-03
+
+At iterate    5    f=  8.38733D+00    |proj g|=  4.97380D-06
+
+At iterate   10    f=  8.38733D+00    |proj g|=  1.00897D-04
+
+At iterate   15    
+################Topic4.0Results#################
+count       91.000000
+mean      4697.461538
+std        725.046118
+min       3642.000000
+25%       4305.000000
+50%       4598.000000
+75%       4954.000000
+max      10035.000000
+Name: count, dtype: float64
+Dickey-Fuller Test:
+Test Statistic                 -1.916526
+p-value                         0.324327
+#Lags Used                      5.000000
+Number of Observations Used    85.000000
+Critical Value (10%)           -2.585258
+Critical Value (5%)            -2.896195
+Critical Value (1%)            -3.509736
+dtype: float64
+None
+Dickey-Fuller Test:
+Test Statistic                -7.788979e+00
+p-value                        8.036498e-12
+#Lags Used                     0.000000e+00
+Number of Observations Used    8.300000e+01
+Critical Value (10%)          -2.585713e+00
+Critical Value (5%)           -2.897048e+00
+Critical Value (1%)           -3.511712e+00
+dtype: float64
+                             ARIMA Model Results                              
+==============================================================================
+Dep. Variable:                D.count   No. Observations:                   83
+Model:                 ARIMA(1, 1, 0)   Log Likelihood                -696.148
+Method:                       css-mle   S.D. of innovations           1061.300
+Date:                Sun, 26 Mar 2017   AIC                           1398.297
+Time:                        22:24:42   BIC                           1405.553
+Sample:                    11-06-2016   HQIC                          1401.212
+                         - 01-27-2017                                         
+=================================================================================
+                    coef    std err          z      P>|z|      [95.0% Conf. Int.]
+---------------------------------------------------------------------------------
+const           -10.4241     82.590     -0.126      0.900      -172.298   151.450
+ar.L1.D.count    -0.4155      0.099     -4.200      0.000        -0.609    -0.222
+                                    Roots                                    
+=============================================================================
+                 Real           Imaginary           Modulus         Frequency
+-----------------------------------------------------------------------------
+AR.1           -2.4066           +0.0000j            2.4066            0.5000
+-----------------------------------------------------------------------------
+################Topic16.0Results#################
+count     91.000000
+mean     560.769231
+std       42.599446
+min      481.000000
+25%      533.000000
+50%      556.000000
+75%      590.500000
+max      651.000000
+Name: count, dtype: float64
+Dickey-Fuller Test:
+Test Statistic                 -2.332656
+p-value                         0.161652
+#Lags Used                     12.000000
+Number of Observations Used    78.000000
+Critical Value (10%)           -2.586955
+Critical Value (5%)            -2.899375
+Critical Value (1%)            -3.517114
+dtype: float64
+None
+Dickey-Fuller Test:
+Test Statistic                 -3.087321
+p-value                         0.027506
+#Lags Used                      7.000000
+Number of Observations Used    76.000000
+Critical Value (10%)           -2.587498
+Critical Value (5%)            -2.900395
+Critical Value (1%)            -3.519481
+dtype: float64
+                             ARIMA Model Results                              
+==============================================================================
+Dep. Variable:                D.count   No. Observations:                   83
+Model:                 ARIMA(1, 1, 0)   Log Likelihood                -448.191
+Method:                       css-mle   S.D. of innovations             53.512
+Date:                Sun, 26 Mar 2017   AIC                            902.382
+Time:                        22:24:45   BIC                            909.638
+Sample:                    11-06-2016   HQIC                           905.297
+                         - 01-27-2017                                         
+=================================================================================
+                    coef    std err          z      P>|z|      [95.0% Conf. Int.]
+---------------------------------------------------------------------------------
+const             0.1649      4.208      0.039      0.969        -8.084     8.413
+ar.L1.D.count    -0.4006      0.101     -3.954      0.000        -0.599    -0.202
+                                    Roots                                    
+=============================================================================
+                 Real           Imaginary           Modulus         Frequency
+-----------------------------------------------------------------------------
+AR.1           -2.4964           +0.0000j            2.4964            0.5000
+-----------------------------------------------------------------------------
+################Topic19.0Results#################
+count     91.000000
+mean     100.219780
+std       19.064686
+min       56.000000
+25%       88.000000
+50%      100.000000
+75%      110.000000
+max      145.000000
+Name: count, dtype: float64
+Dickey-Fuller Test:
+Test Statistic                 -2.697458
+p-value                         0.074479
+#Lags Used                      8.000000
+Number of Observations Used    82.000000
+Critical Value (10%)           -2.585949
+Critical Value (5%)            -2.897490
+Critical Value (1%)            -3.512738
+dtype: float64
+None
+Dickey-Fuller Test:
+Test Statistic                 -4.600354
+p-value                         0.000129
+#Lags Used                      6.000000
+Number of Observations Used    77.000000
+Critical Value (10%)           -2.587223
+Critical Value (5%)            -2.899878
+Critical Value (1%)            -3.518281
+dtype: float64
+                             ARIMA Model Results                              
+==============================================================================
+Dep. Variable:                D.count   No. Observations:                   83
+Model:                 ARIMA(1, 1, 0)   Log Likelihood                -369.504
+Method:                       css-mle   S.D. of innovations             20.732
+Date:                Sun, 26 Mar 2017   AIC                            745.007
+Time:                        22:24:47   BIC                            752.264
+Sample:                    11-06-2016   HQIC                           747.922
+                         - 01-27-2017                                         
+=================================================================================
+                    coef    std err          z      P>|z|      [95.0% Conf. Int.]
+---------------------------------------------------------------------------------
+const             0.1695      1.594      0.106      0.916        -2.955     3.294
+ar.L1.D.count    -0.4329      0.099     -4.372      0.000        -0.627    -0.239
+                                    Roots                                    
+=============================================================================
+                 Real           Imaginary           Modulus         Frequency
+-----------------------------------------------------------------------------
+AR.1           -2.3099           +0.0000j            2.3099            0.5000
+-----------------------------------------------------------------------------
+################Topic10.0Results#################
+count     91.000000
+mean      68.208791
+std       18.534962
+min       37.000000
+25%       55.000000
+50%       64.000000
+75%       80.500000
+max      123.000000
+Name: count, dtype: float64
+Dickey-Fuller Test:
+Test Statistic                 -2.695870
+p-value                         0.074756
+#Lags Used                      5.000000
+Number of Observations Used    85.000000
+Critical Value (10%)           -2.585258
+Critical Value (5%)            -2.896195
+Critical Value (1%)            -3.509736
+dtype: float64
+None
+Dickey-Fuller Test:
+Test Statistic                 -4.365145
+p-value                         0.000342
+#Lags Used                      6.000000
+Number of Observations Used    77.000000
+Critical Value (10%)           -2.587223
+Critical Value (5%)            -2.899878
+Critical Value (1%)            -3.518281
+dtype: float64
+                             ARIMA Model Results                              
+==============================================================================
+Dep. Variable:                D.count   No. Observations:                   83
+Model:                 ARIMA(1, 1, 0)   Log Likelihood                -372.119
+Method:                       css-mle   S.D. of innovations             21.398
+Date:                Sun, 26 Mar 2017   AIC                            750.238
+Time:                        22:24:50   BIC                            757.494
+Sample:                    11-06-2016   HQIC                           753.153
+                         - 01-27-2017                                         
+=================================================================================
+                    coef    std err          z      P>|z|      [95.0% Conf. Int.]
+---------------------------------------------------------------------------------
+const             0.4217      1.668      0.253      0.801        -2.848     3.692
+ar.L1.D.count    -0.4128      0.099     -4.172      0.000        -0.607    -0.219
+                                    Roots                                    
+=============================================================================
+                 Real           Imaginary           Modulus         Frequency
+-----------------------------------------------------------------------------
+AR.1           -2.4227           +0.0000j            2.4227            0.5000
+-----------------------------------------------------------------------------
+################Topic17.0Results#################
+count     91.000000
+mean      88.538462
+std       23.289629
+min       47.000000
+25%       71.000000
+50%       83.000000
+75%      105.000000
+max      149.000000
+Name: count, dtype: float64
+Dickey-Fuller Test:
+Test Statistic                 -3.251863
+p-value                         0.017172
+#Lags Used                      8.000000
+Number of Observations Used    82.000000
+Critical Value (10%)           -2.585949
+Critical Value (5%)            -2.897490
+Critical Value (1%)            -3.512738
+dtype: float64
+None
+Dickey-Fuller Test:
+Test Statistic                 -3.124754
+p-value                         0.024775
+#Lags Used                      7.000000
+Number of Observations Used    76.000000
+Critical Value (10%)           -2.587498
+Critical Value (5%)            -2.900395
+Critical Value (1%)            -3.519481
+dtype: float64
+                             ARIMA Model Results                              
+==============================================================================
+Dep. Variable:                D.count   No. Observations:                   83
+Model:                 ARIMA(1, 1, 0)   Log Likelihood                -378.125
+Method:                       css-mle   S.D. of innovations             23.023
+Date:                Sun, 26 Mar 2017   AIC                            762.251
+Time:                        22:24:53   BIC                            769.507
+Sample:                    11-06-2016   HQIC                           765.166
+                         - 01-27-2017                                         
+=================================================================================
+                    coef    std err          z      P>|z|      [95.0% Conf. Int.]
+---------------------------------------------------------------------------------
+const             0.1191      2.066      0.058      0.954        -3.930     4.168
+ar.L1.D.count    -0.2259      0.107     -2.118      0.037        -0.435    -0.017
+                                    Roots                                    
+=============================================================================
+                 Real           Imaginary           Modulus         Frequency
+-----------------------------------------------------------------------------
+AR.1           -4.4272           +0.0000j            4.4272            0.5000
+-----------------------------------------------------------------------------
+################Topic15.0Results#################
+count     91.000000
+mean      76.274725
+std       19.119546
+min       38.000000
+25%       61.500000
+50%       74.000000
+75%       85.500000
+max      137.000000
+Name: count, dtype: float64
+Dickey-Fuller Test:
+Test Statistic                 -2.279545
+p-value                         0.178650
+#Lags Used                      6.000000
+Number of Observations Used    84.000000
+Critical Value (10%)           -2.585482
+Critical Value (5%)            -2.896616
+Critical Value (1%)            -3.510712
+dtype: float64
+None
+Dickey-Fuller Test:
+Test Statistic                 -4.088348
+p-value                         0.001012
+#Lags Used                      6.000000
+Number of Observations Used    77.000000
+Critical Value (10%)           -2.587223
+Critical Value (5%)            -2.899878
+Critical Value (1%)            -3.518281
+dtype: float64
+                             ARIMA Model Results                              
+==============================================================================
+Dep. Variable:                D.count   No. Observations:                   83
+Model:                 ARIMA(1, 1, 0)   Log Likelihood                -369.651
+Method:                       css-mle   S.D. of innovations             20.788
+Date:                Sun, 26 Mar 2017   AIC                            745.302
+Time:                        22:24:55   BIC                            752.558
+Sample:                    11-06-2016   HQIC                           748.217
+                         - 01-27-2017                                         
+=================================================================================
+                    coef    std err          z      P>|z|      [95.0% Conf. Int.]
+---------------------------------------------------------------------------------
+const             0.2167      1.860      0.116      0.908        -3.429     3.863
+ar.L1.D.count    -0.2295      0.107     -2.139      0.035        -0.440    -0.019
+                                    Roots                                    
+=============================================================================
+                 Real           Imaginary           Modulus         Frequency
+-----------------------------------------------------------------------------
+AR.1           -4.3575           +0.0000j            4.3575            0.5000
+-----------------------------------------------------------------------------
+################Topic7.0Results#################
+count     91.000000
+mean     545.692308
+std      102.931012
+min      332.000000
+25%      474.500000
+50%      535.000000
+75%      616.500000
+max      924.000000
+Name: count, dtype: float64
+Dickey-Fuller Test:
+Test Statistic                 -2.700916
+p-value                         0.073880
+#Lags Used                      2.000000
+Number of Observations Used    88.000000
+Critical Value (10%)           -2.584615
+Critical Value (5%)            -2.894990
+Critical Value (1%)            -3.506944
+dtype: float64
+None
+Dickey-Fuller Test:
+Test Statistic                 -2.409344
+p-value                         0.139116
+#Lags Used                     12.000000
+Number of Observations Used    71.000000
+Critical Value (10%)           -2.588995
+Critical Value (5%)            -2.903200
+Critical Value (1%)            -3.526005
+dtype: float64
+                             ARIMA Model Results                              
+==============================================================================
+Dep. Variable:                D.count   No. Observations:                   83
+Model:                 ARIMA(1, 1, 0)   Log Likelihood                -519.368
+Method:                       css-mle   S.D. of innovations            126.174
+Date:                Sun, 26 Mar 2017   AIC                           1044.735
+Time:                        22:24:58   BIC                           1051.992
+Sample:                    11-06-2016   HQIC                          1047.650
+                         - 01-27-2017                                         
+=================================================================================
+                    coef    std err          z      P>|z|      [95.0% Conf. Int.]
+---------------------------------------------------------------------------------
+const            -1.6352     10.213     -0.160      0.873       -21.652    18.382
+ar.L1.D.count    -0.3605      0.102     -3.536      0.001        -0.560    -0.161
+                                    Roots                                    
+=============================================================================
+                 Real           Imaginary           Modulus         Frequency
+-----------------------------------------------------------------------------
+AR.1           -2.7741           +0.0000j            2.7741            0.5000
+-----------------------------------------------------------------------------f=  8.38733D+00    |proj g|=  1.24167D-04
+
+At iterate   20    f=  8.38733D+00    |proj g|=  1.01252D-05
+
+At iterate   25    f=  8.38733D+00    |proj g|=  0.00000D+00
+
+           * * *
+
+Tit   = total number of iterations
+Tnf   = total number of function evaluations
+Tnint = total number of segments explored during Cauchy searches
+Skip  = number of BFGS updates skipped
+Nact  = number of active bounds at final generalized Cauchy point
+Projg = norm of the final projected gradient
+F     = final function value
+
+           * * *
+
+   N    Tit     Tnf  Tnint  Skip  Nact     Projg        F
+    2     25     35      1     0     0   0.000D+00   8.387D+00
+  F =   8.38733023923827     
+
+CONVERGENCE: NORM_OF_PROJECTED_GRADIENT_<=_PGTOL            
+
+ Cauchy                time 0.000E+00 seconds.
+ Subspace minimization time 0.000E+00 seconds.
+ Line search           time 0.000E+00 seconds.
+
+ Total User time 0.000E+00 seconds.
+
+RUNNING THE L-BFGS-B CODE
+
+           * * *
+
+Machine precision = 2.220D-16
+ N =            2     M =           12
+
+At X0         0 variables are exactly at the bounds
+
+At iterate    0    f=  5.39999D+00    |proj g|=  3.25073D-03
+
+At iterate    5    f=  5.39994D+00    |proj g|=  2.17151D-03
+
+At iterate   10    f=  5.39989D+00    |proj g|=  2.30926D-06
+
+           * * *
+
+Tit   = total number of iterations
+Tnf   = total number of function evaluations
+Tnint = total number of segments explored during Cauchy searches
+Skip  = number of BFGS updates skipped
+Nact  = number of active bounds at final generalized Cauchy point
+Projg = norm of the final projected gradient
+F     = final function value
+
+           * * *
+
+   N    Tit     Tnf  Tnint  Skip  Nact     Projg        F
+    2     13     18      1     0     0   0.000D+00   5.400D+00
+  F =   5.39989038970682     
+
+CONVERGENCE: NORM_OF_PROJECTED_GRADIENT_<=_PGTOL            
+
+ Cauchy                time 0.000E+00 seconds.
+ Subspace minimization time 0.000E+00 seconds.
+ Line search           time 0.000E+00 seconds.
+
+ Total User time 0.000E+00 seconds.
+
+RUNNING THE L-BFGS-B CODE
+
+           * * *
+
+Machine precision = 2.220D-16
+ N =            2     M =           12
+
+At X0         0 variables are exactly at the bounds
+
+At iterate    0    f=  4.45190D+00    |proj g|=  1.62963D-03
+
+At iterate    5    f=  4.45185D+00    |proj g|=  5.41789D-06
+
+           * * *
+
+Tit   = total number of iterations
+Tnf   = total number of function evaluations
+Tnint = total number of segments explored during Cauchy searches
+Skip  = number of BFGS updates skipped
+Nact  = number of active bounds at final generalized Cauchy point
+Projg = norm of the final projected gradient
+F     = final function value
+
+           * * *
+
+   N    Tit     Tnf  Tnint  Skip  Nact     Projg        F
+    2      7     10      1     0     0   8.882D-08   4.452D+00
+  F =   4.45185005988498     
+
+CONVERGENCE: REL_REDUCTION_OF_F_<=_FACTR*EPSMCH             
+
+ Cauchy                time 0.000E+00 seconds.
+ Subspace minimization time 0.000E+00 seconds.
+ Line search           time 0.000E+00 seconds.
+
+ Total User time 0.000E+00 seconds.
+
+RUNNING THE L-BFGS-B CODE
+
+           * * *
+
+Machine precision = 2.220D-16
+ N =            2     M =           12
+
+At X0         0 variables are exactly at the bounds
+
+At iterate    0    f=  4.48337D+00    |proj g|=  2.46221D-03
+
+At iterate    5    f=  4.48336D+00    |proj g|=  0.00000D+00
+
+           * * *
+
+Tit   = total number of iterations
+Tnf   = total number of function evaluations
+Tnint = total number of segments explored during Cauchy searches
+Skip  = number of BFGS updates skipped
+Nact  = number of active bounds at final generalized Cauchy point
+Projg = norm of the final projected gradient
+F     = final function value
+
+           * * *
+
+   N    Tit     Tnf  Tnint  Skip  Nact     Projg        F
+    2      5      8      1     0     0   0.000D+00   4.483D+00
+  F =   4.48335927447531     
+
+CONVERGENCE: NORM_OF_PROJECTED_GRADIENT_<=_PGTOL            
+
+ Cauchy                time 0.000E+00 seconds.
+ Subspace minimization time 0.000E+00 seconds.
+ Line search           time 0.000E+00 seconds.
+
+ Total User time 0.000E+00 seconds.
+
+RUNNING THE L-BFGS-B CODE
+
+           * * *
+
+Machine precision = 2.220D-16
+ N =            2     M =           12
+
+At X0         0 variables are exactly at the bounds
+
+At iterate    0    f=  4.55576D+00    |proj g|=  5.51648D-04
+
+At iterate    5    f=  4.55573D+00    |proj g|=  1.80478D-04
+
+           * * *
+
+Tit   = total number of iterations
+Tnf   = total number of function evaluations
+Tnint = total number of segments explored during Cauchy searches
+Skip  = number of BFGS updates skipped
+Nact  = number of active bounds at final generalized Cauchy point
+Projg = norm of the final projected gradient
+F     = final function value
+
+           * * *
+
+   N    Tit     Tnf  Tnint  Skip  Nact     Projg        F
+    2      8     11      1     0     0   0.000D+00   4.556D+00
+  F =   4.55572708781057     
+
+CONVERGENCE: NORM_OF_PROJECTED_GRADIENT_<=_PGTOL            
+
+ Cauchy                time 0.000E+00 seconds.
+ Subspace minimization time 0.000E+00 seconds.
+ Line search           time 0.000E+00 seconds.
+
+ Total User time 0.000E+00 seconds.
+
+RUNNING THE L-BFGS-B CODE
+
+           * * *
+
+Machine precision = 2.220D-16
+ N =            2     M =           12
+
+At X0         0 variables are exactly at the bounds
+
+At iterate    0    f=  4.45364D+00    |proj g|=  1.00471D-03
+
+At iterate    5    f=  4.45363D+00    |proj g|=  9.59588D-04
+
+At iterate   10    f=  4.45363D+00    |proj g|=  0.00000D+00
+
+           * * *
+
+Tit   = total number of iterations
+Tnf   = total number of function evaluations
+Tnint = total number of segments explored during Cauchy searches
+Skip  = number of BFGS updates skipped
+Nact  = number of active bounds at final generalized Cauchy point
+Projg = norm of the final projected gradient
+F     = final function value
+
+           * * *
+
+   N    Tit     Tnf  Tnint  Skip  Nact     Projg        F
+    2     10     15      1     0     0   0.000D+00   4.454D+00
+  F =   4.45362617186122     
+
+CONVERGENCE: NORM_OF_PROJECTED_GRADIENT_<=_PGTOL            
+
+ Cauchy                time 0.000E+00 seconds.
+ Subspace minimization time 0.000E+00 seconds.
+ Line search           time 0.000E+00 seconds.
+
+ Total User time 0.000E+00 seconds.
+
+RUNNING THE L-BFGS-B CODE
+
+           * * *
+
+Machine precision = 2.220D-16
+ N =            2     M =           12
+
+At X0         0 variables are exactly at the bounds
+
+At iterate    0    f=  6.25745D+00    |proj g|=  1.80949D-03
+
+At iterate    5    f=  6.25744D+00    |proj g|=  5.46585D-04
+
+           * * *
+
+Tit   = total number of iterations
+Tnf   = total number of function evaluations
+Tnint = total number of segments explored during Cauchy searches
+Skip  = number of BFGS updates skipped
+Nact  = number of active bounds at final generalized Cauchy point
+Projg = norm of the final projected gradient
+F     = final function value
+
+           * * *
+
+   N    Tit     Tnf  Tnint  Skip  Nact     Projg        F
+    2      9     14      1     0     0   0.000D+00   6.257D+00
+  F =   6.25744014419879     
+
+CONVERGENCE: NORM_OF_PROJECTED_GRADIENT_<=_PGTOL            
+
+ Cauchy                time 0.000E+00 seconds.
+ Subspace minimization time 0.000E+00 seconds.
+ Line search           time 0.000E+00 seconds.
+
+ Total User time 0.000E+00 seconds.
+
+RUNNING THE L-BFGS-B CODE
+
+           * * *
+
+Machine precision = 2.220D-16
+ N =            2     M =           12
+
+At X0         0 variables are exactly at the bounds
+
+At iterate    0    f=  5.96342D+00    |proj g|=  2.72600D-03
+
+At iterate    5    f=  5.96340D+00    |proj g|=  1.50102D-05
+
+At iterate   10    f=  5.96340D+00    |proj g|=  2.22933D-05
+
+           * * *
+
+Tit   = total number of iterations
+Tnf   = total number of function evaluations
+Tnint = total number of segments explored during Cauchy searches
+Skip  = number of BFGS updates skipped
+Nact  = number of active bounds at final generalized Cauchy point
+Projg = norm of the final projected gradient
+F     = final function value
+
+           * * *
+
+   N    Tit     Tnf  Tnint  Skip  Nact     Projg        F
+    2     13     15      1     0     0   0.000D+00   5.963D+00
+  F =   5.96339656736549     
+
+
+################Topic8.0Results#################
+count     91.000000
+mean     305.780220
+std       90.508539
+min      179.000000
+25%      248.000000
+50%      284.000000
+75%      340.000000
+max      679.000000
+Name: count, dtype: float64
+Dickey-Fuller Test:
+Test Statistic                 -1.718247
+p-value                         0.421736
+#Lags Used                      5.000000
+Number of Observations Used    85.000000
+Critical Value (10%)           -2.585258
+Critical Value (5%)            -2.896195
+Critical Value (1%)            -3.509736
+dtype: float64
+None
+Dickey-Fuller Test:
+Test Statistic                 -2.502459
+p-value                         0.114877
+#Lags Used                      9.000000
+Number of Observations Used    74.000000
+Critical Value (10%)           -2.588072
+Critical Value (5%)            -2.901470
+Critical Value (1%)            -3.521980
+dtype: float64
+                             ARIMA Model Results                              
+==============================================================================
+Dep. Variable:                D.count   No. Observations:                   83
+Model:                 ARIMA(1, 1, 0)   Log Likelihood                -494.962
+Method:                       css-mle   S.D. of innovations             93.983
+Date:                Sun, 26 Mar 2017   AIC                            995.924
+Time:                        22:25:01   BIC                           1003.180
+Sample:                    11-06-2016   HQIC                           998.839
+                         - 01-27-2017                                         
+=================================================================================
+                    coef    std err          z      P>|z|      [95.0% Conf. Int.]
+---------------------------------------------------------------------------------
+const             0.0181      7.153      0.003      0.998       -14.001    14.037
+ar.L1.D.count    -0.4477      0.098     -4.576      0.000        -0.639    -0.256
+                                    Roots                                    
+=============================================================================
+                 Real           Imaginary           Modulus         Frequency
+-----------------------------------------------------------------------------
+AR.1           -2.2335           +0.0000j            2.2335            0.5000
+-----------------------------------------------------------------------------
+################Topic11.0Results#################
+count     91.000000
+mean      39.186813
+std       16.756367
+min       19.000000
+25%       28.000000
+50%       37.000000
+75%       46.000000
+max      136.000000
+Name: count, dtype: float64
+Dickey-Fuller Test:
+Test Statistic                -6.003309e+00
+p-value                        1.637736e-07
+#Lags Used                     0.000000e+00
+Number of Observations Used    9.000000e+01
+Critical Value (10%)          -2.584210e+00
+Critical Value (5%)           -2.894232e+00
+Critical Value (1%)           -3.505190e+00
+dtype: float64
+None
+Dickey-Fuller Test:
+Test Statistic                -6.943347e+00
+p-value                        1.011805e-09
+#Lags Used                     0.000000e+00
+Number of Observations Used    8.300000e+01
+Critical Value (10%)          -2.585713e+00
+Critical Value (5%)           -2.897048e+00
+Critical Value (1%)           -3.511712e+00
+dtype: float64
+                             ARIMA Model Results                              
+==============================================================================
+Dep. Variable:                D.count   No. Observations:                   83
+Model:                 ARIMA(1, 1, 0)   Log Likelihood                -372.577
+Method:                       css-mle   S.D. of innovations             21.517
+Date:                Sun, 26 Mar 2017   AIC                            751.153
+Time:                        22:25:04   BIC                            758.410
+Sample:                    11-06-2016   HQIC                           754.069
+                         - 01-27-2017                                         
+=================================================================================
+                    coef    std err          z      P>|z|      [95.0% Conf. Int.]
+---------------------------------------------------------------------------------
+const            -0.0516      1.687     -0.031      0.976        -3.358     3.255
+ar.L1.D.count    -0.4050      0.099     -4.074      0.000        -0.600    -0.210
+                                    Roots                                    
+=============================================================================
+                 Real           Imaginary           Modulus         Frequency
+-----------------------------------------------------------------------------
+AR.1           -2.4691           +0.0000j            2.4691            0.5000
+-----------------------------------------------------------------------------
+################Topic13.0Results#################
+count     91.000000
+mean      60.318681
+std       20.213241
+min       23.000000
+25%       47.500000
+50%       59.000000
+75%       70.500000
+max      154.000000
+Name: count, dtype: float64
+Dickey-Fuller Test:
+Test Statistic                -6.220763e+00
+p-value                        5.230328e-08
+#Lags Used                     1.000000e+00
+Number of Observations Used    8.900000e+01
+Critical Value (10%)          -2.584410e+00
+Critical Value (5%)           -2.894607e+00
+Critical Value (1%)           -3.506057e+00
+dtype: float64
+None
+Dickey-Fuller Test:
+Test Statistic                 -2.979668
+p-value                         0.036837
+#Lags Used                     12.000000
+Number of Observations Used    71.000000
+Critical Value (10%)           -2.588995
+Critical Value (5%)            -2.903200
+Critical Value (1%)            -3.526005
+dtype: float64
+                             ARIMA Model Results                              
+==============================================================================
+Dep. Variable:                D.count   No. Observations:                   83
+Model:                 ARIMA(1, 1, 0)   Log Likelihood                -375.994
+Method:                       css-mle   S.D. of innovations             22.446
+Date:                Sun, 26 Mar 2017   AIC                            757.987
+Time:                        22:25:07   BIC                            765.244
+Sample:                    11-06-2016   HQIC                           760.902
+                         - 01-27-2017                                         
+=================================================================================
+                    coef    std err          z      P>|z|      [95.0% Conf. Int.]
+---------------------------------------------------------------------------------
+const             0.4201      2.577      0.163      0.871        -4.631     5.471
+ar.L1.D.count     0.0445      0.109      0.408      0.685        -0.169     0.258
+                                    Roots                                    
+=============================================================================
+                 Real           Imaginary           Modulus         Frequency
+-----------------------------------------------------------------------------
+AR.1           22.4869           +0.0000j           22.4869            0.0000
+-----------------------------------------------------------------------------
+################Topic18.0Results#################
+count     91.000000
+mean      66.054945
+std       17.714628
+min       32.000000
+25%       53.500000
+50%       62.000000
+75%       77.000000
+max      125.000000
+Name: count, dtype: float64
+Dickey-Fuller Test:
+Test Statistic                 -2.137516
+p-value                         0.229699
+#Lags Used                      5.000000
+Number of Observations Used    85.000000
+Critical Value (10%)           -2.585258
+Critical Value (5%)            -2.896195
+Critical Value (1%)            -3.509736
+dtype: float64
+None
+Dickey-Fuller Test:
+Test Statistic                 -3.292403
+p-value                         0.015221
+#Lags Used                      6.000000
+Number of Observations Used    77.000000
+Critical Value (10%)           -2.587223
+Critical Value (5%)            -2.899878
+Critical Value (1%)            -3.518281
+dtype: float64
+                             ARIMA Model Results                              
+==============================================================================
+Dep. Variable:                D.count   No. Observations:                   83
+Model:                 ARIMA(1, 1, 0)   Log Likelihood                -374.474
+Method:                       css-mle   S.D. of innovations             21.990
+Date:                Sun, 26 Mar 2017   AIC                            754.949
+Time:                        22:25:09   BIC                            762.205
+Sample:                    11-06-2016   HQIC                           757.864
+                         - 01-27-2017                                         
+=================================================================================
+                    coef    std err          z      P>|z|      [95.0% Conf. Int.]
+---------------------------------------------------------------------------------
+const             0.0851      1.562      0.054      0.957        -2.976     3.146
+ar.L1.D.count    -0.5524      0.091     -6.057      0.000        -0.731    -0.374
+                                    Roots                                    
+=============================================================================
+                 Real           Imaginary           Modulus         Frequency
+-----------------------------------------------------------------------------
+AR.1           -1.8103           +0.0000j            1.8103            0.5000
+-----------------------------------------------------------------------------
+################Topic14.0Results#################
+count     91.000000
+mean      52.197802
+std       17.228671
+min       22.000000
+25%       42.000000
+50%       51.000000
+75%       62.000000
+max      115.000000
+Name: count, dtype: float64
+Dickey-Fuller Test:
+Test Statistic                 -3.745050
+p-value                         0.003522
+#Lags Used                      8.000000
+Number of Observations Used    82.000000
+Critical Value (10%)           -2.585949
+Critical Value (5%)            -2.897490
+Critical Value (1%)            -3.512738
+dtype: float64
+None
+Dickey-Fuller Test:
+Test Statistic                 -3.270317
+p-value                         0.016259
+#Lags Used                      7.000000
+Number of Observations Used    76.000000
+Critical Value (10%)           -2.587498
+Critical Value (5%)            -2.900395
+Critical Value (1%)            -3.519481
+dtype: float64
+                             ARIMA Model Results                              
+==============================================================================
+Dep. Variable:                D.count   No. Observations:                   83
+Model:                 ARIMA(1, 1, 0)   Log Likelihood                -349.106
+Method:                       css-mle   S.D. of innovations             16.195
+Date:                Sun, 26 Mar 2017   AIC                            704.213
+Time:                        22:25:11   BIC                            711.469
+Sample:                    11-06-2016   HQIC                           707.128
+                         - 01-27-2017                                         
+=================================================================================
+                    coef    std err          z      P>|z|      [95.0% Conf. Int.]
+---------------------------------------------------------------------------------
+const             0.3420      1.130      0.303      0.763        -1.873     2.557
+ar.L1.D.count    -0.5799      0.088     -6.582      0.000        -0.753    -0.407
+                                    Roots                                    
+=============================================================================
+                 Real           Imaginary           Modulus         Frequency
+-----------------------------------------------------------------------------
+AR.1           -1.7245           +0.0000j            1.7245            0.5000
+-----------------------------------------------------------------------------
+################Topic9.0Results#################
+count     91.000000
+mean      83.571429
+std       29.220291
+min       40.000000
+25%       64.500000
+50%       76.000000
+75%      100.500000
+max      194.000000
+Name: count, dtype: float64
+Dickey-Fuller Test:
+Test Statistic                 -4.182058
+p-value                         0.000707
+#Lags Used                      8.000000
+Number of Observations Used    82.000000
+Critical Value (10%)           -2.585949
+Critical Value (5%)            -2.897490
+Critical Value (1%)            -3.512738
+dtype: float64
+None
+Dickey-Fuller Test:
+Test Statistic                 -3.685435
+p-value                         0.004323
+#Lags Used                      7.000000
+Number of Observations Used    76.000000
+Critical Value (10%)           -2.587498
+Critical Value (5%)            -2.900395
+Critical Value (1%)            -3.519481
+dtype: float64
+                             ARIMA Model Results                              
+==============================================================================
+Dep. Variable:                D.count   No. Observations:                   83
+Model:                 ARIMA(1, 1, 0)   Log Likelihood                -407.933
+Method:                       css-mle   S.D. of innovations             32.922
+Date:                Sun, 26 Mar 2017   AIC                            821.866
+Time:                        22:25:14   BIC                            829.122
+Sample:                    11-06-2016   HQIC                           824.781
+                         - 01-27-2017                                         
+=================================================================================
+                    coef    std err          z      P>|z|      [95.0% Conf. Int.]
+---------------------------------------------------------------------------------
+const            -0.4473      2.410     -0.186      0.853        -5.171     4.276
+ar.L1.D.count    -0.5058      0.095     -5.321      0.000        -0.692    -0.319
+                                    Roots                                    
+=============================================================================
+                 Real           Imaginary           Modulus         Frequency
+-----------------------------------------------------------------------------
+AR.1           -1.9771           +0.0000j            1.9771            0.5000
+-----------------------------------------------------------------------------
+CONVERGENCE: NORM_OF_PROJECTED_GRADIENT_<=_PGTOL            
+
+ Cauchy                time 0.000E+00 seconds.
+ Subspace minimization time 0.000E+00 seconds.
+ Line search           time 0.000E+00 seconds.
+
+ Total User time 0.000E+00 seconds.
+
+RUNNING THE L-BFGS-B CODE
+
+           * * *
+
+Machine precision = 2.220D-16
+ N =            2     M =           12
+
+At X0         0 variables are exactly at the bounds
+
+At iterate    0    f=  4.48889D+00    |proj g|=  2.25020D-03
+
+At iterate    5    f=  4.48888D+00    |proj g|=  2.02593D-04
+
+           * * *
+
+Tit   = total number of iterations
+Tnf   = total number of function evaluations
+Tnint = total number of segments explored during Cauchy searches
+Skip  = number of BFGS updates skipped
+Nact  = number of active bounds at final generalized Cauchy point
+Projg = norm of the final projected gradient
+F     = final function value
+
+           * * *
+
+   N    Tit     Tnf  Tnint  Skip  Nact     Projg        F
+    2      8     11      1     0     0   0.000D+00   4.489D+00
+  F =   4.48887570876947     
+
+CONVERGENCE: NORM_OF_PROJECTED_GRADIENT_<=_PGTOL            
+
+ Cauchy                time 0.000E+00 seconds.
+ Subspace minimization time 0.000E+00 seconds.
+ Line search           time 0.000E+00 seconds.
+
+ Total User time 0.000E+00 seconds.
+
+RUNNING THE L-BFGS-B CODE
+
+           * * *
+
+Machine precision = 2.220D-16
+ N =            2     M =           12
+
+At X0         0 variables are exactly at the bounds
+
+At iterate    0    f=  4.53005D+00    |proj g|=  2.53930D-04
+
+At iterate    5    f=  4.53004D+00    |proj g|=  1.81988D-04
+
+At iterate   10    f=  4.53004D+00    |proj g|=  8.88178D-08
+
+           * * *
+
+Tit   = total number of iterations
+Tnf   = total number of function evaluations
+Tnint = total number of segments explored during Cauchy searches
+Skip  = number of BFGS updates skipped
+Nact  = number of active bounds at final generalized Cauchy point
+Projg = norm of the final projected gradient
+F     = final function value
+
+           * * *
+
+   N    Tit     Tnf  Tnint  Skip  Nact     Projg        F
+    2     10     14      1     0     0   8.882D-08   4.530D+00
+  F =   4.53004234507167     
+
+CONVERGENCE: REL_REDUCTION_OF_F_<=_FACTR*EPSMCH             
+
+ Cauchy                time 0.000E+00 seconds.
+ Subspace minimization time 0.000E+00 seconds.
+ Line search           time 0.000E+00 seconds.
+
+ Total User time 0.000E+00 seconds.
+
+RUNNING THE L-BFGS-B CODE
+
+           * * *
+
+Machine precision = 2.220D-16
+ N =            2     M =           12
+
+At X0         0 variables are exactly at the bounds
+
+At iterate    0    f=  4.51176D+00    |proj g|=  8.08065D-04
+
+At iterate    5    f=  4.51174D+00    |proj g|=  5.29354D-05
+
+           * * *
+
+Tit   = total number of iterations
+Tnf   = total number of function evaluations
+Tnint = total number of segments explored during Cauchy searches
+Skip  = number of BFGS updates skipped
+Nact  = number of active bounds at final generalized Cauchy point
+Projg = norm of the final projected gradient
+F     = final function value
+
+           * * *
+
+   N    Tit     Tnf  Tnint  Skip  Nact     Projg        F
+    2      8     11      1     0     0   0.000D+00   4.512D+00
+  F =   4.51173986759248     
+
+CONVERGENCE: NORM_OF_PROJECTED_GRADIENT_<=_PGTOL            
+
+ Cauchy                time 0.000E+00 seconds.
+ Subspace minimization time 0.000E+00 seconds.
+ Line search           time 0.000E+00 seconds.
+
+ Total User time 0.000E+00 seconds.
+
+RUNNING THE L-BFGS-B CODE
+
+           * * *
+
+Machine precision = 2.220D-16
+ N =            2     M =           12
+
+At X0         0 variables are exactly at the bounds
+
+At iterate    0    f=  4.20614D+00    |proj g|=  3.36531D-03
+
+At iterate    5    f=  4.20610D+00    |proj g|=  8.88178D-08
+
+           * * *
+
+Tit   = total number of iterations
+Tnf   = total number of function evaluations
+Tnint = total number of segments explored during Cauchy searches
+Skip  = number of BFGS updates skipped
+Nact  = number of active bounds at final generalized Cauchy point
+Projg = norm of the final projected gradient
+F     = final function value
+
+           * * *
+
+   N    Tit     Tnf  Tnint  Skip  Nact     Projg        F
+    2      6     10      1     0     0   0.000D+00   4.206D+00
+  F =   4.20610114154680     
+
+CONVERGENCE: NORM_OF_PROJECTED_GRADIENT_<=_PGTOL            
+
+ Cauchy                time 0.000E+00 seconds.
+ Subspace minimization time 0.000E+00 seconds.
+ Line search           time 0.000E+00 seconds.
+
+ Total User time 0.000E+00 seconds.
+
+RUNNING THE L-BFGS-B CODE
+
+           * * *
+
+Machine precision = 2.220D-16
+ N =            2     M =           12
+
+At X0         0 variables are exactly at the bounds
+
+At iterate    0    f=  4.91494D+00    |proj g|=  3.47216D-03
+
+At iterate    5    f=  4.91488D+00    |proj g|=  1.80727D-03
+
+At iterate   10    f=  4.91485D+00    |proj g|=  1.77636D-07
+
+           * * *
+
+Tit   = total number of iterations
+Tnf   = total number of function evaluations
+Tnint = total number of segments explored during Cauchy searches
+Skip  = number of BFGS updates skipped
+Nact  = number of active bounds at final generalized Cauchy point
+Projg = norm of the final projected gradient
+F     = final function value
+
+           * * *
+
+   N    Tit     Tnf  Tnint  Skip  Nact     Projg        F
+    2     11     13      1     0     0   8.882D-08   4.915D+00
+  F =   4.91485499141398     
+
+CONVERGENCE: REL_REDUCTION_OF_F_<=_FACTR*EPSMCH             
+
+ Cauchy                time 0.000E+00 seconds.
+ Subspace minimization time 0.000E+00 seconds.
+ Line search           time 0.000E+00 seconds.
+
+ Total User time 0.000E+00 seconds.
+

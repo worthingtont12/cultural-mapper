@@ -1,16 +1,28 @@
 # Cultural Mapper
-Data Science Institute Capstone Project Class of 2017
+Using user-generated text to classify subpopulations in a city.
 
-We are mapping out subpopulations using twitter data.
+# Summary
+The goal of this project was to try to devise a methodology of grouping individuals in metropolitan areas that didn't rely on census divisions of race or income. The argument is that we can instead group together individuals by their social interests and that this can allow us a more granular approach to looking at subpopulations. This project attempts to do this and examines the spatial and temporal aspects of this idea.
 
 # Data
-We listened and stored tweets in Los Angeles, Chicago, and Istanbul for 90 days, 10/29/16-1/26/17. The data needed considerable cleaning, parsing, and processing.
+Over the course of 90 days from 10/29/16-1/26/17 we collected tweets from 3 regions.
+* Los Angeles, CA, USA
+* Chicago, IL, USA
+* Istanbul, Turkey
 
-# Procedure
-After we collapsed all tweets by the same author we separated the tweets by language group. These language groups were then used as corpora for topic modeling.
+We chose these 3 regions because we wanted 3 highly populated diverse areas but also wanted to see if we could create a methodology that can be used on cities domestic and international.
 
-# Paper Title
-Visualizing Spatio-Temporal Trends in Urban Cultural Subpopulations through Social Media
+# Directory
+* Analysis - Analyzed time series of clustered data.
+* Assets - Dependencies for other processes.
+* Data Collection - Scripts used to collect the data.
+* Louvain Clustering - Implemented the Louvain Algorithm for clustering of users.
+* Parsing - Files used to clean and process the data.
+* SQL Queries - Important queries used throughout project.
+* Topic Modeling - Implemented topic modeling to cluster twitter users.
+
+# Purpose
+This project was completed for the Data Science Institute at UVa in fulfillment of the capstone project for the Master's of Science in Data Science.  
 
 # Project Contributors
 * Tyler Worthington
