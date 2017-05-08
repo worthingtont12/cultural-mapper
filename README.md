@@ -22,9 +22,13 @@ We chose these 3 regions because we wanted 3 highly populated diverse areas but 
 * Topic Modeling - Implemented topic modeling to cluster twitter users.
 
 # Purpose
-This project was completed for the Data Science Institute at UVa in fulfillment of the capstone project for the Master's of Science in Data Science.  
+This project was completed for the [Data Science Institute](https://dsi.virginia.edu) at UVa in fulfillment of the capstone project for the Master's of Science in Data Science.  
 
-# Project Contributors
-* Tyler Worthington
-* James Rogol
-* Lander Basterra
+### Project Contributors
+* Tyler Worthington (@worthingtont12)
+* James Rogol (@jrogol)
+* Lander Basterra (@landerbasterra)
+
+### Presentations
+* [10th Annual Strategic Multi-layer Assessment Conference](http://www.start.umd.edu/news/strategic-multilayer-assessment-call-poster-proposals) (Joint Base Andrews, MD); April 25-26, 2017 (Poster)
+* [SIEDS '17](http://bart.sys.virginia.edu/sieds17/) (Charlottesville, VA); April 28, 2017 (Presentation and Poster)

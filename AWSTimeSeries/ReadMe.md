@@ -18,8 +18,9 @@ Running RStudio in AWS enabled the team to keep data within the AWS ecosystem, a
   * Estimates Forecasts for 1 to 7 day windows.
 * __AWS_TS_load.R__ - Modified version of the above, but limited to the 92-day study period
 * __DailyAvgPlot.R__ - Depends on city data obtained __AWS_TS_load_all.R__ Experimenting with representations of daily averages. Radial plots were attempted, but obscured the variations, and were not used.
-* __Helpers/Postgres_functions.R__ - Simplified connections and queries to the PostgreSQL database (AWS-specific). Calls __Helpers/SpatialUtil.R__.
-* __Helpers/keys.R__ - Contains strings `usr` (PostgreSQL user name),`pwd` (PostgreSQL password), and `hst` (AWS PostgreSQL host). Called by
+* __Helpers/Postgres_functions.R__ - Simplified connections and queries to the PostgreSQL database (AWS-specific).
+* __Helpers/SpatialUtil.R__ - Geospatial Utilities.
+* __Helpers/keys.R__ - Contains strings `usr` (PostgreSQL user name),`pwd` (PostgreSQL password), and `hst` (AWS PostgreSQL host). Called by __Prostgres_functions.R__
 
 
 ## Packages
