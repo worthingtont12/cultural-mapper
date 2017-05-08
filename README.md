@@ -13,10 +13,12 @@ Over the course of 90 days from 10/29/16-1/26/17 we collected tweets from 3 regi
 We chose these 3 regions because we wanted 3 highly populated diverse areas but also wanted to see if we could create a methodology that can be used on cities domestic and international.
 
 # Directory
+* AWSTimeSeries - Time Series analsis ran on AWS
 * Analysis - Analyzed time series of clustered data.
 * Assets - Dependencies for other processes.
 * Data Collection - Scripts used to collect the data.
 * Louvain Clustering - Implemented the Louvain Algorithm for clustering of users.
+* Mapping - Files used for geographic mapping.
 * Parsing - Files used to clean and process the data.
 * SQL Queries - Important queries used throughout project.
 * Topic Modeling - Implemented topic modeling to cluster twitter users.
