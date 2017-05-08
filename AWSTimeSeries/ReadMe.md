@@ -9,7 +9,7 @@ Running RStudio in AWS enabled the team to keep data within the AWS ecosystem, a
 * __Helpers__ - Functions used elsewhere
 
 ## Files
-* __*_meta.R files__ - Files for LA, Chicago and Istanbul. The bounding boxes, timezones, and geographic projections are contained, allowing the same code to be run on multiple cities.
+* __*meta.R files__ - Files for LA, Chicago and Istanbul. The bounding boxes, timezones, and geographic projections are contained, allowing the same code to be run on multiple cities.
 * __AllCities_load_all.R__ - Runs __AWS_TS_load_all.R__ for each city, saving the results to the __Outputs__ directory.
 * __ArabicAnalysis.R__ - Specific to the Arabic communities, which were distinct from other groups in LA and Istanbul
 * __AWS_TS_load_all.R__ - Queries databases for all tweets after 10/28/16, the start of the study period.
