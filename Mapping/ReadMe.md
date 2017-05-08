@@ -9,7 +9,7 @@
 * __Shiny__ - Workings of the Shiny App.
 
 ## Files
-* __\*_meta.R files__ - Files for LA, Chicago and Istanbul. The bounding boxes, timezones, and geographic projections are contained, allowing the same code to be run on multiple cities.
+* __meta.R files__ - Files for LA, Chicago and Istanbul. The bounding boxes, timezones, and geographic projections are contained, allowing the same code to be run on multiple cities.
 * __All_Maps.R__ - Iterates through cities, mapping as it goes. Data can be loaded is saved, or queried from the database.
 * __Mapping_Template.R__ - Can Be called after city data is loaded. Here, plots trends in Istanbul.
 * __MultivariateRegression.R__ - Brief exploration of predicting location from Topic assignments and timestamps.
