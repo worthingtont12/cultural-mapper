@@ -159,7 +159,7 @@ map +
   geom_point(aes(x = long, y = lat, color = lang.topic),
              data = clean.topics %>% filter(user_language == all_langs$language[1],
                                             source != "Instagram",
-                                            hour.cut == "8pm-12am",
+                                            hour.cut == "12am-4am",
                                             tz >= "2016-12-31",
                                             tz <= "2017-01-01"
              ),  alpha = .1) +
@@ -168,7 +168,7 @@ map +
                  n = grid.points,
                  data = clean.topics %>% filter(user_language == all_langs$language[1],
                                                 source != "Instagram",
-                                                hour.cut == "8pm-12am",
+                                                hour.cut == "12am-4am",
                                                 tz >= "2016-12-31",
                                                 tz <= "2017-01-01"
                  )) + theme(legend.position = "none") +
@@ -178,18 +178,18 @@ map +
 # All other Sundays
 map +
   geom_point(aes(x = long, y = lat, color = lang.topic), alpha = .1,
-             data = clean.topics %>% filter(user_language == all_langs$language[1:6],
+             data = clean.topics %>% filter(user_language == all_langs$language[1],
                                             source != "Instagram",
-                                            hour.cut == "8pm-12am",
+                                            hour.cut == "12am-4am",
                                             tz != strftime("2016-01-01"),
                                             day == "Sun"
              )) +
   stat_density2d(aes(x = long, y = lat, 
                      fill = ..level..), geom = "polygon",
                  n = grid.points,
-                 data = clean.topics %>% filter(user_language == all_langs$language[1:6],
+                 data = clean.topics %>% filter(user_language == all_langs$language[1],
                                                 source != "Instagram",
-                                                hour.cut == "8pm-12am",
+                                                hour.cut == "12am-4am",
                                                 tz != strftime("2017-01-01"),
                                                 day == "Sun"
                  ))+
