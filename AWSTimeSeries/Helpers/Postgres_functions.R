@@ -1,13 +1,15 @@
+#### Functions to connect to the AWS database
+
 library(RPostgreSQL)
-# Function to connect to the database, 
+# Function to connect to the database,
 connectDB <- function(city){
   require(RPostgreSQL)
   # Load in the keys
   source('keys.R')
-  # Create DB name, joining city name 
+  # Create DB name, joining city name
   name = paste("culturalmapper", city, sep = "_")
   pg = dbDriver("PostgreSQL")
-  
+
   # Connect to the database
   con = dbConnect(pg, user = usr,
                   password = pwd,
@@ -28,7 +30,7 @@ disconnectDB <-function(db){
 # Load language registry
 load_langs <- function(){
   require(jsonlite)
-  registry <- fromJSON('../Assets/Langauge.json')
+  registry <- fromJSON('../../Assets/Langauge.json')
   names(registry) <- c('user_lang', 'language')
   registry[1:2]
 }
@@ -46,7 +48,7 @@ merge_langs <- function(df){
   require(dplyr)
   require(lubridate)
   require(timeDate)
-  
+
   registry <- load_langs()
   # Merge the language by the users' selected language!
   data_merge <- left_join(df, registry)
@@ -73,7 +75,7 @@ merge_langs <- function(df){
       hour_cos = cos(deg.to.rad(as.numeric(hour)*(360/24))),
       # Clean up the source, removing HTML tags
       source = gsub(pattern = "<.+\">|</a>", "",source)
-    ) 
+    )
 }
 
 
@@ -94,8 +96,8 @@ merge_langs <- function(df){
 #     hour_sin = sin(deg.to.rad(hour)),
 #     hour_cos = cos(deg.to.rad(hour))
 #   )
-# 
-# 
+#
+#
 # as.numeric(wday(data$tz, label = T))
 
 
@@ -106,15 +108,15 @@ StatChull <- ggproto("StatChull", Stat,
                      compute_group = function(data, scales) {
                        data[chull(data$x, data$y), , drop = FALSE]
                      },
-                     
+
                      required_aes = c("x", "y")
 )
 
 stat_chull <- function(mapping = NULL, data = NULL, geom = "polygon",
-                       position = "identity", na.rm = FALSE, show.legend = NA, 
+                       position = "identity", na.rm = FALSE, show.legend = NA,
                        inherit.aes = TRUE, ...) {
   layer(
-    stat = StatChull, data = data, mapping = mapping, geom = geom, 
+    stat = StatChull, data = data, mapping = mapping, geom = geom,
     position = position, show.legend = show.legend, inherit.aes = inherit.aes,
     params = list(na.rm = na.rm, ...)
   )
@@ -140,11 +142,9 @@ merge_topics <- function(data, path){
   temp <- left_join(data, temp.topics, by = "user_id")
   # Create a new feature, "lang.topic", which combines a user's language with
   # the corresponding topic if it exists. If not, returns the user's language.
-  temp$lang.topic <- ifelse(is.na(temp$user_language), 
+  temp$lang.topic <- ifelse(is.na(temp$user_language),
                             as.character(temp$language),
                             paste("Topic",str_extract(temp$top_topic,"[0-9]+"),
                                   "-",temp$user_language))
-  temp %>% 
-    filter(!(source %in% c("Twitter for Windows", "altın dükkan twitter robotu")))
   temp
 }

@@ -1,7 +1,7 @@
 #### Get the City Data ####
 # Load in the helper functions
-source("Postgres_functions.R")
-source("SpatialUtil.R")
+source("Helpers/Postgres_functions.R")
+source("Helpers/SpatialUtil.R")
 
 # Connect To the Database
 con <- connectDB(db)
@@ -42,7 +42,7 @@ registry <- load_langs()
 data_merge <- left_join(loc.data, registry)
 data_merge$language <- as.factor(data_merge$language)
 # Clean up the source, Extract the Date
-data_merge <- data_merge %>% 
+data_merge <- data_merge %>%
   mutate(source = gsub(pattern = "<.+\">|</a>", "",source),
          date = format(tzone, "%d %b %Y"))
 
@@ -53,7 +53,7 @@ clean.topics <- merge_topics(data_merge, "Topic_Data/")
 #rm(loc.data, data_merge)
 
 # Aggregate count by date and topic
-counts <- clean.topics %>% 
+counts <- clean.topics %>%
   # Extract Date
   mutate(date = as.Date(date,"%d %b %Y")) %>%
   # Filter out languages in the registry, so it's only the topics
@@ -64,7 +64,7 @@ counts <- clean.topics %>%
   group_by(date, lang.topic) %>% count
 
 # Spread the data from long to wide format and sort by date
-counts <- counts %>% 
+counts <- counts %>%
   spread(lang.topic,n) %>%
   arrange(date)
 
@@ -73,7 +73,7 @@ counts[is.na(counts)] <- 0
 
 # Top topics, by count
 top_topics <- clean.topics %>%
-  group_by(lang.topic) %>% 
+  group_by(lang.topic) %>%
   filter(!is.na(lang.topic)) %>%
   count() %>%
   arrange(desc(n))
@@ -130,32 +130,32 @@ coefs <- extract_coefs(models)
 smooth.coefs <- extract_coefs(smooth.models)
 
 # find the number of unique users by language
-unique.users <- clean.topics %>% 
+unique.users <- clean.topics %>%
   group_by(lang.topic) %>%
   filter(!is.na(lang.topic)) %>%
   mutate(users = length(unique(user_id))) %>%
-  select(lang.topic, users) %>% 
+  select(lang.topic, users) %>%
   unique %>%
   arrange(desc(users))
 
 # Top topics, by count
 top_topics <- clean.topics %>%
-  group_by(lang.topic) %>% 
+  group_by(lang.topic) %>%
   filter(!is.na(lang.topic)) %>%
   count() %>%
   arrange(desc(n))
 
 
-coefs2 <- top_topics[1:20,] %>% 
+coefs2 <- top_topics[1:20,] %>%
   rename(tweets = n) %>%
   left_join(unique.users, by ="lang.topic") %>%
-  mutate (avg = (tweets/users)) %>% 
+  mutate (avg = (tweets/users)) %>%
   left_join(coefs, by = c("lang.topic"="topic"))
 
-smooth.coefs2 <- top_topics[1:20,] %>% 
+smooth.coefs2 <- top_topics[1:20,] %>%
   rename(tweets = n) %>%
   left_join(unique.users, by ="lang.topic") %>%
-  mutate (avg = (tweets/users)) %>% 
+  mutate (avg = (tweets/users)) %>%
   left_join(smooth.coefs, by = c("lang.topic"="topic"))
 
 # Write the outputs to CSV
@@ -214,13 +214,13 @@ ColorDendrogram(clusters, y = clust, labels = names(clust),
 dev.off()
 
 # Normalizing tweets per user
-tweetcount <- clean.topics %>% 
+tweetcount <- clean.topics %>%
   mutate(date = as.Date(date,"%d %b %Y")) %>%
   #filter(!(lang.topic %in% registry$language)) %>%
   filter(!is.na(lang.topic)) %>%
   group_by(date, lang.topic) %>% count
 
-activityPerUser <- left_join(tweetcount,unique.users, by ="lang.topic") %>% 
+activityPerUser <- left_join(tweetcount,unique.users, by ="lang.topic") %>%
   rename(tweets = n ) %>%
   mutate(PerUser = tweets/users) %>%
   select(date, lang.topic, PerUser)
@@ -261,12 +261,12 @@ dev.off()
 
 #### Dendrograms for top 20 Topics  ####
 
-tweetcount <- clean.topics %>% 
+tweetcount <- clean.topics %>%
   mutate(date = as.Date(date,"%d %b %Y")) %>%
   filter(lang.topic %in% top_topics$lang.topic[1:20]) %>%
   group_by(date, lang.topic) %>% count
 
-activityPerUser <- left_join(tweetcount,unique.users, by ="lang.topic") %>% 
+activityPerUser <- left_join(tweetcount,unique.users, by ="lang.topic") %>%
   rename(tweets = n ) %>%
   mutate(PerUser = tweets/users) %>%
   select(date, lang.topic, PerUser)
@@ -338,7 +338,7 @@ norm.clust <- cutree(clusters2, k =5)
 
 png(paste0("Outputs/",db,"-Top20TopicsNormDendrogram.png"),width = 11, height = 8.5, units = "in", res = 300)
 # colors the leaves of a dendrogram
-ColorDendrogram(clusters2, y = norm.clust, labels = names(norm.clust), 
+ColorDendrogram(clusters2, y = norm.clust, labels = names(norm.clust),
                 main = paste("Dendrogram of Top 20 Topics in",db),
                 xlab = "Topics", sub = "Normalized by Tweets per User",
                 branchlength = .2)
@@ -352,16 +352,16 @@ dev.off()
 # library(dplyr)
 # library(tidyr)
 # library(lubridate)
-# 
+#
 # # find the number of unique users by language
-# unique.users <- clean.topics %>% 
+# unique.users <- clean.topics %>%
 #   group_by(lang.topic) %>%
 #   filter(!is.na(lang.topic)) %>%
 #   mutate(users = length(unique(user_id))) %>%
-#   select(lang.topic, users) %>% 
+#   select(lang.topic, users) %>%
 #   unique %>%
 #   arrange(desc(users))
-# 
+#
 # # Summarize the count by topic, by day
 # count.TopicDay <- clean.topics %>%
 #   mutate(day = wday(tzone, label = T)) %>%
@@ -370,33 +370,33 @@ dev.off()
 #   ungroup %>%
 #   group_by(lang.topic, day) %>%
 #   summarise(avg = mean(n))
-# 
+#
 # # Normalize daily averages by the number of users within each topic
 # PerUser <- left_join(count.TopicDay, unique.users, on = lang.topic) %>%
 #   mutate(avgPerUser = avg/users)
-# 
+#
 # # Plot of top 10 topics
-# PerUser %>% 
+# PerUser %>%
 #   filter(lang.topic %in% top_topics$lang.topic[1:10]) %>%
-#   ggplot(aes(x=day, y = avgPerUser, color = lang.topic, group = lang.topic)) + 
-#   geom_line() + 
-#   ggtitle(paste("Average Tweets per User in",db,"by Day"))  + 
-#   theme(legend.position = "bottom", legend.box = "horizontal") #+ 
+#   ggplot(aes(x=day, y = avgPerUser, color = lang.topic, group = lang.topic)) +
+#   geom_line() +
+#   ggtitle(paste("Average Tweets per User in",db,"by Day"))  +
+#   theme(legend.position = "bottom", legend.box = "horizontal") #+
 #   ggsave(paste0("Outputs/",db,"-TopicDensity_DayHourALL.png"), width = 11, height = 8.5, units = "in")
-#   
-# 
-# PerUser %>% 
+#
+#
+# PerUser %>%
 #   filter(lang.topic %in% top_topics$lang.topic[15:20]) %>%
 #   ggplot(aes(x=day, y = avgPerUser, color = lang.topic, group = lang.topic))+ geom_line()
-# 
-# 
+#
+#
 # # Plot of top 6 topics
 # count.TopicDay %>%
 #   filter(lang.topic %in% top_topics$lang.topic[1:6]) %>%
 #   ggplot(aes(x=day, y = avg, color = lang.topic, group = lang.topic)) +
 #   scale_color_discrete() +
 #   geom_line()
-# 
+#
 # count.TopicDay %>%
 #   filter(lang.topic %in% top_topics$lang.topic[15:20]) %>%
 #   ggplot(aes(x=day, y = avg, color = lang.topic, group = lang.topic)) +

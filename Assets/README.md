@@ -1,5 +1,5 @@
 # Stop Words
-Majority of the stop words were downloaded from  the nltk toolkit. The rest were downloaded from Kevin Bougé's website. 
+Majority of the stop words were downloaded from  the nltk toolkit. The rest were downloaded from Kevin Bougé's website.
 
 NLTK
 http://www.nltk.org/index.html
@@ -21,6 +21,8 @@ http://developer.yahoo.com/geo/placefinder/
 Amy X Zhang's Repository
 https://github.com/amyxzhang/boundingbox-cities
 
-# Language JSON file
+# Language files
 
-Used the Twitter API to make a request of supported languages. File was manipulated to collapse similar languages into one category, ie english, British english, and Australian english.
+Twitter's API provided a JSON object of supported "production" languages. File was manipulated to collapse similar languages into one category, i.e. English, British English, and Australian English.
+
+The [IANA](www.iana.org) maintains a list of all languages and their corresponding two-letter codes. This was used in identifying languages not featured in the JSON (though ultimately not used in analysis).
