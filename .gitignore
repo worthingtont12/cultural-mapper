@@ -56,6 +56,9 @@ Modelling_SMOTE/ISTData.RData
 Modelling_SMOTE/CHIData.RData
 
 *.RData
+*.Rhistory
+*.DS_Store
+*.Rproj
 
 Mapping/Mapping.Rproj
 
