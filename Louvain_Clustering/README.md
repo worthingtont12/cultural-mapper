@@ -35,7 +35,7 @@ How to run Top_Words_in_Community.py
 
 ```
 1) Membership column name in communities.csv might change, so make sure membership_(city) in Top_Words_in_Community.py refers to the right column name
-2) In Joining.py, set dbname to the right city database as well as variables primary, quotes, and user_desc 
+2) In Joining.py, set dbname to the right city database as well as variables: primary, quotes, and user_desc 
 3) python Top_Words_in_Community.py
 
 ```
