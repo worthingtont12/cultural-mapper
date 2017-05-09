@@ -1,6 +1,6 @@
 # Implementing Louvain Clustering
 
-An Optimal Louvain Network will return a partition of the network that maximizes the modularity of the network caracterized
+An Optimal Louvain Network will return a partition that maximizes the modularity of the network caracterized
 by dense connections within communities and sparse connections between communities. The objective of applying 
 the Louvain algorithm to a cluster of tweets is to identify communities in large networks.  
 
