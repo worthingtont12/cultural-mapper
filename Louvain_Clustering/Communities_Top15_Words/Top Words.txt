@@ -1,0 +1,167 @@
+—————————————————Istanbul - English
+
+purple
+core, bad, from, people, displeasure, myself ,kemalism(founding ideology of Turkey),turkish, world, a, race, expression, make, purpose, using
+— I’m guessing nationalists, people who love Turkey
+
+green
+tweet, on, the, balkan, european union, eastern, neighborhood, sofia (Bulgaria), based, wine, geek, travel, enthusiast, expulsion, overshadow, reported
+— probably tourists
+
+light blue
+what, minimum, life, this, it, write, judge, you, benzene, queues, welcome, back, snapchat
+- i don’t know
+
+yellow
+emi (european movement international), universal, music,Turkey, office, formal, twitter, account, old, group, pick, January, during, here, 
+— people advocating for the inclusion of turkey in the european union 
+
+
+red
+unknown, other, people, from, smart, full, one, yellow, dark, dessert, red, prisoner, ytu (Yildiz Technical University), backpacker 
+- I’m guessing university students, this university is very famous in Istanbul, also red and yellow are the colors of Galatassaray so prob the university has a lot of fans 
+
+dark blue                
+'psychology', 'graduate', 'animal', 'human', 'right', 'advocate', 'bunny', 'gsd', 'mama', 'photographer', 'visual', 'storyteller', 'artist', 'traveller', 'vegan'
+
+
+————————— Istanbul - Turkish 
+purple
+life, meaning, arda (Arda Turan - he supports Erdogan), you, own, in, a, mother, even, fair, of, atatürkçü[Kemalist Thought Association)- secular organization that espouses the ideas of the founder of modern Turkey and they are against islamists tenets and separation of church and state],Republic, yet,woman
+     
+green
+tepedr, warwick[University of Warwick], peynir[most popular turkish cheese], sick,children,dogs, books, movies, cocktail, smell of the sea, night, Republic, skin
+
+blue
+socialism, beşiktaş(footbal team),mosque,iman, kadıköy(neighborhood in Istanbul), away, sport fans, (piece or seed), god, will not happen, all, your future, galatasarai           
+
+yellow
+people, soul, scam, marmara (university-sea-region-hotel), university, tourism, hotel, şletmeciliği (name of a hotel),while reading, my heart, squeeze, brutal, look, you,terrorist, 
+- might have to do with the terrorist attack in Istanbul in January
+
+orange
+loving, time, talisman,türkünbayramıekim (turkish holyday), blessed, enjoy, good morning, beautiful, a, week, end, to pass well-wishes to another person, I wish, good morning (another way), good
+
+red 
+system(political sense), slave, don’t be(stupid),name, meander, university, instagram, I,I am, day, Galata (neighborhood),the two of us
+
+turquoise 
+confidence,shame,obtain,to you, girl, good, endures, to create, aggressive, in my opinion, well-known, we, waving
+
+
+——————————————— Los Angeles ————————————
+
+purple green blue yellow orange red turquoise brown grey
+
+***********************   groupm num  ************************
+[1467, 1706, 1037, 286, 1110, 892, 324, 658, 1241, 18, 1131
+***********************    Score List  ************************
+
+purple
+[['hey', 'nigga', 'sexy', 'girl', 'call', 'ok', 'man', 'pretty', 'baby', 'stunna', 'em', 'boy', 'miss', 'babythis', 'real’],
+
+green
+ ['writing', 'running', 'time', ‘la’, ’nyc’, ‘leave’, ‘accepting’, 'lot', 'writer', 'co', 'exec', ‘attachment’, ‘practicing’, ‘come’, ‘allowing’], 
+
+blue
+[‘entertainment’, 'feeling', ‘touring’, ‘independent’, ‘proffesional’, 'snapchat', 'ig', ‘travel’, ‘pic’, ‘taken’, ‘exploring’, 'update', ‘happy’, 'send', 'people'], 
+tourists, 
+
+yellow
+['ardent', 'imwithher', 'flipitdem', 'nevertrump', 'grey', 'matter', 'expanding', ‘trump’, ‘crook’, 'philanthropist', ‘washington’, ‘november’, ‘win’, ‘democrat’, ‘hillaryclinton’],
+
+orange
+['artist', 'activist', 'coffee', 'wine', 'food', 'aficionado', 'politico', 'lgbt', 'tribe', ‘fight’, 'son', 'art', ‘black lives matter’, ‘creative’, ‘strong’],
+
+red
+[‘hollywood’, ‘producer’, ‘movie’, ‘singer’, ‘songwritter’, ‘actor’, ‘model’ ‘life’, ’social’, ‘travel’, ‘acting’, ‘screen’]
+
+turquoise
+[‘hockey’, 'sport', ‘baseball’, 'rap', ‘fan’, 'radio', 'contributor', ‘basketball’, 'kobe', 'bryant', 'flinch', ‘football’, ‘win’, 'impressive', 'player'],
+
+
+['henny', 'think', 'spirit', 'trying', 'tell', 'something', 'saved', 'best', 'last', 'wait', 'fall', 'someone', 'enough', 'favorite', 'person'], 
+
+['maybe', 'monster', 'hiding', 'bed', 'lonely', 'afraid', 'feeling', 'supposed', 'make', 'sense', 'cuz', 'mine', 'doe', 'notare', 'suppose'], 
+
+['crazy', 'hockey', 'sunny', 'city', 'los', 'angeles', 'heavy', 'metal', 'music', 'texas', 'ranger', 'trend', 'happyweekend', 'tworld', 'kiss']]
+
+
+——————————— Los Angeles (subgroup - purple ) —————————
+purple green blue yellow orange red turquoise brown grey
+
+***********************   groupm num  ************************
+[557, 547, 285, 5, 556, 396, 551, 313]
+***********************    Score List  ************************
+
+[['hey', 'nigga', 'sexy', 'girl', 'call', 'ok', 'man', 'pretty', 'baby', 'stunna', 'em', 'boy', 'miss', 'babythis', 'real’],
+
+purple
+[['disney', ‘comiccon’, 'contributor', 'shydra', 'always forward', 'reybrigade', 'force', ‘marvel’, 'minei', 'live', 'right', ‘comic’, 'lukecage', 'season', 'join'],
+
+green
+ ['soul', 'deep', 'swam', 'shallow', 'end', 'aries', 'bird', 'guitar', 'outdoorswoman', 'june', 'oc', 'ipv', 'driplife', 'insta', 'crystaleatsyoualive'],
+
+blue
+ ['mommy', 'queen', 'la', 'cholas', ‘ho’, 'chalco', 'ex', 'gang', 'member', ‘girl’, 'tattoo', 'first', 'time', ’stunted’], 
+
+yellow
+['voice', ‘music’, 'echo', 'opinion', 'others', 'read', 'tweet', 'brand', ‘club’, 'influencer', ‘rap’, ‘party’, ‘night’, ‘pic’, 'perfectly'],
+
+orage
+['univ', 'mich', 'grad', 'lived', 'socal', 'life', 'long', 'beach', 'english', 'history', 'major', 'patron', 'art', 'movie', 'travel'], 
+students
+
+red
+['san', 'pedro', 'news', 'pilot', 'sport', 'editor', 'magazine', 'large', 'contributor', 'announce', 'team', 'emoji', 'right', 'bandwagoners', 'changing'], 
+
+
+
+
+—————————— Chicago ——————————
+purple green blue yellow orange red turquoise brown grey 
+
+**********************   groupm num  ************************
+[1810, 1922, 703, 591, 1881, 832, 10, 1660, 2017, 1160, 363, 1985]
+***********************    Score List  ************************
+
+purple
+['master', ‘entrepreneur’, 'operation', ‘university’, ‘technophile’, 'coffee', 'shop', ‘life hack’, 'propped', 'open', 'even', ‘visionary’, 'climatechangeisreal', ‘alum’, ‘health’], 
+techies, academics 
+
+green
+['chicago', 'skateboarder', 'photographer', 'sauce', 'completely', 'convinced', 'exactly', ‘sport’, 'inauguration', 'champion', 'flythe', ‘wrestling’, 'posting', ‘baseball’, 'social'],
+sport
+
+blue
+ ['quote', 'dear', 'friend', 'bragger', ‘dream’, 'personally', 'call', 'shout', 'joy', 'loud', 'heaven', 'hobo', 'convert', 'millionaire', 'conversion'], 
+?
+
+yellow
+['fan', 'anime', 'manga', 'gamer', 'writes', 'poetry', 'story', 'pop', 'proud', 'wonderful', 'writer', ‘art’, ‘snapchat’, ‘ig’],
+
+orange
+ ['hoosier', 'born', 'raised', 'country', 'man', 'god', 'family', 'right', 'brother', 'think', 'pete', 'rose', 'way', 'due', 'prayer'], 
+religious, conservative
+
+red
+[‘imagine’, ‘dream’, ‘black lives matter’, ‘lgbt’, ‘family’, 'gradual', 'race', 'objective', ‘hard’, 'south', ‘slandered’, 'chicago', ‘attacked’, 'pull', 'rug'],
+activists
+
+
+turquoise 
+ [‘hillary’, ‘deserve’, ’world', 'parody', ‘trump’, ’violence', 'bad', 'historically', 'winning', 'argument', 'win', 'town', 'died', 'single', 'punch', 'biden'],
+politics
+
+
+brown
+ ['cinephile', 'superman', 'fan', 'dceu', 'supporter', 'hobbit', 'dinosaur', 'lover', 'gryffindor', 'xenomorph', 'enthusiast', 'whovian', 'jedi', 'master', 'scruffy'],
+
+grey
+['tolerate', 'bullshit', 'live', 'life', 'fullest', 'regret', 'remorse', 'waiting', 'moment', 'aint', 'truthit', 'minute', 'since', 'snow', 'kinda'],
+
+
+
+
+
+
