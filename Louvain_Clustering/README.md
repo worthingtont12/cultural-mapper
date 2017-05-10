@@ -11,7 +11,7 @@ Communities are groups of nodes in a network or graph that are more connected to
 
 ### Prerequisites
 
-Courpus of tweets (.mm file) and TF_IDF matrix for each city 
+Term Frequency Matrix (.mm file) and TF_IDF matrix for each city 
 
 
 ### Order
